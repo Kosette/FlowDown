@@ -159,21 +159,21 @@ class ConversationCaptureView: UIView {
             controller.view.layoutIfNeeded()
             layoutIfNeeded()
 
-            let finalSize = CGSize(width: layoutWidth, height: finalHeight)
-            let format = UIGraphicsImageRendererFormat.default()
-            format.scale = UIScreen.main.scale
-            format.opaque = true
-            let renderer = UIGraphicsImageRenderer(size: finalSize, format: format)
-            let image = renderer.image { context in
-                context.cgContext.setFillColor(UIColor.white.cgColor)
-                context.cgContext.fill(CGRect(origin: .zero, size: finalSize))
-                self.layer.render(in: context.cgContext)
-            }
-
-            completion(image)
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.removeFromSuperview()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                let finalSize = CGSize(width: self.layoutWidth, height: finalHeight)
+                let format = UIGraphicsImageRendererFormat.default()
+                format.scale = UIScreen.main.scale
+                format.opaque = true
+                let renderer = UIGraphicsImageRenderer(size: finalSize, format: format)
+                let image = renderer.image { context in
+                    context.cgContext.setFillColor(UIColor.white.cgColor)
+                    context.cgContext.fill(CGRect(origin: .zero, size: finalSize))
+                    self.layer.render(in: context.cgContext)
+                }
+                completion(image)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.removeFromSuperview()
+                }
             }
         }
     }
