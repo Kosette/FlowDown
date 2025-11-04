@@ -591,6 +591,8 @@ class CloudModelEditorController: StackScrollController {
     // MARK: - Menu Builders
 
     private func buildEndpointMenu(for modelId: CloudModel.ID, view: ConfigurableInfoView) -> [UIMenuElement] {
+        guard let model = ModelManager.shared.cloudModel(identifier: modelId) else { return [] }
+        
         let editAction = UIAction(
             title: String(localized: "Edit"),
             image: UIImage(systemName: "character.cursor.ibeam")
@@ -610,36 +612,48 @@ class CloudModelEditorController: StackScrollController {
             view.parentViewController?.present(input, animated: true)
         }
 
+        var menuElements: [UIMenuElement] = [editAction]
+        
+        // Add copy action if there's a value
+        if !model.endpoint.isEmpty {
+            let copyAction = UIAction(
+                title: String(localized: "Copy"),
+                image: UIImage(systemName: "doc.on.doc")
+            ) { _ in
+                UIPasteboard.general.string = model.endpoint
+            }
+            menuElements.append(copyAction)
+        }
+
         // Get unique endpoints from existing models
         let existingEndpoints = Set(ModelManager.shared.cloudModels.value.compactMap { model in
             model.endpoint.isEmpty ? nil : model.endpoint
         }).sorted()
 
-        if existingEndpoints.isEmpty {
-            return [editAction]
-        }
-
-        let selectActions = existingEndpoints.map { endpoint in
-            UIAction(title: endpoint) { _ in
-                ModelManager.shared.editCloudModel(identifier: modelId) {
-                    $0.update(\.endpoint, to: endpoint)
+        if !existingEndpoints.isEmpty {
+            let selectActions = existingEndpoints.map { endpoint in
+                UIAction(title: endpoint) { _ in
+                    ModelManager.shared.editCloudModel(identifier: modelId) {
+                        $0.update(\.endpoint, to: endpoint)
+                    }
+                    view.configure(value: endpoint)
                 }
-                view.configure(value: endpoint)
             }
-        }
-
-        return [
-            editAction,
-            UIMenu(
+            
+            menuElements.append(UIMenu(
                 title: String(localized: "Select from Existing"),
                 image: UIImage(systemName: "list.bullet"),
                 options: [.displayInline],
                 children: selectActions
-            ),
-        ]
+            ))
+        }
+
+        return menuElements
     }
 
     private func buildModelIdentifierMenu(for modelId: CloudModel.ID, view: ConfigurableInfoView) -> [UIMenuElement] {
+        guard let model = ModelManager.shared.cloudModel(identifier: modelId) else { return [] }
+        
         let editAction = UIAction(
             title: String(localized: "Edit"),
             image: UIImage(systemName: "character.cursor.ibeam")
@@ -661,6 +675,19 @@ class CloudModelEditorController: StackScrollController {
                 }
             }
             view.parentViewController?.present(input, animated: true)
+        }
+
+        var menuElements: [UIMenuElement] = [editAction]
+        
+        // Add copy action if there's a value
+        if !model.model_identifier.isEmpty {
+            let copyAction = UIAction(
+                title: String(localized: "Copy"),
+                image: UIImage(systemName: "doc.on.doc")
+            ) { _ in
+                UIPasteboard.general.string = model.model_identifier
+            }
+            menuElements.append(copyAction)
         }
 
         let deferredElement = UIDeferredMenuElement.uncached { completion in
@@ -687,14 +714,13 @@ class CloudModelEditorController: StackScrollController {
             }
         }
 
-        return [
-            editAction,
-            UIMenu(
-                title: String(localized: "Select from Server"),
-                image: UIImage(systemName: "icloud.and.arrow.down"),
-                children: [deferredElement]
-            ),
-        ]
+        menuElements.append(UIMenu(
+            title: String(localized: "Select from Server"),
+            image: UIImage(systemName: "icloud.and.arrow.down"),
+            children: [deferredElement]
+        ))
+
+        return menuElements
     }
 
     private func buildModelSelectionMenu(
