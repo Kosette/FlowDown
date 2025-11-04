@@ -4976,6 +4976,22 @@
         }
       }
     },
+    "Failed to load models" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load models"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加载模型失败"
+          }
+        }
+      }
+    },
     "Failed to parse calendar event details." : {
       "localizations" : {
         "en" : {
@@ -9705,6 +9721,22 @@
         }
       }
     },
+    "Select from Existing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select from Existing"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择现有"
+          }
+        }
+      }
+    },
     "Select from Server" : {
       "localizations" : {
         "en" : {
@@ -11290,22 +11322,6 @@
         }
       }
     },
-    "This model is provided by pollinations.ai free of charge. Rate limit applies." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This model is provided by pollinations.ai free of charge. Rate limit applies."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此模型由 pollinations.ai 免费提供。包含速率限制。"
-          }
-        }
-      }
-    },
     "This model requires developer role when dealing with prompt." : {
       "localizations" : {
         "en" : {
@@ -11334,6 +11350,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "此参数可用于控制模型的性格。想象力越丰富，输出越不稳定。此参数亦可称为温度。"
+          }
+        }
+      }
+    },
+    "This service is provided free of charge by pollinations.ai and includes rate limits. It may be unavailable in certain countries or regions. If you encounter issues, please set up your own model service." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This service is provided free of charge by pollinations.ai and includes rate limits. It may be unavailable in certain countries or regions. If you encounter issues, please set up your own model service."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此服务由 pollinations.ai 免费提供，包含速率限制，在部分国家或地区的网络下不可用。如遇到问题，请自建模型服务。"
           }
         }
       }

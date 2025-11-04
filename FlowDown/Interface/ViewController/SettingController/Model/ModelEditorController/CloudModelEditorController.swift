@@ -89,27 +89,17 @@ class CloudModelEditorController: StackScrollController {
         ) { $0.bottom /= 2 }
         stackView.addArrangedSubview(SeparatorView())
 
-        let endpointView = ConfigurableInfoView().setTapBlock { view in
-            guard let model = ModelManager.shared.cloudModel(identifier: model?.id) else { return }
-            let input = AlertInputViewController(
-                title: "Edit Endpoint",
-                message: "This endpoint is used to send inference requests.",
-                placeholder: "https://",
-                text: model.endpoint.isEmpty ? "https://" : model.endpoint
-            ) { output in
-                ModelManager.shared.editCloudModel(identifier: model.id) {
-                    $0.update(\.endpoint, to: output)
-                }
-                view.configure(value: output)
-            }
-            view.parentViewController?.present(input, animated: true)
-        }
+        let endpointView = ConfigurableInfoView()
         endpointView.configure(icon: .init(systemName: "link"))
         endpointView.configure(title: "Inference Endpoint")
         endpointView.configure(description: "This endpoint is used to send inference requests.")
         var endpoint = model?.endpoint ?? ""
         if endpoint.isEmpty { endpoint = String(localized: "Not Configured") }
         endpointView.configure(value: endpoint)
+        endpointView.use { [weak self] in
+            guard let self else { return [] }
+            return buildEndpointMenu(for: identifier, view: endpointView)
+        }
         stackView.addArrangedSubviewWithMargin(endpointView)
         stackView.addArrangedSubview(SeparatorView())
 
@@ -600,6 +590,55 @@ class CloudModelEditorController: StackScrollController {
     }
 
     // MARK: - Menu Builders
+
+    private func buildEndpointMenu(for modelId: CloudModel.ID, view: ConfigurableInfoView) -> [UIMenuElement] {
+        let editAction = UIAction(
+            title: String(localized: "Edit"),
+            image: UIImage(systemName: "character.cursor.ibeam")
+        ) { _ in
+            guard let model = ModelManager.shared.cloudModel(identifier: modelId) else { return }
+            let input = AlertInputViewController(
+                title: "Edit Endpoint",
+                message: "This endpoint is used to send inference requests.",
+                placeholder: "https://",
+                text: model.endpoint.isEmpty ? "https://" : model.endpoint
+            ) { output in
+                ModelManager.shared.editCloudModel(identifier: model.id) {
+                    $0.update(\.endpoint, to: output)
+                }
+                view.configure(value: output.isEmpty ? String(localized: "Not Configured") : output)
+            }
+            view.parentViewController?.present(input, animated: true)
+        }
+
+        // Get unique endpoints from existing models
+        let existingEndpoints = Set(ModelManager.shared.cloudModels.value.compactMap { model in
+            model.endpoint.isEmpty ? nil : model.endpoint
+        }).sorted()
+
+        if existingEndpoints.isEmpty {
+            return [editAction]
+        }
+
+        let selectActions = existingEndpoints.map { endpoint in
+            UIAction(title: endpoint) { _ in
+                ModelManager.shared.editCloudModel(identifier: modelId) {
+                    $0.update(\.endpoint, to: endpoint)
+                }
+                view.configure(value: endpoint)
+            }
+        }
+
+        return [
+            editAction,
+            UIMenu(
+                title: String(localized: "Select from Existing"),
+                image: UIImage(systemName: "list.bullet"),
+                options: [.displayInline],
+                children: selectActions
+            ),
+        ]
+    }
 
     private func buildModelIdentifierMenu(for modelId: CloudModel.ID, view: ConfigurableInfoView) -> [UIMenuElement] {
         let editAction = UIAction(

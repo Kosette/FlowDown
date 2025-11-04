@@ -159,7 +159,7 @@
       "location" : "https://github.com/ml-explore/mlx-swift-examples/",
       "state" : {
         "branch" : "main",
-        "revision" : "f156edae3e4b6ed0d21f8f11ed62b3a566af15d0"
+        "revision" : "db9b51a591de18bdc49d4a55e0d44b26a3af2602"
       }
     },
     {
@@ -257,8 +257,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/huggingface/swift-jinja.git",
       "state" : {
-        "revision" : "c1ef5963ba4a97a589b9c9583ff4ee3352a86d23",
-        "version" : "2.1.0"
+        "revision" : "38b7beeec5d968accd19a8a70c1882cc89979d1c",
+        "version" : "2.1.1"
       }
     },
     {

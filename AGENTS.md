@@ -81,3 +81,4 @@ FlowDown is a Swift-based AI/LLM client for iOS and macOS (Catalyst) with a priv
 - Add new localized strings to `FlowDown/Resources/Localizable.xcstrings` when introducing new UI text
 - Run `python3 Resources/DevKit/scripts/update_missing_i18n.py FlowDown/Resources/Localizable.xcstrings` after adding strings, then audit results with `check_translations.py`
 - Follow existing localization patterns and maintain consistency with the codebase
+- Adding new localized stirngs requires you to use an script above, you can edit the script. Avoid manual edits to localization files.

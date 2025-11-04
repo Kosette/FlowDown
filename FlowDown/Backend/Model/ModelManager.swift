@@ -64,8 +64,6 @@ class ModelManager: NSObject {
         _defaultModelForAuxiliaryVisualTaskSkipIfPossible.key
     }
 
-    @BareCodableStorage(key: "Model.IsFirstBoot", defaultValue: true)
-    fileprivate var isFirstBoot: Bool
     @BareCodableStorage(key: "Model.ChatInterface.CollapseReasoningSectionWhenComplete", defaultValue: false)
     var collapseReasoningSectionWhenComplete: Bool
     var collapseReasoningSectionWhenCompleteKey: String {
@@ -105,13 +103,6 @@ class ModelManager: NSObject {
 
         localModels.send(scanLocalModels())
         cloudModels.send(scanCloudModels())
-
-        if isFirstBoot, localModels.value.isEmpty, cloudModels.value.isEmpty {
-            for model in CloudModel.BuiltinModel.allCases.map(\.model) {
-                _ = newCloudModel(profile: model)
-            }
-        }
-        defer { isFirstBoot = false }
 
         // make sure after scan!
         Publishers.CombineLatest(

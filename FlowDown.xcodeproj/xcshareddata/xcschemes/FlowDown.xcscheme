@@ -39,6 +39,22 @@
                </EnvironmentBuildable>
             </ActionContent>
          </ExecutionAction>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Install Metal Toolchain"
+               scriptText = "xcodebuild -downloadComponent MetalToolchain&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "503498BC2D23053D004672BD"
+                     BuildableName = "FlowDown.app"
+                     BlueprintName = "FlowDown"
+                     ReferencedContainer = "container:FlowDown.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
       </PreActions>
       <BuildActionEntries>
          <BuildActionEntry
