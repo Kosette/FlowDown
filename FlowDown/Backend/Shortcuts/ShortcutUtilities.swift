@@ -70,4 +70,23 @@ enum ShortcutUtilities {
 
         return transcript.joined(separator: "\n\n")
     }
+
+    static func newConversationURL(initialMessage: String?) throws -> URL {
+        let allowedCharacters = CharacterSet.urlPathAllowed.subtracting(CharacterSet(charactersIn: "/"))
+        let messageForEncoding: String = if let initialMessage, !initialMessage.isEmpty {
+            initialMessage
+        } else {
+            " "
+        }
+
+        guard let encodedMessage = messageForEncoding.addingPercentEncoding(withAllowedCharacters: allowedCharacters) else {
+            throw ShortcutUtilitiesError.invalidMessageEncoding
+        }
+
+        guard let url = URL(string: "flowdown://new/\(encodedMessage)") else {
+            throw ShortcutUtilitiesError.unableToCreateURL
+        }
+
+        return url
+    }
 }
