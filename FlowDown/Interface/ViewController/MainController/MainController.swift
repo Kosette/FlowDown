@@ -332,7 +332,11 @@ class MainController: UIViewController {
                     localized:
                     "Please add some models to use. You can choose to download models, or use cloud model from well known service providers."
                 )
-            )
+            ) {
+                let setting = SettingController()
+                SettingController.setNextEntryPage(.modelManagement)
+                self.present(setting, animated: true)
+            }
             return
         }
         Logger.app.infoFile("using model: \(modelID)")
@@ -362,14 +366,14 @@ class MainController: UIViewController {
         }
     }
 
-    private func showErrorAlert(title: String, message: String) {
+    private func showErrorAlert(title: String, message: String, completion: @escaping () -> Void = {}) {
         DispatchQueue.main.async {
             let alert = AlertViewController(
                 title: "\(title)",
                 message: "\(message)"
             ) { context in
                 context.addAction(title: "OK") {
-                    context.dispose()
+                    context.dispose(completion)
                 }
             }
             self.present(alert, animated: true)

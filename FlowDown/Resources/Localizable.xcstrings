@@ -4630,6 +4630,12 @@
     },
     "Extra headers and body fields are optional, and can be used to add extra information to the request. They should be in JSON format with key-value pairs." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extra headers and body fields are optional, and can be used to add extra information to the request. They should be in JSON format with key-value pairs."
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4911,6 +4917,22 @@
         }
       }
     },
+    "Failed to load models" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load models"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加载模型失败"
+          }
+        }
+      }
+    },
     "Failed to parse calendar event details." : {
       "localizations" : {
         "en" : {
@@ -5137,6 +5159,12 @@
     },
     "Finished" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finished"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7591,6 +7619,12 @@
     },
     "Networking" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Networking"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11073,6 +11107,7 @@
       }
     },
     "This model is provided by pollinations.ai free of charge. Rate limit applies." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11120,6 +11155,22 @@
         }
       }
     },
+    "This service is provided free of charge by pollinations.ai and includes rate limits. It may be unavailable in certain countries or regions. If you encounter issues, please set up your own model service." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This service is provided free of charge by pollinations.ai and includes rate limits. It may be unavailable in certain countries or regions. If you encounter issues, please set up your own model service."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此服务由 pollinations.ai 免费提供，包含速率限制，在部分国家或地区的网络下不可用。如遇到问题，请自建模型服务。"
+          }
+        }
+      }
+    },
     "This value will be added to the request as additional header." : {
       "localizations" : {
         "en" : {
@@ -11138,6 +11189,12 @@
     },
     "This value will be added to the request body as additional fields." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This value will be added to the request body as additional fields."
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
