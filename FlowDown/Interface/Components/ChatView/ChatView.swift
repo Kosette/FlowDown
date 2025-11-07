@@ -256,7 +256,7 @@ extension ChatView {
             $0.textColor = .label
             $0.textAlignment = .center
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.clipsToBounds = false
+            $0.clipsToBounds = true
         }
 
         let icon = UIImageView().with {
@@ -315,6 +315,10 @@ extension ChatView {
             }
             textLabel.snp.makeConstraints { make in
                 make.center.equalToSuperview()
+                make.top.greaterThanOrEqualToSuperview()
+                make.bottom.lessThanOrEqualToSuperview()
+                make.left.greaterThanOrEqualTo(icon.snp.right).offset(8)
+                make.right.lessThanOrEqualTo(menuButton.snp.left).offset(-8)
             }
 
             menuButton.snp.makeConstraints { make in
