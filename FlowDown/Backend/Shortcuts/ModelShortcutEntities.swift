@@ -4,7 +4,7 @@ import Foundation
 enum ShortcutsEntities {
     struct ModelEntity: AppEntity, Identifiable {
         static var typeDisplayRepresentation: TypeDisplayRepresentation {
-            .init(name: LocalizedStringResource("Model", defaultValue: "Model"))
+            .init(name: LocalizedStringResource("Model"))
         }
 
         static var defaultQuery: ShortcutsEntities.ModelQuery { .init() }
@@ -17,11 +17,11 @@ enum ShortcutsEntities {
             var localizedDescription: LocalizedStringResource {
                 switch self {
                 case .local:
-                    LocalizedStringResource("Local", defaultValue: "Local")
+                    LocalizedStringResource("Local")
                 case .cloud:
-                    LocalizedStringResource("Cloud", defaultValue: "Cloud")
+                    LocalizedStringResource("Cloud")
                 case .apple:
-                    LocalizedStringResource("Apple Intelligence", defaultValue: "Apple Intelligence")
+                    LocalizedStringResource("Apple Intelligence")
                 }
             }
         }
@@ -164,6 +164,7 @@ enum FlowDownShortcutError: LocalizedError {
     case imageNotAllowed
     case imageNotSupportedByModel
     case invalidImage
+    case invalidCandidates
 
     var errorDescription: String? {
         switch self {
@@ -179,6 +180,8 @@ enum FlowDownShortcutError: LocalizedError {
             String(localized: "The selected model does not support image inputs.")
         case .invalidImage:
             String(localized: "The provided image could not be processed.")
+        case .invalidCandidates:
+            String(localized: "At least one candidate is required.")
         }
     }
 }

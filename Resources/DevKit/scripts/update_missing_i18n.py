@@ -41,6 +41,48 @@ NEW_STRINGS: dict[str, dict[str, str]] = {
     "A proactive memory summary has been provided above according to the user's setting. Treat it as reliable context and keep it updated through memory tools when necessary.": {
         "zh-Hans": "根据用户的设置，上方已提供主动记忆摘要。请将其视为可靠的上下文，并在需要时通过记忆工具保持更新。"
     },
+    "Save to Conversation": {"zh-Hans": "保存到对话"},
+    "Enable Memory": {"zh-Hans": "启用记忆"},
+    "Save response to conversation history": {"zh-Hans": "将回复保存到对话记录"},
+    "Enable memory tools during inference": {"zh-Hans": "推理时启用记忆工具"},
+    "Attachment shared via Shortcut.": {"zh-Hans": "通过快捷指令分享的附件。"},
+    "Quick Reply %@": {"zh-Hans": "快速回复 %@"},
+    "Classify Content": {"zh-Hans": "分类内容"},
+    "Use the model to classify content into one of the provided candidates. If the model cannot decide, the first candidate is returned.": {
+        "zh-Hans": "使用模型将内容分类到提供的候选项之一。如果模型无法决定，则返回第一个候选项。"
+    },
+    "Prompt": {"zh-Hans": "提示"},
+    "Candidates": {"zh-Hans": "候选项"},
+    "What content should be classified?": {"zh-Hans": "需要分类的内容是什么？"},
+    "Provide the candidate labels.": {"zh-Hans": "请提供候选标签。"},
+    "You are a classification assistant. Choose the best candidate for the provided content.": {
+        "zh-Hans": "你是一名分类助手。请为提供的内容选择最合适的候选项。"
+    },
+    "Respond with exactly one candidate string from the list above. If you are unsure, respond with '%@'.": {
+        "zh-Hans": "从上述列表中仅返回一个候选项字符串。如果不确定，请返回“%@”。"
+    },
+    "Candidates:": {"zh-Hans": "候选项："},
+    "Content:": {"zh-Hans": "内容："},
+    "Search Conversations": {"zh-Hans": "搜索对话"},
+    "Search saved conversations by keyword, date, and whether they include images.": {
+        "zh-Hans": "按关键词、日期以及是否包含图片搜索已保存的对话。"
+    },
+    "Keyword": {"zh-Hans": "关键词"},
+    "Date": {"zh-Hans": "日期"},
+    "Include Images": {"zh-Hans": "包含图片"},
+    "Search conversations": {"zh-Hans": "搜索对话"},
+    "Keyword: %@": {"zh-Hans": "关键词：%@"},
+    "On date: %@": {"zh-Hans": "日期：%@"},
+    "Only conversations with images": {"zh-Hans": "仅包含图片的对话"},
+    "No conversations found.": {"zh-Hans": "未找到对话。"},
+    "%d conversation(s) matched your criteria.": {"zh-Hans": "符合条件的对话数：%d。"},
+    "%@ • %@": {"zh-Hans": "%@ • %@"},
+    "[%@] %@": {"zh-Hans": "[%@] %@"},
+    "(No content)": {"zh-Hans": "（无内容）"},
+    "Classify": {"zh-Hans": "分类"},
+    "Search Chats": {"zh-Hans": "搜索聊天"},
+    "At least one candidate is required.": {"zh-Hans": "至少需要一个候选项。"},
+    "Classify %@": {"zh-Hans": "分类 %@"},
 }
 
 def update_translations(file_path):

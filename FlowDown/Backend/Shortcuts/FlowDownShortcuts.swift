@@ -10,7 +10,7 @@ struct FlowDownAppShortcuts: AppShortcutsProvider {
                 phrases: [
                     "Ask Model on \(.applicationName)",
                 ],
-                shortTitle: LocalizedStringResource("Ask Model", defaultValue: "Ask Model"),
+                shortTitle: LocalizedStringResource("Ask Model"),
                 systemImageName: "text.bubble"
             ),
             AppShortcut(
@@ -19,7 +19,7 @@ struct FlowDownAppShortcuts: AppShortcutsProvider {
                     "Set conversation model on \(.applicationName)",
                     "Set default model on \(.applicationName)",
                 ],
-                shortTitle: LocalizedStringResource("Set Model", defaultValue: "Set Model"),
+                shortTitle: LocalizedStringResource("Set Model"),
                 systemImageName: "slider.horizontal.3"
             ),
             AppShortcut(
@@ -28,10 +28,34 @@ struct FlowDownAppShortcuts: AppShortcutsProvider {
                     "Create FlowDown link on \(.applicationName)",
                     "New conversation link on \(.applicationName)",
                 ],
-                shortTitle: LocalizedStringResource("Conversation Link", defaultValue: "Conversation Link"),
+                shortTitle: LocalizedStringResource("Conversation Link"),
                 systemImageName: "link"
             ),
         ]
+
+        shortcuts.append(
+            AppShortcut(
+                intent: ClassifyContentIntent(),
+                phrases: [
+                    "Classify content on \(.applicationName)",
+                    "Classify with \(.applicationName)",
+                ],
+                shortTitle: LocalizedStringResource("Classify"),
+                systemImageName: "checklist"
+            )
+        )
+
+        shortcuts.append(
+            AppShortcut(
+                intent: SearchConversationsIntent(),
+                phrases: [
+                    "Search conversations on \(.applicationName)",
+                    "Find chats on \(.applicationName)",
+                ],
+                shortTitle: LocalizedStringResource("Search Chats"),
+                systemImageName: "magnifyingglass"
+            )
+        )
 
         if #available(iOS 18.0, macCatalyst 18.0, *) {
             shortcuts.append(
@@ -40,7 +64,7 @@ struct FlowDownAppShortcuts: AppShortcutsProvider {
                     phrases: [
                         "Ask Model with image on \(.applicationName)",
                     ],
-                    shortTitle: LocalizedStringResource("Ask Model + Image", defaultValue: "Ask Model + Image"),
+                    shortTitle: LocalizedStringResource("Ask Model + Image"),
                     systemImageName: "photo"
                 )
             )
