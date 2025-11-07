@@ -22,6 +22,9 @@
 		505BC6F92D42A73600894BB0 /* AlertController in Frameworks */ = {isa = PBXBuildFile; productRef = 505BC6F82D42A73600894BB0 /* AlertController */; };
 		505FC6192D4945E500F4CB17 /* SPIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 505FC6182D4945E500F4CB17 /* SPIndicator */; };
 		505FC65B2D4A754F00F4CB17 /* MLXVLM in Frameworks */ = {isa = PBXBuildFile; productRef = 505FC65A2D4A754F00F4CB17 /* MLXVLM */; };
+		506C93CB2EBE4BBC00CB87A9 /* PrivacyPolicy.md in Resources */ = {isa = PBXBuildFile; fileRef = 506C93C92EBE4BBC00CB87A9 /* PrivacyPolicy.md */; };
+		506C93CC2EBE4BBC00CB87A9 /* Emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 506C93C52EBE4BBC00CB87A9 /* Emoji.json */; };
+		506C93CD2EBE4BBC00CB87A9 /* OpenSourceLicenses.md in Resources */ = {isa = PBXBuildFile; fileRef = 506C93C62EBE4BBC00CB87A9 /* OpenSourceLicenses.md */; };
 		5078496A2D285B5900B1F430 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 507849692D285B5900B1F430 /* MarkdownView */; };
 		5081A0142D6DBBBA0079ECBE /* RunestoneEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 5081A0132D6DBBBA0079ECBE /* RunestoneEditor */; };
 		50B492942D4F609E00F4D2B3 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 50B492932D4F609E00F4D2B3 /* ZIPFoundation */; };
@@ -31,7 +34,6 @@
 		50B5149B2D2316EC0092284C /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 50B5149A2D2316EC0092284C /* SwifterSwift */; };
 		50C9035B2D428DAD00E6E3A8 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 50C9035A2D428DAD00E6E3A8 /* Storage */; };
 		50CB4E752DE30A57009C58E1 /* Digger in Frameworks */ = {isa = PBXBuildFile; productRef = 50CB4E742DE30A57009C58E1 /* Digger */; };
-		50D6C7832EBDFC850037488A /* BundledResources in Resources */ = {isa = PBXBuildFile; fileRef = 50D6C7822EBDFC820037488A /* BundledResources */; };
 		50DDB1712DDF16F200351E46 /* ListViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 50DDB1702DDF16F200351E46 /* ListViewKit */; };
 		50E3FA092D6D7FB8000405BD /* GPTEncoder in Frameworks */ = {isa = PBXBuildFile; productRef = 50E3FA082D6D7FB8000405BD /* GPTEncoder */; };
 		50FBFC6C2DEA2E5400098EC4 /* XMLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 50FBFC6B2DEA2E5400098EC4 /* XMLCoder */; };
@@ -42,8 +44,11 @@
 
 /* Begin PBXFileReference section */
 		503498BD2D23053D004672BD /* FlowDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlowDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		506C93C52EBE4BBC00CB87A9 /* Emoji.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Emoji.json; sourceTree = "<group>"; };
+		506C93C62EBE4BBC00CB87A9 /* OpenSourceLicenses.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = OpenSourceLicenses.md; sourceTree = "<group>"; };
+		506C93C72EBE4BBC00CB87A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = en; path = en.lproj/PrivacyPolicy.md; sourceTree = "<group>"; };
+		506C93C82EBE4BBC00CB87A9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "zh-Hans"; path = "zh-Hans.lproj/PrivacyPolicy.md"; sourceTree = "<group>"; };
 		50B5146A2D2305F20092284C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		50D6C7822EBDFC820037488A /* BundledResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BundledResources; sourceTree = "<group>"; };
 		50D6CB1C2EBDFCB50037488A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -169,6 +174,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		506C93CA2EBE4BBC00CB87A9 /* BundledResources */ = {
+			isa = PBXGroup;
+			children = (
+				506C93C52EBE4BBC00CB87A9 /* Emoji.json */,
+				506C93C62EBE4BBC00CB87A9 /* OpenSourceLicenses.md */,
+				506C93C92EBE4BBC00CB87A9 /* PrivacyPolicy.md */,
+			);
+			path = BundledResources;
+			sourceTree = "<group>";
+		};
 		50B5145B2D2305890092284C /* FlowDown */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,7 +196,7 @@
 				50B514732D23133F0092284C /* Extension */,
 				50D148142D71F292008E9F03 /* PlatformSupport */,
 				50B514682D2305E30092284C /* Resources */,
-				50D6C7822EBDFC820037488A /* BundledResources */,
+				506C93CA2EBE4BBC00CB87A9 /* BundledResources */,
 			);
 			path = FlowDown;
 			sourceTree = "<group>";
@@ -309,7 +324,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50D6C7832EBDFC850037488A /* BundledResources in Resources */,
+				506C93CB2EBE4BBC00CB87A9 /* PrivacyPolicy.md in Resources */,
+				506C93CC2EBE4BBC00CB87A9 /* Emoji.json in Resources */,
+				506C93CD2EBE4BBC00CB87A9 /* OpenSourceLicenses.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +364,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		506C93C92EBE4BBC00CB87A9 /* PrivacyPolicy.md */ = {
+			isa = PBXVariantGroup;
+			children = (
+				506C93C72EBE4BBC00CB87A9 /* en */,
+				506C93C82EBE4BBC00CB87A9 /* zh-Hans */,
+			);
+			name = PrivacyPolicy.md;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		503498D12D23053E004672BD /* Debug */ = {
