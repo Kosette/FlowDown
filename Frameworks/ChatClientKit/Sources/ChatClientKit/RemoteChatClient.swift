@@ -57,6 +57,10 @@ open class RemoteChatClient: ChatService {
         let request = try request(for: body, additionalField: additionalField)
         let (data, _) = try await session.data(for: request)
         logger.debug("received response data: \(data.count) bytes")
+        if let error = extractError(fromInput: data) {
+            logger.error("received error from server: \(error.localizedDescription)")
+            throw error
+        }
         var response = try JSONDecoder().decode(ChatResponseBody.self, from: data)
         response.choices = response.choices.map { choice in
             var choice = choice
@@ -365,22 +369,43 @@ open class RemoteChatClient: ChatService {
         let dic = try? JSONSerialization.jsonObject(with: input, options: []) as? [String: Any]
         guard let dic else { return nil }
 
-        let errorDic = dic["error"] as? [String: Any]
-        guard let errorDic else { return nil }
-
-        var message = errorDic["message"] as? String ?? String(localized: "Unknown Error", bundle: .module)
-        let code = errorDic["code"] as? Int ?? 403
-
-        // check for metadata property, read there if find
-        if let metadata = errorDic["metadata"] as? [String: Any],
-           let metadataMessage = metadata["message"] as? String
-        {
-            message += " \(metadataMessage)"
+        if let status = dic["status"] as? Int, (400 ... 599).contains(status) {
+            // something must be wrong
+            let error = dic["error"] as? String ?? String(localized: "Unknown Error", bundle: .module)
+            var errorMessage = "Server returns an error: \(status) \(error)"
+            // looking for message filed in any of the nested dictionaries
+            var bfs: [Any] = [dic]
+            while !bfs.isEmpty {
+                let current = bfs.removeFirst()
+                if let currentDic = current as? [String: Any] {
+                    if let message = currentDic["message"] as? String {
+                        errorMessage = message
+                        break
+                    }
+                    for (_, value) in currentDic {
+                        bfs.append(value)
+                    }
+                }
+            }
+            return NSError(domain: error, code: status, userInfo: [
+                NSLocalizedDescriptionKey: errorMessage,
+            ])
         }
 
-        return NSError(domain: String(localized: "Server Error"), code: code, userInfo: [
-            NSLocalizedDescriptionKey: String(localized: "Server returns an error: \(code) \(message)", bundle: .module),
-        ])
+        if let errorContent = dic["error"] as? [String: Any], !errorContent.isEmpty {
+            var message = errorContent["message"] as? String ?? String(localized: "Unknown Error", bundle: .module)
+            let code = errorContent["code"] as? Int ?? 403
+            if let metadata = errorContent["metadata"] as? [String: Any],
+               let metadataMessage = metadata["message"] as? String
+            {
+                message += " \(metadataMessage)"
+            }
+            return NSError(domain: String(localized: "Server Error"), code: code, userInfo: [
+                NSLocalizedDescriptionKey: String(localized: "Server returns an error: \(code) \(message)", bundle: .module),
+            ])
+        }
+
+        return nil
     }
 
     private func request(for body: ChatRequestBody, additionalField: [String: Any] = [:]) throws -> URLRequest {
