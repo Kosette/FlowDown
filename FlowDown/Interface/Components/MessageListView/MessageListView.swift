@@ -22,6 +22,7 @@ final class MessageListView: UIView {
     private let updateQueue = DispatchQueue(label: "MessageListView.UpdateQueue", qos: .userInteractive)
 
     private var isFirstLoad: Bool = true
+    private let autoScrollTolerance: CGFloat = 2
 
     var session: ConversationSession! {
         didSet {
@@ -109,15 +110,31 @@ final class MessageListView: UIView {
     }
 
     override func layoutSubviews() {
+        let wasNearBottom = isContentOffsetNearBottom()
         super.layoutSubviews()
 
         listView.contentInset = contentSafeAreaInsets
+
+        if isAutoScrollingToBottom || wasNearBottom {
+            let targetOffset = listView.maximumContentOffset
+            if abs(listView.contentOffset.y - targetOffset.y) > autoScrollTolerance {
+                listView.scroll(to: targetOffset)
+            }
+            if wasNearBottom {
+                isAutoScrollingToBottom = true
+            }
+        }
     }
 
     private func updateAutoScrolling() {
-        if listView.contentOffset.y == listView.maximumContentOffset.y {
+        if isContentOffsetNearBottom() {
             isAutoScrollingToBottom = true
         }
+    }
+
+    private func isContentOffsetNearBottom(tolerance: CGFloat? = nil) -> Bool {
+        let tolerance = tolerance ?? autoScrollTolerance
+        return abs(listView.contentOffset.y - listView.maximumContentOffset.y) <= tolerance
     }
 
     func loading(with message: String = .init()) {
