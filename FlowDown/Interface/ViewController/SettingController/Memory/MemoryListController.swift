@@ -198,22 +198,13 @@ extension MemoryListController: UITableViewDelegate {
         _: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let memory = currentMemories()[indexPath.row]
-
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
+        let delete = UIContextualAction(style: .destructive, title: "") { [weak self] _, _, completion in
             self?.deleteMemory(at: indexPath)
             completion(true)
         }
         delete.image = UIImage(systemName: "trash")
 
-        let edit = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completion in
-            self?.presentEditor(for: memory)
-            completion(true)
-        }
-        edit.backgroundColor = .systemBlue
-        edit.image = UIImage(systemName: "square.and.pencil")
-
-        let configuration = UISwipeActionsConfiguration(actions: [delete, edit])
+        let configuration = UISwipeActionsConfiguration(actions: [delete])
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
