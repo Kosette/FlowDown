@@ -23,8 +23,9 @@ extension UIImage {
             ) { image = scaled }
         }
 
+        // we already resized the image, so medium quality is enough
         return image
-            .jpeg(.lowest)?
+            .jpeg(.medium)?
             .byRemovingEXIF()
     }
 }
