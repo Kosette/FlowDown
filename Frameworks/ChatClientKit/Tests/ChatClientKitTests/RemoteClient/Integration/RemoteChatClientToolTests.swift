@@ -12,9 +12,9 @@ import Testing
 @Suite("RemoteChatClient Tool Tests")
 struct RemoteChatClientToolTests {
     @Test("Non-streaming chat completion with tool calls")
-    func testNonStreamingChatCompletionWithTools() async throws {
+    func nonStreamingChatCompletionWithTools() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let getWeatherTool = ChatRequestBody.Tool.function(
             name: "get_weather",
             description: "Get the current weather in a given location",
@@ -23,31 +23,31 @@ struct RemoteChatClientToolTests {
                 "properties": [
                     "location": [
                         "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
+                        "description": "The city and state, e.g. San Francisco, CA",
                     ],
                     "unit": [
                         "type": "string",
-                        "enum": ["celsius", "fahrenheit"]
-                    ]
+                        "enum": ["celsius", "fahrenheit"],
+                    ],
                 ],
-                "required": ["location"]
+                "required": ["location"],
             ],
             strict: nil
         )
-        
+
         let request = ChatRequestBody(
             messages: [
-                .user(content: .text("What's the weather like in San Francisco?"))
+                .user(content: .text("What's the weather like in San Francisco?")),
             ],
             tools: [getWeatherTool]
         )
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let message = response.choices.first?.message
         #expect(message != nil)
-        
+
         // The model should either call the tool or provide a response
         if let toolCalls = message?.toolCalls, !toolCalls.isEmpty {
             #expect(toolCalls.count > 0)
@@ -58,11 +58,11 @@ struct RemoteChatClientToolTests {
             #expect(message?.content != nil)
         }
     }
-    
+
     @Test("Streaming chat completion with tool calls")
-    func testStreamingChatCompletionWithTools() async throws {
+    func streamingChatCompletionWithTools() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let getWeatherTool = ChatRequestBody.Tool.function(
             name: "get_weather",
             description: "Get the current weather in a given location",
@@ -71,26 +71,26 @@ struct RemoteChatClientToolTests {
                 "properties": [
                     "location": [
                         "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
-                    ]
+                        "description": "The city and state, e.g. San Francisco, CA",
+                    ],
                 ],
-                "required": ["location"]
+                "required": ["location"],
             ],
             strict: nil
         )
-        
+
         let request = ChatRequestBody(
             messages: [
-                .user(content: .text("What's the weather in New York?"))
+                .user(content: .text("What's the weather in New York?")),
             ],
             tools: [getWeatherTool]
         )
-        
+
         let stream = try await client.streamingChatCompletionRequest(body: request)
-        
+
         var toolCalls: [ToolCallRequest] = []
         var contentChunks: [String] = []
-        
+
         for try await object in stream {
             switch object {
             case let .chatCompletionChunk(chunk):
@@ -101,15 +101,15 @@ struct RemoteChatClientToolTests {
                 toolCalls.append(call)
             }
         }
-        
+
         // Should either have tool calls or content
         #expect(toolCalls.count > 0 || contentChunks.count > 0)
     }
-    
+
     @Test("Chat completion with required tool choice")
-    func testChatCompletionWithRequiredToolChoice() async throws {
+    func chatCompletionWithRequiredToolChoice() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let calculatorTool = ChatRequestBody.Tool.function(
             name: "calculator",
             description: "Perform a mathematical calculation",
@@ -118,37 +118,37 @@ struct RemoteChatClientToolTests {
                 "properties": [
                     "expression": [
                         "type": "string",
-                        "description": "A mathematical expression to evaluate"
-                    ]
+                        "description": "A mathematical expression to evaluate",
+                    ],
                 ],
-                "required": ["expression"]
+                "required": ["expression"],
             ],
             strict: nil
         )
-        
+
         let request = ChatRequestBody(
             messages: [
-                .user(content: .text("Calculate 2 + 2"))
+                .user(content: .text("Calculate 2 + 2")),
             ],
             tools: [calculatorTool],
             toolChoice: .required
         )
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let message = response.choices.first?.message
-        
+
         // With required tool choice, should have tool calls
         if let toolCalls = message?.toolCalls {
             #expect(toolCalls.count > 0)
         }
     }
-    
+
     @Test("Chat completion with specific tool choice")
-    func testChatCompletionWithSpecificToolChoice() async throws {
+    func chatCompletionWithSpecificToolChoice() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let calculatorTool = ChatRequestBody.Tool.function(
             name: "calculator",
             description: "Perform a mathematical calculation",
@@ -157,38 +157,38 @@ struct RemoteChatClientToolTests {
                 "properties": [
                     "expression": [
                         "type": "string",
-                        "description": "A mathematical expression to evaluate"
-                    ]
+                        "description": "A mathematical expression to evaluate",
+                    ],
                 ],
-                "required": ["expression"]
+                "required": ["expression"],
             ],
             strict: nil
         )
-        
+
         let request = ChatRequestBody(
             messages: [
-                .user(content: .text("What is 5 * 3?"))
+                .user(content: .text("What is 5 * 3?")),
             ],
             tools: [calculatorTool],
             toolChoice: .specific(functionName: "calculator")
         )
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let message = response.choices.first?.message
-        
+
         // With specific tool choice, should have tool calls
         if let toolCalls = message?.toolCalls {
             #expect(toolCalls.count > 0)
             #expect(toolCalls.first?.function.name == "calculator")
         }
     }
-    
+
     @Test("Streaming chat completion collects tool calls")
-    func testStreamingCollectsToolCalls() async throws {
+    func streamingCollectsToolCalls() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let getWeatherTool = ChatRequestBody.Tool.function(
             name: "get_weather",
             description: "Get the current weather",
@@ -197,31 +197,31 @@ struct RemoteChatClientToolTests {
                 "properties": [
                     "location": [
                         "type": "string",
-                        "description": "The location"
-                    ]
+                        "description": "The location",
+                    ],
                 ],
-                "required": ["location"]
+                "required": ["location"],
             ],
             strict: nil
         )
-        
+
         let request = ChatRequestBody(
             messages: [
-                .user(content: .text("Get weather for London"))
+                .user(content: .text("Get weather for London")),
             ],
             tools: [getWeatherTool]
         )
-        
+
         let stream = try await client.streamingChatCompletionRequest(body: request)
-        
+
         var collectedToolCalls: [ToolCallRequest] = []
-        
+
         for try await object in stream {
             if case let .tool(call) = object {
                 collectedToolCalls.append(call)
             }
         }
-        
+
         // May or may not have tool calls depending on model behavior
         // Just verify we can collect them if they exist
         if !collectedToolCalls.isEmpty {
@@ -229,4 +229,3 @@ struct RemoteChatClientToolTests {
         }
     }
 }
-

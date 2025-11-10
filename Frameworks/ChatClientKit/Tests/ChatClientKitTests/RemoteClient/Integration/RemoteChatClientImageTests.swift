@@ -12,42 +12,42 @@ import Testing
 @Suite("RemoteChatClient Image Tests")
 struct RemoteChatClientImageTests {
     @Test("Non-streaming chat completion with image input")
-    func testNonStreamingChatCompletionWithImage() async throws {
+    func nonStreamingChatCompletionWithImage() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let imageURL = TestHelpers.createTestImageDataURL()
-        
+
         let request = ChatRequestBody(messages: [
             .user(content: .parts([
                 .text("What color is this image?"),
-                .imageURL(imageURL)
-            ]))
+                .imageURL(imageURL),
+            ])),
         ])
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let content = response.choices.first?.message.content ?? ""
         #expect(content.isEmpty == false)
         // The image is red, so the response should mention red
         #expect(content.lowercased().contains("red") == true)
     }
-    
+
     @Test("Streaming chat completion with image input")
-    func testStreamingChatCompletionWithImage() async throws {
+    func streamingChatCompletionWithImage() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let imageURL = TestHelpers.createTestImageDataURL()
-        
+
         let request = ChatRequestBody(messages: [
             .user(content: .parts([
                 .text("Describe this image in one sentence."),
-                .imageURL(imageURL)
-            ]))
+                .imageURL(imageURL),
+            ])),
         ])
-        
+
         let stream = try await client.streamingChatCompletionRequest(body: request)
-        
+
         var fullContent = ""
         for try await chunk in stream {
             if case let .chatCompletionChunk(completionChunk) = chunk {
@@ -56,89 +56,89 @@ struct RemoteChatClientImageTests {
                 }
             }
         }
-        
+
         #expect(fullContent.isEmpty == false)
     }
-    
+
     @Test("Chat completion with image and text")
-    func testChatCompletionWithImageAndText() async throws {
+    func chatCompletionWithImageAndText() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let imageURL = TestHelpers.createTestImageDataURL()
-        
+
         let request = ChatRequestBody(messages: [
             .user(content: .parts([
                 .text("What is the primary color in this image? Answer in one word."),
-                .imageURL(imageURL)
-            ]))
+                .imageURL(imageURL),
+            ])),
         ])
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let content = response.choices.first?.message.content ?? ""
         #expect(content.isEmpty == false)
     }
-    
+
     @Test("Chat completion with multiple images")
-    func testChatCompletionWithMultipleImages() async throws {
+    func chatCompletionWithMultipleImages() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let imageURL1 = TestHelpers.createTestImageDataURL(width: 100, height: 100)
         let imageURL2 = TestHelpers.createTestImageDataURL(width: 200, height: 200)
-        
+
         let request = ChatRequestBody(messages: [
             .user(content: .parts([
                 .text("How many images did I send?"),
                 .imageURL(imageURL1),
-                .imageURL(imageURL2)
-            ]))
+                .imageURL(imageURL2),
+            ])),
         ])
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let content = response.choices.first?.message.content ?? ""
         #expect(content.isEmpty == false)
     }
-    
+
     @Test("Chat completion with image detail parameter")
-    func testChatCompletionWithImageDetail() async throws {
+    func chatCompletionWithImageDetail() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let imageURL = TestHelpers.createTestImageDataURL()
-        
+
         let request = ChatRequestBody(messages: [
             .user(content: .parts([
                 .text("Describe this image."),
-                .imageURL(imageURL, detail: .high)
-            ]))
+                .imageURL(imageURL, detail: .high),
+            ])),
         ])
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let content = response.choices.first?.message.content ?? ""
         #expect(content.isEmpty == false)
     }
-    
+
     @Test("Streaming chat completion with image in conversation")
-    func testStreamingChatCompletionWithImageInConversation() async throws {
+    func streamingChatCompletionWithImageInConversation() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let imageURL = TestHelpers.createTestImageDataURL()
-        
+
         let request = ChatRequestBody(messages: [
             .user(content: .parts([
                 .text("What color is this?"),
-                .imageURL(imageURL)
+                .imageURL(imageURL),
             ])),
             .assistant(content: .text("The image is red.")),
-            .user(content: .text("What about the shape?"))
+            .user(content: .text("What about the shape?")),
         ])
-        
+
         let stream = try await client.streamingChatCompletionRequest(body: request)
-        
+
         var fullContent = ""
         for try await chunk in stream {
             if case let .chatCompletionChunk(completionChunk) = chunk {
@@ -147,8 +147,7 @@ struct RemoteChatClientImageTests {
                 }
             }
         }
-        
+
         #expect(fullContent.isEmpty == false)
     }
 }
-

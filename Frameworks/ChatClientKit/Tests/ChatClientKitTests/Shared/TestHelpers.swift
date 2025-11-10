@@ -30,7 +30,7 @@ enum TestHelpers {
         }
         return value
     }
-    
+
     /// Creates a RemoteChatClient configured for OpenRouter with google/gemini-2.5-pro
     static func makeOpenRouterClient() -> RemoteChatClient {
         let apiKey = requireAPIKey()
@@ -41,16 +41,16 @@ enum TestHelpers {
             apiKey: apiKey,
             additionalHeaders: [
                 "HTTP-Referer": "https://github.com/FlowDown/ChatClientKit",
-                "X-Title": "ChatClientKit Tests"
+                "X-Title": "ChatClientKit Tests",
             ]
         )
     }
-    
+
     /// Creates a simple test image as base64 data URL using Core Graphics
     static func createTestImageDataURL(width: Int = 100, height: Int = 100) -> URL {
         let size = CGSize(width: width, height: height)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        
+
         guard let context = CGContext(
             data: nil,
             width: width,
@@ -62,42 +62,42 @@ enum TestHelpers {
         ) else {
             fatalError("Failed to create CGContext")
         }
-        
+
         // Draw a red rectangle
         context.setFillColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
         context.fill(CGRect(origin: .zero, size: size))
-        
+
         guard let cgImage = context.makeImage() else {
             fatalError("Failed to create CGImage")
         }
-        
+
         // Convert to PNG data
         let mutableData = NSMutableData()
         guard let destination = CGImageDestinationCreateWithData(mutableData as CFMutableData, "public.png" as CFString, 1, nil) else {
             fatalError("Failed to create image destination")
         }
-        
+
         CGImageDestinationAddImage(destination, cgImage, nil)
         guard CGImageDestinationFinalize(destination) else {
             fatalError("Failed to finalize image destination")
         }
-        
+
         let pngData = mutableData as Data
         let base64String = pngData.base64EncodedString()
         let dataURLString = "data:image/png;base64,\(base64String)"
         return URL(string: dataURLString)!
     }
-    
+
     /// Creates a simple test audio as base64 data
-    static func createTestAudioBase64(format: String = "wav") -> String {
+    static func createTestAudioBase64(format _: String = "wav") -> String {
         // Create a minimal WAV file header (44 bytes) + some silence
         var wavData = Data()
-        
+
         // RIFF header
         wavData.append("RIFF".data(using: .ascii)!)
         wavData.append(contentsOf: withUnsafeBytes(of: UInt32(36).littleEndian) { Data($0) })
         wavData.append("WAVE".data(using: .ascii)!)
-        
+
         // fmt chunk
         wavData.append("fmt ".data(using: .ascii)!)
         wavData.append(contentsOf: withUnsafeBytes(of: UInt32(16).littleEndian) { Data($0) })
@@ -107,12 +107,11 @@ enum TestHelpers {
         wavData.append(contentsOf: withUnsafeBytes(of: UInt32(32000).littleEndian) { Data($0) }) // byte rate
         wavData.append(contentsOf: withUnsafeBytes(of: UInt16(2).littleEndian) { Data($0) }) // block align
         wavData.append(contentsOf: withUnsafeBytes(of: UInt16(16).littleEndian) { Data($0) }) // bits per sample
-        
+
         // data chunk
         wavData.append("data".data(using: .ascii)!)
         wavData.append(contentsOf: withUnsafeBytes(of: UInt32(0).littleEndian) { Data($0) })
-        
+
         return wavData.base64EncodedString()
     }
 }
-

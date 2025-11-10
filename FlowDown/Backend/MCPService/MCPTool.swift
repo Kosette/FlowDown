@@ -131,7 +131,7 @@ extension [Tool.Content] {
 }
 
 extension MCPTool {
-    private func convertMCPSchemaToJSONValues(_ mcpSchema: Value?) -> [String: JSONValue] {
+    private func convertMCPSchemaToJSONValues(_ mcpSchema: Value?) -> [String: AnyCodingValue] {
         guard let mcpSchema else {
             return ["type": .string("object"), "properties": .object([:]), "additionalProperties": .bool(false)]
         }
@@ -142,7 +142,7 @@ extension MCPTool {
         return ["type": .string("object"), "properties": .object([:]), "additionalProperties": .bool(false)]
     }
 
-    private func convertMCPValueToJSONValue(_ value: Value) -> JSONValue {
+    private func convertMCPValueToJSONValue(_ value: Value) -> AnyCodingValue {
         switch value {
         case let .string(string):
             .string(string)

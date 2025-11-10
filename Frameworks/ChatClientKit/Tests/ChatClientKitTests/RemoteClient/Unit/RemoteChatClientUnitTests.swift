@@ -13,7 +13,7 @@ import Testing
 @Suite("RemoteChatClient Unit Tests")
 struct RemoteChatClientUnitTests {
     @Test("Chat completion request decodes reasoning and includes additional fields")
-    func testChatCompletionRequest_decodesReasoningAndIncludesAdditionalFields() async throws {
+    func chatCompletionRequest_decodesReasoningAndIncludesAdditionalFields() async throws {
         let responseJSON: [String: Any] = [
             "choices": [
                 [
@@ -80,7 +80,7 @@ struct RemoteChatClientUnitTests {
     }
 
     @Test("Chat completion request when server returns error throws decoded error")
-    func testChatCompletionRequest_whenServerReturnsError_throwsDecodedError() async throws {
+    func chatCompletionRequest_whenServerReturnsError_throwsDecodedError() async throws {
         let errorJSON: [String: Any] = [
             "status": 401,
             "error": "unauthorized",
@@ -126,7 +126,7 @@ struct RemoteChatClientUnitTests {
     }
 
     @Test("Streaming chat completion request emits reasoning and tool calls")
-    func testStreamingChatCompletionRequest_emitsReasoningAndToolCalls() async throws {
+    func streamingChatCompletionRequest_emitsReasoningAndToolCalls() async throws {
         let session = MockURLSession(result: .failure(TestError()))
         let eventFactory = MockEventSourceFactory()
 
@@ -258,4 +258,3 @@ private struct TestEvent: EVEvent {
 }
 
 private struct TestError: Swift.Error {}
-

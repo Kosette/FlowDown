@@ -12,15 +12,15 @@ import Testing
 @Suite("RemoteChatClient Basic Tests")
 struct RemoteChatClientBasicTests {
     @Test("Non-streaming chat completion with text message")
-    func testNonStreamingChatCompletion() async throws {
+    func nonStreamingChatCompletion() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let request = ChatRequestBody(messages: [
-            .user(content: .text("Say 'Hello, World!' in one sentence."))
+            .user(content: .text("Say 'Hello, World!' in one sentence.")),
         ])
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.model.contains("gemini"))
         #expect(response.choices.count > 0)
         let message = response.choices.first?.message
@@ -29,20 +29,20 @@ struct RemoteChatClientBasicTests {
         #expect(message?.content?.isEmpty == false)
         #expect(message?.content?.lowercased().contains("hello") == true)
     }
-    
+
     @Test("Streaming chat completion with text message")
-    func testStreamingChatCompletion() async throws {
+    func streamingChatCompletion() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let request = ChatRequestBody(messages: [
-            .user(content: .text("Count from 1 to 5, one number per line."))
+            .user(content: .text("Count from 1 to 5, one number per line.")),
         ])
-        
+
         let stream = try await client.streamingChatCompletionRequest(body: request)
-        
+
         var chunks: [ChatServiceStreamObject] = []
         var fullContent = ""
-        
+
         for try await chunk in stream {
             chunks.append(chunk)
             if case let .chatCompletionChunk(completionChunk) = chunk {
@@ -51,42 +51,42 @@ struct RemoteChatClientBasicTests {
                 }
             }
         }
-        
+
         #expect(chunks.count > 0)
         #expect(fullContent.isEmpty == false)
         #expect(fullContent.contains("1") || fullContent.contains("2") || fullContent.contains("3"))
     }
-    
+
     @Test("Chat completion with system message")
-    func testChatCompletionWithSystemMessage() async throws {
+    func chatCompletionWithSystemMessage() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let request = ChatRequestBody(messages: [
             .system(content: .text("You are a helpful assistant that always responds in uppercase.")),
-            .user(content: .text("Say hello"))
+            .user(content: .text("Say hello")),
         ])
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let content = response.choices.first?.message.content ?? ""
         if content.isEmpty {
             Issue.record("Response content was empty; Google Gemini sometimes omits text for short deterministic prompts.")
         }
     }
-    
+
     @Test("Chat completion with multiple messages")
-    func testChatCompletionWithMultipleMessages() async throws {
+    func chatCompletionWithMultipleMessages() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let request = ChatRequestBody(messages: [
             .user(content: .text("My name is Alice.")),
             .assistant(content: .text("Hello Alice! Nice to meet you.")),
-            .user(content: .text("What's my name?"))
+            .user(content: .text("What's my name?")),
         ])
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let content = response.choices.first?.message.content ?? ""
         if content.isEmpty {
@@ -94,57 +94,57 @@ struct RemoteChatClientBasicTests {
         }
         #expect(content.lowercased().contains("alice") == true)
     }
-    
+
     @Test("Chat completion with temperature parameter")
-    func testChatCompletionWithTemperature() async throws {
+    func chatCompletionWithTemperature() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let request = ChatRequestBody(
             messages: [
-                .user(content: .text("Say 'test'"))
+                .user(content: .text("Say 'test'")),
             ],
             temperature: 0.5
         )
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let content = response.choices.first?.message.content ?? ""
         #expect(content.isEmpty == false)
     }
-    
+
     @Test("Chat completion with max tokens")
-    func testChatCompletionWithMaxTokens() async throws {
+    func chatCompletionWithMaxTokens() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let request = ChatRequestBody(
             messages: [
-                .user(content: .text("List the numbers 1 through 10."))
+                .user(content: .text("List the numbers 1 through 10.")),
             ],
             maxCompletionTokens: 50
         )
-        
+
         let response = try await client.chatCompletionRequest(body: request)
-        
+
         #expect(response.choices.count > 0)
         let content = response.choices.first?.message.content ?? ""
         #expect(content.isEmpty == false)
     }
-    
+
     @Test("Streaming chat completion collects all chunks")
-    func testStreamingCollectsAllChunks() async throws {
+    func streamingCollectsAllChunks() async throws {
         let client = TestHelpers.makeOpenRouterClient()
-        
+
         let request = ChatRequestBody(messages: [
-            .user(content: .text("Write a short poem about testing."))
+            .user(content: .text("Write a short poem about testing.")),
         ])
-        
+
         let stream = try await client.streamingChatCompletionRequest(body: request)
-        
+
         var contentChunks: [String] = []
         var reasoningChunks: [String] = []
         var toolCalls: [ToolCallRequest] = []
-        
+
         for try await object in stream {
             switch object {
             case let .chatCompletionChunk(chunk):
@@ -160,8 +160,7 @@ struct RemoteChatClientBasicTests {
                 toolCalls.append(call)
             }
         }
-        
+
         #expect(contentChunks.count > 0 || reasoningChunks.count > 0)
     }
 }
-
