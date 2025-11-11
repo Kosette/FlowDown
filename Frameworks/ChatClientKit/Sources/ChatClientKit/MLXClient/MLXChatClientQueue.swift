@@ -19,12 +19,13 @@ public final class MLXChatClientQueue {
     @discardableResult
     public func acquire() -> UUID {
         let token = UUID()
+        logger.debugFile("MLXChatClientQueue.acquire token: \(token.uuidString)")
+        semaphore.wait()
+
         lock.lock()
         runningTokens.insert(token)
         lock.unlock()
 
-        logger.debugFile("MLXChatClientQueue.acquire token: \(token.uuidString)")
-        semaphore.wait()
         return token
     }
 

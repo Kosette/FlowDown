@@ -25,14 +25,15 @@ extension MLXChatClient {
             let input = try await context.processor.prepare(input: lockedInput)
 
             return AsyncThrowingStream { continuation in
-                var latestOutputLength = 0
-                var isReasoning = false
-                var shouldRemoveLeadingWhitespace = true
+                let workerTask = Task.detached(priority: .userInitiated) {
+                    defer { MLXChatClientQueue.shared.release(token: token) }
 
-                var decoder = ChunkDecoder(context: context)
-                var regularContentOutputLength = 0
+                    var latestOutputLength = 0
+                    var isReasoning = false
+                    var shouldRemoveLeadingWhitespace = true
+                    var decoder = ChunkDecoder(context: context)
+                    var regularContentOutputLength = 0
 
-                Task.detached(priority: .userInitiated) {
                     do {
                         let result = try MLXLMCommon.generate(
                             input: input,
@@ -79,13 +80,21 @@ extension MLXChatClient {
                         }
 
                         logger.infoFile("inference completed, total output length: \(output.count), regular content: \(regularContentOutputLength)")
-                        MLXChatClientQueue.shared.release(token: token)
+                        continuation.finish()
+                    } catch is CancellationError {
+                        logger.debugFile("inference cancelled for token: \(token.uuidString)")
                         continuation.finish()
                     } catch {
                         logger.errorFile("inference failed: \(error.localizedDescription)")
-                        MLXChatClientQueue.shared.release(token: token)
                         continuation.finish(throwing: error)
                     }
+                }
+
+                continuation.onTermination = { @Sendable reason in
+                    guard case .cancelled = reason else { return }
+                    logger.debugFile("stream cancelled before completion for token: \(token.uuidString)")
+                    workerTask.cancel()
+                    MLXChatClientQueue.shared.release(token: token)
                 }
             }
         }.eraseToAnyAsyncSequence()

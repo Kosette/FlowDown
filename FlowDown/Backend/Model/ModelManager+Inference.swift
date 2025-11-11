@@ -35,8 +35,6 @@ extension ModelManager {
         }
         Task.detached {
             assert(!Thread.isMainThread)
-            let token = MLXChatClientQueue.shared.acquire()
-            defer { MLXChatClientQueue.shared.release(token: token) }
 
             do {
                 let client = MLXChatClient(url: ModelManager.shared.modelContent(for: model))
