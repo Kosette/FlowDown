@@ -7,7 +7,10 @@ struct ClassifyContentIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Use the model to classify content into one of the provided candidates. If the model cannot decide, the first candidate is returned."
+        IntentDescription(
+            LocalizedStringResource("Use the model to classify content into one of the provided candidates. If the model cannot decide, the first candidate is returned."),
+            categoryName: LocalizedStringResource("Classification")
+        )
     }
 
     @Parameter(title: "Model", default: nil)
@@ -96,7 +99,10 @@ struct ClassifyContentWithImageIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Use the model to classify content with the help of an accompanying image. If the model cannot decide, the first candidate is returned."
+        IntentDescription(
+            LocalizedStringResource("Use the model to classify content with the help of an accompanying image. If the model cannot decide, the first candidate is returned."),
+            categoryName: LocalizedStringResource("Classification")
+        )
     }
 
     @Parameter(title: "Model", default: nil)

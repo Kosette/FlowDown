@@ -457,18 +457,18 @@
         }
       }
     },
-    "Add text, images, or audio to the rich editor's temporary storage for the selected conversation" : {
+    "Add text, images, or audio to the rich editor's temporary storage for the selected conversation." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add text, images, or audio to the rich editor's temporary storage for the selected conversation"
+            "value" : "Add text, images, or audio to the rich editor's temporary storage for the selected conversation."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "将文本、图像或音频添加到所选会话的富文本编辑器暂存区"
+            "value" : "为所选对话的富文本编辑器临时存储添加文本、图像或音频。"
           }
         }
       }
@@ -1547,6 +1547,22 @@
         }
       }
     },
+    "Browse and select any FlowDown conversation." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browse and select any FlowDown conversation."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "浏览并选择任意 FlowDown 对话。"
+          }
+        }
+      }
+    },
     "Browse, search, and manage stored memories." : {
       "localizations" : {
         "en" : {
@@ -2043,6 +2059,22 @@
         }
       }
     },
+    "Choose from the models available in FlowDown." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose from the models available in FlowDown."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择 FlowDown 中可用的模型。"
+          }
+        }
+      }
+    },
     "Choose how we proactively shares stored memories with the model during conversations and automations. This includes system Shortcuts." : {
       "localizations" : {
         "en" : {
@@ -2103,6 +2135,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "城市：%@"
+          }
+        }
+      }
+    },
+    "Classification" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classification"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分类"
           }
         }
       }
@@ -2956,6 +3004,22 @@
         }
       }
     },
+    "Conversations" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversations"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "对话"
+          }
+        }
+      }
+    },
     "Conversations, Messages, Attachments" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3197,18 +3261,18 @@
         }
       }
     },
-    "Create a deep link that starts a new conversation in app" : {
+    "Create a deep link that starts a new conversation in the app." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Create a deep link that starts a new conversation in app"
+            "value" : "Create a deep link that starts a new conversation in the app."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "创建一个用于打开软件并进行新对话的链接"
+            "value" : "创建在应用内启动新对话的深度链接。"
           }
         }
       }
@@ -3261,18 +3325,18 @@
         }
       }
     },
-    "Create a new conversation and optionally switch to it" : {
+    "Create a new conversation and optionally switch to it." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Create a new conversation and optionally switch to it"
+            "value" : "Create a new conversation and optionally switch to it."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "创建新会话，并可选择切换到该会话"
+            "value" : "创建一个新对话，并可选择切换到该对话。"
           }
         }
       }
@@ -6552,6 +6616,22 @@
         }
       }
     },
+    "Generation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generation"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "生成"
+          }
+        }
+      }
+    },
     "Get control of your data, configure cloud sync, export database or reset the app." : {
       "localizations" : {
         "en" : {
@@ -7851,6 +7931,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最近 30 项"
+          }
+        }
+      }
+    },
+    "Launch FlowDown without performing any additional actions." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Launch FlowDown without performing any additional actions."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启动 FlowDown 而不执行其他操作。"
           }
         }
       }
@@ -11336,18 +11432,18 @@
         }
       }
     },
-    "Return the full document of the most recent conversation" : {
+    "Return the full document of the most recent conversation." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Return the full document of the most recent conversation"
+            "value" : "Return the full document of the most recent conversation."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "返回最近对话的完整文档"
+            "value" : "返回最近一次对话的完整文档。"
           }
         }
       }
@@ -12955,34 +13051,34 @@
         }
       }
     },
-    "Switch to a conversation and automatically send the message" : {
+    "Switch to a conversation and automatically send the message." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Switch to a conversation and automatically send the message"
+            "value" : "Switch to a conversation and automatically send the message."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切换到指定会话并自动发送消息"
+            "value" : "切换到对话并自动发送消息。"
           }
         }
       }
     },
-    "Switch to a conversation without sending any messages" : {
+    "Switch to a conversation without sending any messages." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Switch to a conversation without sending any messages"
+            "value" : "Switch to a conversation without sending any messages."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切换到一个对话，但不自动发送消息。"
+            "value" : "切换到对话而不发送任何消息。"
           }
         }
       }
@@ -14898,6 +14994,22 @@
         }
       }
     },
+    "Transcription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcription"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "转录"
+          }
+        }
+      }
+    },
     "Travel & Places" : {
       "comment" : "Emoji Category",
       "localizations" : {
@@ -15876,6 +15988,22 @@
         }
       }
     },
+    "Utilities" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilities"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "实用工具"
+          }
+        }
+      }
+    },
     "Utilize the current chat model to assist with auxiliary tasks." : {
       "localizations" : {
         "en" : {
@@ -16817,6 +16945,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "仅能添加"
+          }
+        }
+      }
+    },
+    "Writing Assistance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writing Assistance"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "写作辅助"
           }
         }
       }

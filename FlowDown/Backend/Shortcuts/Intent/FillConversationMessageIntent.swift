@@ -16,7 +16,10 @@ struct FillConversationMessageIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Add text, images, or audio to the rich editor's temporary storage for the selected conversation"
+        IntentDescription(
+            LocalizedStringResource("Add text, images, or audio to the rich editor's temporary storage for the selected conversation."),
+            categoryName: LocalizedStringResource("Conversations")
+        )
     }
 
     @Parameter(title: "Conversation")

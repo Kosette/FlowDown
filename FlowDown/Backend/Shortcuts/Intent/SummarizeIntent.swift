@@ -7,7 +7,10 @@ struct SummarizeTextIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Summarize content into a short paragraph."
+        IntentDescription(
+            LocalizedStringResource("Summarize content into a short paragraph."),
+            categoryName: LocalizedStringResource("Writing Assistance")
+        )
     }
 
     @Parameter(title: "Model", default: nil)
@@ -49,7 +52,10 @@ struct SummarizeTextUsingListIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Summarize content into a list of key points."
+        IntentDescription(
+            LocalizedStringResource("Summarize content into a list of key points."),
+            categoryName: LocalizedStringResource("Writing Assistance")
+        )
     }
 
     @Parameter(title: "Model", default: nil)

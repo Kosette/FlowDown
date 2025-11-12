@@ -9,7 +9,10 @@ struct TranscribeAudioIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Convert an audio recording into text using a model that supports audio input."
+        IntentDescription(
+            LocalizedStringResource("Convert an audio recording into text using a model that supports audio input."),
+            categoryName: LocalizedStringResource("Transcription")
+        )
     }
 
     @Parameter(title: "Model", default: nil)

@@ -10,7 +10,10 @@ struct GenerateResponseIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Send a message and get the model's response."
+        IntentDescription(
+            LocalizedStringResource("Send a message and get the model's response."),
+            categoryName: LocalizedStringResource("Generation")
+        )
     }
 
     @Parameter(title: "Model", default: nil)
@@ -67,7 +70,10 @@ struct GenerateChatResponseWithImagesIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Send a message and get the model's response."
+        IntentDescription(
+            LocalizedStringResource("Send a message and get the model's response."),
+            categoryName: LocalizedStringResource("Generation")
+        )
     }
 
     @Parameter(title: "Model", default: nil)

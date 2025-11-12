@@ -7,7 +7,10 @@ struct ImproveWritingMoreProfessionalIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Rewrite text in a more professional tone while preserving meaning."
+        IntentDescription(
+            LocalizedStringResource("Rewrite text in a more professional tone while preserving meaning."),
+            categoryName: LocalizedStringResource("Writing Assistance")
+        )
     }
 
     @Parameter(title: "Model", default: nil)
@@ -55,7 +58,10 @@ struct ImproveWritingMoreFriendlyIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Rewrite text with a warmer and more approachable tone."
+        IntentDescription(
+            LocalizedStringResource("Rewrite text with a warmer and more approachable tone."),
+            categoryName: LocalizedStringResource("Writing Assistance")
+        )
     }
 
     @Parameter(title: "Model", default: nil)
@@ -103,7 +109,10 @@ struct ImproveWritingMoreConciseIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Trim text to be more concise without losing the key message."
+        IntentDescription(
+            LocalizedStringResource("Trim text to be more concise without losing the key message."),
+            categoryName: LocalizedStringResource("Writing Assistance")
+        )
     }
 
     @Parameter(title: "Model", default: nil)

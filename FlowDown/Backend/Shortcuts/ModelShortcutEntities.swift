@@ -41,6 +41,13 @@ enum ShortcutsEntities {
     }
 
     struct ConversationQuery: EntityQuery {
+        static var findIntentDescription: IntentDescription? {
+            IntentDescription(
+                LocalizedStringResource("Browse and select any FlowDown conversation."),
+                categoryName: LocalizedStringResource("Conversations")
+            )
+        }
+
         func entities(for identifiers: [ConversationEntity.ID]) async throws -> [ConversationEntity] {
             let available = await loadEntities()
             let identifierSet = Set(identifiers)
@@ -135,6 +142,13 @@ enum ShortcutsEntities {
     }
 
     struct ModelQuery: EntityQuery {
+        static var findIntentDescription: IntentDescription? {
+            IntentDescription(
+                LocalizedStringResource("Choose from the models available in FlowDown."),
+                categoryName: LocalizedStringResource("Models")
+            )
+        }
+
         func entities(for identifiers: [ModelEntity.ID]) async throws -> [ModelEntity] {
             let available = await loadEntities()
             let identifierSet = Set(identifiers)

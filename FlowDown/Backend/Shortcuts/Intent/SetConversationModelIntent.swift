@@ -7,7 +7,10 @@ struct SetConversationModelIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Choose the default model for new conversations."
+        IntentDescription(
+            LocalizedStringResource("Choose the default model for new conversations."),
+            categoryName: LocalizedStringResource("Models")
+        )
     }
 
     @Parameter(title: "Model", requestValueDialog: "Which model should be the default?")

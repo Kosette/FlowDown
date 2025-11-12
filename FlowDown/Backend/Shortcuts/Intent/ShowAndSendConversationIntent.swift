@@ -15,7 +15,10 @@ struct ShowAndSendConversationIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Switch to a conversation and automatically send the message"
+        IntentDescription(
+            LocalizedStringResource("Switch to a conversation and automatically send the message."),
+            categoryName: LocalizedStringResource("Conversations")
+        )
     }
 
     static var openAppWhenRun: Bool {

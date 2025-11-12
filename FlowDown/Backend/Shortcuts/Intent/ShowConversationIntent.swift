@@ -15,7 +15,10 @@ struct ShowConversationIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Switch to a conversation without sending any messages"
+        IntentDescription(
+            LocalizedStringResource("Switch to a conversation without sending any messages."),
+            categoryName: LocalizedStringResource("Conversations")
+        )
     }
 
     static var openAppWhenRun: Bool {

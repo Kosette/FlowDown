@@ -7,7 +7,10 @@ struct GetLatestConversationDetailsIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Return the full document of the most recent conversation"
+        IntentDescription(
+            LocalizedStringResource("Return the full document of the most recent conversation."),
+            categoryName: LocalizedStringResource("Conversations")
+        )
     }
 
     static var authenticationPolicy: IntentAuthenticationPolicy {

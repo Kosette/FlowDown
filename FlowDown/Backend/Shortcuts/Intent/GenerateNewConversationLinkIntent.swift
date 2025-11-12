@@ -7,7 +7,10 @@ struct GenerateNewConversationLinkIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Create a deep link that starts a new conversation in app"
+        IntentDescription(
+            LocalizedStringResource("Create a deep link that starts a new conversation in the app."),
+            categoryName: LocalizedStringResource("Utilities")
+        )
     }
 
     @Parameter(title: "Initial Message", default: "", requestValueDialog: "What message should we pre-fill?")

@@ -8,7 +8,10 @@ struct SearchConversationsIntent: AppIntent {
     }
 
     static var description: IntentDescription {
-        "Search saved conversations by keyword and return formatted summaries."
+        IntentDescription(
+            LocalizedStringResource("Search saved conversations by keyword and return formatted summaries."),
+            categoryName: LocalizedStringResource("Conversations")
+        )
     }
 
     static var authenticationPolicy: IntentAuthenticationPolicy {
