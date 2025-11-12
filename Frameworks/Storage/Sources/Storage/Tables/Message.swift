@@ -129,7 +129,7 @@ public extension Message.Role {
         case .system:
             false
         case .toolHint:
-            true
+            false // 不然会被删掉了 这个是包含信息的
         }
     }
 }

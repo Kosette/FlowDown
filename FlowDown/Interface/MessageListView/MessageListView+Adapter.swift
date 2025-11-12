@@ -310,7 +310,7 @@ extension MessageListView: ListViewAdapter {
                           message.role == .user
                     else { return nil }
                     guard let editor = self.nearestEditor() else { return nil }
-                    return UIAction(title: String(localized: "Redo"), image: .init(systemName: "arrow.clockwise")) { _ in
+                    return UIAction(title: String(localized: "Redo (Edit)"), image: .init(systemName: "arrow.clockwise")) { _ in
                         let attachments: [RichEditorView.Object.Attachment] = self.session
                             .attachments(for: messageIdentifier)
                             .compactMap {

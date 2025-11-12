@@ -61,20 +61,74 @@ extension ConversationSession {
                     <content>\($0.toolResult)</content>
                     """
                 }
+                guard let toolRequest = decodeToolRequestFromToolMessage(message) else {
+                    return
+                }
+                requestMessages.append(.assistant(content: nil, name: nil, refusal: nil, toolCalls: [
+                    .init(id: toolRequest.id.uuidString, function: .init(name: toolRequest.name, arguments: toolRequest.args)),
+                ]))
                 requestMessages.append(.tool(
                     content: .text(content.joined(separator: "\n")),
-                    toolCallID: message.id
+                    toolCallID: toolRequest.id.uuidString
                 ))
             case .toolHint:
                 let content = message.toolStatus.message
+                guard let toolRequest = decodeToolRequestFromToolMessage(message) else {
+                    return
+                }
+                requestMessages.append(.assistant(content: nil, name: nil, refusal: nil, toolCalls: [
+                    .init(id: toolRequest.id.uuidString, function: .init(name: toolRequest.name, arguments: toolRequest.args)),
+                ]))
                 requestMessages.append(.tool(
                     content: .text(content),
-                    toolCallID: message.id
+                    toolCallID: toolRequest.id.uuidString
                 ))
             default:
                 continue
             }
         }
+    }
+
+    /*
+     {
+       "error": {
+         "message": "Provider returned error",
+         "metadata": {
+           "raw": "{\n  \"error\": {\n    \"message\": \"Missing required parameter: 'input[6].arguments'.\",\n    \"type\": \"invalid_request_error\",\n    \"param\": \"input[6].arguments\",\n    \"code\": \"missing_required_parameter\"\n  }\n}",
+           "provider_name": "Azure"
+         },
+         "code": 400
+       },
+     }
+     */
+
+    func encodeAdditionalInfoAndAttachToMessage(_ message: Message, dic: [String: Any]) {
+        let read = message.metadata ?? .init()
+        let orig = try? JSONSerialization.jsonObject(with: read, options: [.fragmentsAllowed]) as? [String: Any]
+        var existing = orig ?? .init()
+        for (key, value) in dic {
+            existing[key] = value
+        }
+        let data = try? JSONSerialization.data(withJSONObject: existing, options: [.fragmentsAllowed])
+        message.update(\.metadata, to: data)
+        logger.debugFile("[*] encoded additional info to message \(message.objectId) with value \(dic)")
+    }
+
+    func encodeToolRequestAndAttachToToolMessage(_ toolRequest: ToolCallRequest, message: Message) {
+        let precoded = try? JSONEncoder().encode(toolRequest)
+        let predic = try? JSONSerialization.jsonObject(with: precoded ?? .init(), options: [.fragmentsAllowed]) as? [String: Any]
+        encodeAdditionalInfoAndAttachToMessage(message, dic: ["tool_request": predic ?? [:]])
+        logger.debugFile("[*] encoded tool request \(toolRequest.name) to message \(message.objectId) with value \(predic ?? [:])")
+    }
+
+    func decodeToolRequestFromToolMessage(_ message: Message) -> ToolCallRequest? {
+        let read = message.metadata ?? .init()
+        guard let orig = try? JSONSerialization.jsonObject(with: read, options: [.fragmentsAllowed]) as? [String: Any],
+              let toolRequestDic = orig["tool_request"],
+              let data = try? JSONSerialization.data(withJSONObject: toolRequestDic, options: [.fragmentsAllowed]),
+              let toolRequest = try? JSONDecoder().decode(ToolCallRequest.self, from: data)
+        else { return nil }
+        return toolRequest
     }
 
     func makeMessageFromAttachments(

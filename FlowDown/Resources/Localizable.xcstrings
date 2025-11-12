@@ -11078,18 +11078,18 @@
         }
       }
     },
-    "Redo" : {
+    "Redo (Edit)" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Redo"
+            "value" : "Redo (Edit)"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重做"
+            "value" : "重做（编辑）"
           }
         }
       }

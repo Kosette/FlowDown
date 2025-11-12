@@ -24,6 +24,9 @@ extension ConversationSession {
         await currentMessageListView.loading()
 
         let message = appendNewMessage(role: .assistant)
+        encodeAdditionalInfoAndAttachToMessage(message, dic: [
+            "model_id": modelID,
+        ])
 
         let stream = try await ModelManager.shared.streamingInfer(
             with: modelID,
@@ -127,6 +130,7 @@ extension ConversationSession {
             // 检查是否是网络搜索工具，如果是则直接执行
             if let tool = tool as? MTWebSearchTool {
                 let webSearchMessage = appendNewMessage(role: .webSearch)
+                encodeToolRequestAndAttachToToolMessage(request, message: webSearchMessage)
                 let searchResult = try await tool.execute(
                     with: request.args,
                     session: self,
@@ -166,6 +170,7 @@ extension ConversationSession {
                 var toolStatus = Message.ToolStatus(name: tool.interfaceName, state: 0, message: "")
                 let toolMessage = appendNewMessage(role: .toolHint)
                 toolMessage.update(\.toolStatus, to: toolStatus)
+                encodeToolRequestAndAttachToToolMessage(request, message: toolMessage)
                 await requestUpdate(view: currentMessageListView)
 
                 // 标准工具
