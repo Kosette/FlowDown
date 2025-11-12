@@ -41,9 +41,18 @@ struct FillConversationMessageIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
+        try await performInMainThread()
+
+        let message = String(localized: "Message filled successfully")
+        let dialog = IntentDialog(.init(stringLiteral: message))
+        return .result(dialog: dialog)
+    }
+
+    @MainActor
+    private func performInMainThread() async throws {
         let identifier = conversation.id
 
-        guard await MainActor.run(body: { sdb.conversationWith(identifier: identifier) != nil }) else {
+        guard sdb.conversationWith(identifier: identifier) != nil else {
             throw ShortcutUtilitiesError.conversationNotFound
         }
 
@@ -65,7 +74,7 @@ struct FillConversationMessageIntent: AppIntent {
 
         if let audio {
             let data = audio.data
-            let filename = audio.filename?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+            let filename = audio.filename.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
             let fileExtension = filename.flatMap { name -> String? in
                 let ext = URL(fileURLWithPath: name).pathExtension
                 return ext.isEmpty ? nil : ext
@@ -83,34 +92,28 @@ struct FillConversationMessageIntent: AppIntent {
             attachmentsToAppend.append(attachment)
         }
 
-        await MainActor.run {
-            var editorObject = ConversationManager.shared.getRichEditorObject(identifier: identifier) ?? RichEditorView.Object()
+        var editorObject = ConversationManager.shared.getRichEditorObject(identifier: identifier) ?? RichEditorView.Object()
 
-            if !trimmedText.isEmpty {
-                if editorObject.text.isEmpty {
-                    editorObject.text = trimmedText
-                } else {
-                    editorObject.text += "\n" + trimmedText
-                }
+        if !trimmedText.isEmpty {
+            if editorObject.text.isEmpty {
+                editorObject.text = trimmedText
+            } else {
+                editorObject.text += "\n" + trimmedText
             }
-
-            if !attachmentsToAppend.isEmpty {
-                editorObject.attachments.append(contentsOf: attachmentsToAppend)
-            }
-
-            if editorObject.options[.storagePrefix] == nil {
-                editorObject.options[.storagePrefix] = .url(storageDirectory)
-            }
-
-            ConversationManager.shared.setRichEditorObject(identifier: identifier, editorObject)
-            NotificationCenter.default.post(
-                name: NSNotification.Name("RefreshRichEditor"),
-                object: identifier
-            )
         }
 
-        let message = String(localized: "Message filled successfully")
-        let dialog = IntentDialog(.init(stringLiteral: message))
-        return .result(dialog: dialog)
+        if !attachmentsToAppend.isEmpty {
+            editorObject.attachments.append(contentsOf: attachmentsToAppend)
+        }
+
+        if editorObject.options[.storagePrefix] == nil {
+            editorObject.options[.storagePrefix] = .url(storageDirectory)
+        }
+
+        ConversationManager.shared.setRichEditorObject(identifier: identifier, editorObject)
+        NotificationCenter.default.post(
+            name: NSNotification.Name("RefreshRichEditor"),
+            object: identifier
+        )
     }
 }

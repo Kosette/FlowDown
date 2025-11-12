@@ -41,4 +41,3 @@ struct CreateNewConversationIntent: AppIntent {
         return .result(value: entity)
     }
 }
-

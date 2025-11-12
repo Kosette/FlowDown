@@ -6164,18 +6164,18 @@
         }
       }
     },
-    "Fill message for current conversation" : {
+    "Fill message for ${conversation}" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fill message for current conversation"
+            "value" : "Fill message for ${conversation}"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "为当前会话填充消息"
+            "value" : "填充消息到 ${conversation}"
           }
         }
       }
