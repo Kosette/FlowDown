@@ -9,16 +9,111 @@ import UIKit
 
 /// A label that displays text with an animated shimmer effect that sweeps across characters
 final class ShimmerTextLabel: UILabel {
+    // MARK: - Direction Configuration
+
+    /// Shimmer animation direction
+    enum ShimmerDirection {
+        case leftToRight
+        case rightToLeft
+        case topToBottom
+        case bottomToTop
+    }
+
+    // MARK: - Private Properties
+
     private var isAnimating = false
     private let gradientLayer = CAGradientLayer()
     private var originalTextColor: UIColor?
     private var cachedIntrinsicSize: CGSize?
 
+    // MARK: - Customizable Parameters
+
     /// Controls the shimmer animation speed (duration for one complete cycle)
     var animationDuration: TimeInterval = 1.5
 
     /// The size of the shimmer band (0.3 = 30% of the view width)
-    private let bandSize: CGFloat = 0.3
+    var bandSize: CGFloat = 0.3 {
+        didSet {
+            if isAnimating {
+                setupGradientLayer()
+                if window != nil {
+                    startShimmerAnimation()
+                }
+            }
+        }
+    }
+
+    /// The minimum alpha/transparency of the shimmer effect (0.0 - 1.0)
+    var minimumAlpha: CGFloat = 0.3 {
+        didSet {
+            minimumAlpha = max(0, min(1, minimumAlpha))
+            if isAnimating {
+                updateGradientColors()
+            }
+        }
+    }
+
+    /// The maximum alpha/transparency of the shimmer effect (0.0 - 1.0)
+    var maximumAlpha: CGFloat = 1.0 {
+        didSet {
+            maximumAlpha = max(0, min(1, maximumAlpha))
+            if isAnimating {
+                updateGradientColors()
+            }
+        }
+    }
+
+    /// Custom shimmer color (if nil, uses text color)
+    var shimmerColor: UIColor? {
+        didSet {
+            if isAnimating {
+                updateGradientColors()
+            }
+        }
+    }
+
+    /// Shimmer animation direction
+    var shimmerDirection: ShimmerDirection = .leftToRight {
+        didSet {
+            if isAnimating {
+                setupGradientLayer()
+                if window != nil {
+                    startShimmerAnimation()
+                }
+            }
+        }
+    }
+
+    /// Animation timing function
+    var timingFunction: CAMediaTimingFunctionName = .linear {
+        didSet {
+            if isAnimating {
+                gradientLayer.removeAllAnimations()
+                if window != nil {
+                    startShimmerAnimation()
+                }
+            }
+        }
+    }
+
+    /// Gradient color positions (center position of the bright spot, 0.0 - 1.0)
+    var gradientCenterLocation: CGFloat = 0.5 {
+        didSet {
+            gradientCenterLocation = max(0, min(1, gradientCenterLocation))
+            if isAnimating {
+                updateGradientColors()
+            }
+        }
+    }
+
+    /// Whether to use smooth fade at gradient edges
+    var useFadeEdges: Bool = true {
+        didSet {
+            if isAnimating {
+                updateGradientColors()
+            }
+        }
+    }
 
     override var intrinsicContentSize: CGSize {
         // Use cached size during animation to prevent incorrect sizing when textColor is clear
@@ -56,24 +151,54 @@ final class ShimmerTextLabel: UILabel {
     }
 
     private func setupGradientLayer() {
-        // Horizontal gradient, starting from left outside
-        gradientLayer.startPoint = CGPoint(x: -bandSize, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 0, y: 0.5)
+        // Configure gradient direction based on shimmerDirection
+        switch shimmerDirection {
+        case .leftToRight:
+            gradientLayer.startPoint = CGPoint(x: -bandSize, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 0, y: 0.5)
+        case .rightToLeft:
+            gradientLayer.startPoint = CGPoint(x: 1 + bandSize, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        case .topToBottom:
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: -bandSize)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        case .bottomToTop:
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 1 + bandSize)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        }
 
         updateGradientColors()
     }
 
     private func updateGradientColors() {
-        // Gradient colors: dark -> bright -> dark
-        let baseColor = originalTextColor ?? textColor ?? .label
+        // Use custom shimmer color or fallback to text color
+        let baseColor = shimmerColor ?? originalTextColor ?? textColor ?? .label
 
-        gradientLayer.colors = [
-            baseColor.withAlphaComponent(0.3).cgColor,
-            baseColor.cgColor,
-            baseColor.withAlphaComponent(0.3).cgColor,
-        ]
+        // Create gradient with customizable alpha values
+        if useFadeEdges {
+            // Smooth gradient: dark -> bright -> dark
+            gradientLayer.colors = [
+                baseColor.withAlphaComponent(minimumAlpha).cgColor,
+                baseColor.withAlphaComponent(maximumAlpha).cgColor,
+                baseColor.withAlphaComponent(minimumAlpha).cgColor,
+            ]
 
-        gradientLayer.locations = [0, 0.5, 1]
+            // Use gradientCenterLocation to control where the bright spot appears
+            let edgeWidth = (1.0 - gradientCenterLocation) * 0.5
+            gradientLayer.locations = [
+                0,
+                NSNumber(value: gradientCenterLocation),
+                1,
+            ]
+        } else {
+            // Sharp edges: no fade
+            gradientLayer.colors = [
+                baseColor.withAlphaComponent(maximumAlpha).cgColor,
+                baseColor.withAlphaComponent(maximumAlpha).cgColor,
+            ]
+
+            gradientLayer.locations = [0, 1]
+        }
     }
 
     /// Start the shimmer animation
@@ -150,22 +275,42 @@ final class ShimmerTextLabel: UILabel {
         let min = -bandSize
         let max: CGFloat = 1 + bandSize
 
-        // Start point animation: from left outside -> right outside (horizontal)
+        // Configure animation based on direction
         let startPointAnimation = CABasicAnimation(keyPath: "startPoint")
-        startPointAnimation.fromValue = CGPoint(x: min, y: 0.5)
-        startPointAnimation.toValue = CGPoint(x: max, y: 0.5)
-
-        // End point animation: from left -> right outside (horizontal)
         let endPointAnimation = CABasicAnimation(keyPath: "endPoint")
-        endPointAnimation.fromValue = CGPoint(x: 0, y: 0.5)
-        endPointAnimation.toValue = CGPoint(x: max + bandSize, y: 0.5)
+
+        switch shimmerDirection {
+        case .leftToRight:
+            startPointAnimation.fromValue = CGPoint(x: min, y: 0.5)
+            startPointAnimation.toValue = CGPoint(x: max, y: 0.5)
+            endPointAnimation.fromValue = CGPoint(x: 0, y: 0.5)
+            endPointAnimation.toValue = CGPoint(x: max + bandSize, y: 0.5)
+
+        case .rightToLeft:
+            startPointAnimation.fromValue = CGPoint(x: max, y: 0.5)
+            startPointAnimation.toValue = CGPoint(x: min, y: 0.5)
+            endPointAnimation.fromValue = CGPoint(x: 1, y: 0.5)
+            endPointAnimation.toValue = CGPoint(x: min - bandSize, y: 0.5)
+
+        case .topToBottom:
+            startPointAnimation.fromValue = CGPoint(x: 0.5, y: min)
+            startPointAnimation.toValue = CGPoint(x: 0.5, y: max)
+            endPointAnimation.fromValue = CGPoint(x: 0.5, y: 0)
+            endPointAnimation.toValue = CGPoint(x: 0.5, y: max + bandSize)
+
+        case .bottomToTop:
+            startPointAnimation.fromValue = CGPoint(x: 0.5, y: max)
+            startPointAnimation.toValue = CGPoint(x: 0.5, y: min)
+            endPointAnimation.fromValue = CGPoint(x: 0.5, y: 1)
+            endPointAnimation.toValue = CGPoint(x: 0.5, y: min - bandSize)
+        }
 
         // Combine animations
         let group = CAAnimationGroup()
         group.animations = [startPointAnimation, endPointAnimation]
         group.duration = animationDuration
         group.repeatCount = .infinity
-        group.timingFunction = CAMediaTimingFunction(name: .linear)
+        group.timingFunction = CAMediaTimingFunction(name: timingFunction)
 
         gradientLayer.add(group, forKey: "shimmer")
     }
