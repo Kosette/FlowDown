@@ -263,7 +263,7 @@ extension ModelManager {
         if let model = cloudModel(identifier: identifier) {
             // Use additionalBodyField directly without merging model's bodyFields
             // Callers should explicitly merge bodyFields if needed
-            return RemoteChatClient(
+            return RemoteCompletionsChatClient(
                 model: model.model_identifier,
                 baseURL: model.endpoint,
                 apiKey: model.token,

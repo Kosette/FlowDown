@@ -163,6 +163,15 @@
       }
     },
     {
+      "identity" : "mlx-swift-lm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ml-explore/mlx-swift-lm/",
+      "state" : {
+        "branch" : "main",
+        "revision" : "b857882f15c8bad077644898e0d3ab44c15c8852"
+      }
+    },
+    {
       "identity" : "msdisplaylink",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Lakr233/MSDisplayLink.git",
