@@ -22,10 +22,6 @@ class ToggleBlockButton: BlockButton {
     override init(text: String, icon: String) {
         super.init(text: text, icon: icon)
         super.actionBlock = { [weak self] in self?.toggle() }
-
-        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, _) in
-            self.updateUI()
-        }
     }
 
     @available(*, unavailable)
@@ -46,6 +42,11 @@ class ToggleBlockButton: BlockButton {
                 newValue()
             }
         }
+    }
+
+    override func updateAppearanceAfterTraitChange() {
+        super.updateAppearanceAfterTraitChange()
+        updateUI()
     }
 
     func updateUI() {
