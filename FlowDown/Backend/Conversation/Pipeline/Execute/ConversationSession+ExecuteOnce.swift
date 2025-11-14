@@ -121,9 +121,6 @@ extension ConversationSession {
             }
             await currentMessageListView.loading(with: String(localized: "Utilizing tool: \(tool.interfaceName)"))
 
-            // 等待一小会以避免过快执行任务用户还没看到内容
-            try await Task.sleep(nanoseconds: 1 * 500_000_000)
-
             // 检查是否是网络搜索工具，如果是则直接执行
             if let tool = tool as? MTWebSearchTool {
                 let webSearchMessage = appendNewMessage(role: .webSearch)
