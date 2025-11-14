@@ -324,60 +324,13 @@ class CloudModelEditorController: StackScrollController {
         let temperatureView = ConfigurableInfoView()
         temperatureView.configure(icon: .init(systemName: "sparkles"))
         temperatureView.configure(title: "Imagination")
-        temperatureView.configure(description: "This parameter can be used to control the personality of the model. The more imaginative, the more unstable the output. This parameter is also known as temperature.")
-        let temperatureDisplay = ModelManager.shared.displayTextForTemperature(
-            preference: model?.temperature_preference ?? .inherit,
-            override: model?.temperature_override
-        )
-        temperatureView.configure(value: temperatureDisplay)
-        temperatureView.use { [weak self] in
-            guard let self,
-                  let model = ModelManager.shared.cloudModel(identifier: identifier)
-            else { return [] }
-
-            var actions: [UIMenuElement] = []
-
-            let inheritAction = UIAction(
-                title: String(localized: "Inference default"),
-                image: UIImage(systemName: "circle.dashed")
-            ) { _ in
-                ModelManager.shared.editCloudModel(identifier: model.id) { item in
-                    item.update(\.temperature_preference, to: .inherit)
-                    item.update(\.temperature_override, to: nil)
-                }
-                temperatureView.configure(value: ModelManager.shared.displayTextForTemperature(
-                    preference: .inherit,
-                    override: nil
-                ))
-            }
-            inheritAction.state = model.temperature_preference == .inherit ? .on : .off
-            actions.append(inheritAction)
-
-            for preset in ModelManager.shared.temperaturePresets {
-                let action = UIAction(
-                    title: preset.title,
-                    image: UIImage(systemName: preset.icon)
-                ) { _ in
-                    ModelManager.shared.editCloudModel(identifier: model.id) { item in
-                        item.update(\.temperature_preference, to: .custom)
-                        item.update(\.temperature_override, to: preset.value)
-                    }
-                    temperatureView.configure(value: ModelManager.shared.displayTextForTemperature(
-                        preference: .custom,
-                        override: preset.value
-                    ))
-                }
-                if model.temperature_preference == .custom,
-                   let value = model.temperature_override,
-                   abs(value - preset.value) < 0.0001
-                {
-                    action.state = .on
-                }
-                actions.append(action)
-            }
-
-            return actions
-        }
+        temperatureView.configure(description: "This model uses the global temperature preference. Adjust it from Inference Settings.")
+        let globalTemperature = Double(ModelManager.shared.temperature)
+        temperatureView.configure(value: String(
+            format: String(localized: "Global @ %.2f"),
+            globalTemperature
+        ))
+        temperatureView.isUserInteractionEnabled = false
         stackView.addArrangedSubviewWithMargin(temperatureView)
         stackView.addArrangedSubview(SeparatorView())
 
@@ -808,6 +761,7 @@ private extension CloudModelEditorController {
         case reasoning // openrouter
         case enableThinking = "enable_thinking"
         case thinkingMode = "thinking_mode" // llama
+        case thinking // additional provider requirement
 
         var title: String.LocalizationValue { "Use \(rawValue) Key" }
 
@@ -815,6 +769,7 @@ private extension CloudModelEditorController {
             switch self {
             case .enableThinking: dic[rawValue] = true
             case .thinkingMode: dic[rawValue] = ["type": "enabled"]
+            case .thinking: dic[rawValue] = ["type": "enabled"]
             case .reasoning: dic[rawValue] = ["enabled": true]
             }
         }
@@ -872,27 +827,24 @@ private extension CloudModelEditorController {
                     }
                 }
             }
-            children.append(UIMenu(
-                title: String(localized: "Reasoning Parameters"),
-                image: UIImage(systemName: "brain.head.profile"),
+            let reasoningKeysMenu = UIMenu(
+                title: String(localized: "Reasoning Keys"),
+                image: UIImage(systemName: "key"),
                 options: [.displayInline],
                 children: reasoningParmsActions
-            ))
+            )
 
             let dic = controller.currentDictionary
             let existingReasoningKeys = ReasoningParametersType.allCases.filter { existingType in
                 dic.keys.contains(existingType.rawValue)
             }
-            if existingReasoningKeys.count == 1, let key = existingReasoningKeys.first {
-                children.append(UIMenu(
-                    title: String(localized: "Reasoning Budget"),
-                    image: UIImage(systemName: "gauge"),
-                    options: [.displayInline],
-                    children: ReasoningEffort.allCases.map { effort -> UIAction in
+            let reasoningBudgetMenu: UIMenu = {
+                if existingReasoningKeys.count == 1, let key = existingReasoningKeys.first {
+                    let budgetActions = ReasoningEffort.allCases.map { effort -> UIAction in
                         UIAction(title: String(localized: effort.title)) { _ in
                             controller.updateValue { dic in
                                 switch key {
-                                case .thinkingMode:
+                                case .thinkingMode, .thinking:
                                     dic["thinking_budget"] = effort.thinkingBudgetTokens
                                 case .enableThinking:
                                     dic["thinking_budget"] = effort.thinkingBudgetTokens
@@ -904,12 +856,18 @@ private extension CloudModelEditorController {
                             }
                         }
                     }
-                ))
-            } else {
+                    return UIMenu(
+                        title: String(localized: "Reasoning Budget"),
+                        image: UIImage(systemName: "gauge"),
+                        options: [.displayInline],
+                        children: budgetActions
+                    )
+                }
+
                 let title: String.LocalizationValue = existingReasoningKeys.isEmpty
                     ? "Unavailable - No Reasoning Key"
                     : "Unavailable - Multiple Reasoning Keys"
-                children.append(UIMenu(
+                return UIMenu(
                     title: String(localized: "Reasoning Budget"),
                     image: UIImage(systemName: "gauge"),
                     options: [.displayInline],
@@ -920,8 +878,120 @@ private extension CloudModelEditorController {
                             attributes: [.disabled]
                         ) { _ in },
                     ]
-                ))
-            }
+                )
+            }()
+
+            children.append(UIMenu(
+                title: String(localized: "Reasoning Parameters"),
+                image: UIImage(systemName: "brain.head.profile"),
+                children: [reasoningKeysMenu, reasoningBudgetMenu]
+            ))
+
+            let globalTemperature = Double(ModelManager.shared.temperature)
+            let samplingActions: [UIAction] = [
+                UIAction(title: String(localized: "Set temperature"), image: UIImage(systemName: "sparkles")) { _ in
+                    controller.updateValue {
+                        $0["temperature"] = globalTemperature
+                    }
+                },
+                UIAction(title: String(localized: "Set top_p"), image: UIImage(systemName: "chart.line.uptrend.xyaxis")) { _ in
+                    controller.updateValue {
+                        $0["top_p"] = 0.9
+                    }
+                },
+                UIAction(title: String(localized: "Set top_k"), image: UIImage(systemName: "number")) { _ in
+                    controller.updateValue {
+                        $0["top_k"] = 40
+                    }
+                },
+                UIAction(title: String(localized: "Set presence_penalty"), image: UIImage(systemName: "person.fill.badge.plus")) { _ in
+                    controller.updateValue {
+                        $0["presence_penalty"] = 0.5
+                    }
+                },
+                UIAction(title: String(localized: "Set frequency_penalty"), image: UIImage(systemName: "waveform.path.ecg")) { _ in
+                    controller.updateValue {
+                        $0["frequency_penalty"] = 0.5
+                    }
+                },
+            ]
+            children.append(UIMenu(
+                title: String(localized: "Sampling Parameters"),
+                image: UIImage(systemName: "slider.horizontal.3"),
+                children: samplingActions
+            ))
+
+            var providerChildren: [UIMenuElement] = []
+            let dataCollectionOptions: [(title: String.LocalizationValue, value: String)] = [
+                ("Set data_collection = deny", "deny"),
+                ("Set data_collection = allow", "allow"),
+                ("Set data_collection = limited", "limited"),
+            ]
+            providerChildren.append(contentsOf: dataCollectionOptions.map { option in
+                UIAction(title: String(localized: option.title), image: UIImage(systemName: "hand.raised.fill")) { _ in
+                    controller.updateValue { dic in
+                        var provider = dic["provider"] as? [String: Any] ?? [:]
+                        provider["data_collection"] = option.value
+                        dic["provider"] = provider
+                    }
+                }
+            })
+
+            providerChildren.append(contentsOf: [true, false].map { flag in
+                UIAction(
+                    title: flag
+                        ? String(localized: "Enable zdr")
+                        : String(localized: "Disable zdr"),
+                    image: UIImage(systemName: "switch.2")
+                ) { _ in
+                    controller.updateValue { dic in
+                        var provider = dic["provider"] as? [String: Any] ?? [:]
+                        provider["zdr"] = flag
+                        dic["provider"] = provider
+                    }
+                }
+            })
+
+            providerChildren.append(UIAction(
+                title: String(localized: "Add provider order…"),
+                image: UIImage(systemName: "text.badge.plus")
+            ) { _ in
+                let input = AlertInputViewController(
+                    title: String(localized: "Provider Order"),
+                    message: String(localized: "Enter a provider name to append to the order list."),
+                    placeholder: "Cerebras",
+                    text: ""
+                ) { text in
+                    let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !trimmed.isEmpty else { return }
+                    controller.updateValue { dic in
+                        var provider = dic["provider"] as? [String: Any] ?? [:]
+                        var order = provider["order"] as? [String] ?? []
+                        if !order.contains(trimmed) {
+                            order.append(trimmed)
+                        }
+                        provider["order"] = order
+                        dic["provider"] = provider
+                    }
+                }
+                controller.present(input, animated: true)
+            })
+
+            providerChildren.append(UIAction(
+                title: String(localized: "Clear provider overrides"),
+                image: UIImage(systemName: "trash"),
+                attributes: [.destructive]
+            ) { _ in
+                controller.updateValue { dic in
+                    dic.removeValue(forKey: "provider")
+                }
+            })
+
+            children.append(UIMenu(
+                title: String(localized: "Provider Options"),
+                image: UIImage(systemName: "server.rack"),
+                children: providerChildren
+            ))
 
             comp(children)
         }])

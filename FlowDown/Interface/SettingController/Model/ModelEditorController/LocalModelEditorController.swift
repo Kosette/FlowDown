@@ -273,65 +273,17 @@ class LocalModelEditorController: StackScrollController {
         ) { $0.bottom /= 2 }
         stackView.addArrangedSubview(SeparatorView())
 
-        let localTemperatureView = ConfigurableInfoView().setTapBlock { [weak self] view in
-            guard let self,
-                  let latestModel = ModelManager.shared.localModel(identifier: identifier)
-            else { return }
-
-            func updateDisplay(_ preference: ModelTemperaturePreference, override: Double?) {
-                view.configure(value: ModelManager.shared.displayTextForTemperature(
-                    preference: preference,
-                    override: override
-                ))
-            }
-
-            var actions: [UIMenuElement] = []
-
-            let inheritAction = UIAction(
-                title: String(localized: "Inference default"),
-                image: UIImage(systemName: "circle.dashed")
-            ) { _ in
-                ModelManager.shared.editLocalModel(identifier: latestModel.id) { item in
-                    item.temperature_preference = .inherit
-                    item.temperature_override = nil
-                }
-                updateDisplay(.inherit, override: nil)
-            }
-            inheritAction.state = latestModel.temperature_preference == .inherit ? .on : .off
-            actions.append(inheritAction)
-
-            for preset in ModelManager.shared.temperaturePresets {
-                let action = UIAction(
-                    title: preset.title,
-                    image: UIImage(systemName: preset.icon)
-                ) { _ in
-                    ModelManager.shared.editLocalModel(identifier: latestModel.id) { item in
-                        item.temperature_preference = .custom
-                        item.temperature_override = preset.value
-                    }
-                    updateDisplay(.custom, override: preset.value)
-                }
-                if latestModel.temperature_preference == .custom,
-                   let override = latestModel.temperature_override,
-                   abs(override - preset.value) < 0.0001
-                {
-                    action.state = .on
-                }
-                actions.append(action)
-            }
-
-            view.valueLabel.menu = UIMenu(title: String(localized: "Imagination"), children: actions)
-            view.valueLabel.showsMenuAsPrimaryAction = true
-        }
+        let localTemperatureView = ConfigurableInfoView()
         localTemperatureView.configure(icon: .init(systemName: "sparkles"))
         localTemperatureView.configure(title: "Imagination")
-        localTemperatureView.configure(description: "This parameter can be used to control the personality of the model. The more imaginative, the more unstable the output. This parameter is also known as temperature.")
+        localTemperatureView.configure(description: "Local models use the global temperature preference. Adjust it from Inference Settings.")
         localTemperatureView.configure(
-            value: ModelManager.shared.displayTextForTemperature(
-                preference: model?.temperature_preference ?? .inherit,
-                override: model?.temperature_override
+            value: String(
+                format: String(localized: "Global @ %.2f"),
+                Double(ModelManager.shared.temperature)
             )
         )
+        localTemperatureView.isUserInteractionEnabled = false
         stackView.addArrangedSubviewWithMargin(localTemperatureView)
         stackView.addArrangedSubview(SeparatorView())
 

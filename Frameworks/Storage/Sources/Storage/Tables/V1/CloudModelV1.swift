@@ -21,7 +21,6 @@ package final class CloudModelV1: Identifiable, Codable, Equatable, Hashable, Ta
     package var capabilities: Set<ModelCapabilities> = []
     package var context: ModelContextLength = .short_8k
     package var temperature_preference: ModelTemperaturePreference = .inherit
-    package var temperature_override: Double?
 
     // can be used when loading model from our server
     // present to user on the top of the editor page
@@ -41,7 +40,6 @@ package final class CloudModelV1: Identifiable, Codable, Equatable, Hashable, Ta
             BindColumnConstraint(context, isNotNull: true, defaultTo: ModelContextLength.short_8k)
             BindColumnConstraint(comment, isNotNull: true, defaultTo: "")
             BindColumnConstraint(temperature_preference, isNotNull: true, defaultTo: ModelTemperaturePreference.inherit)
-            BindColumnConstraint(temperature_override, isNotNull: false)
         }
 
         case id
@@ -55,7 +53,6 @@ package final class CloudModelV1: Identifiable, Codable, Equatable, Hashable, Ta
         case context
         case comment
         case temperature_preference
-        case temperature_override
     }
 
     package init(
@@ -69,8 +66,7 @@ package final class CloudModelV1: Identifiable, Codable, Equatable, Hashable, Ta
         context _: ModelContextLength = .medium_64k,
         capabilities: Set<ModelCapabilities> = [],
         comment: String = "",
-        temperature_preference: ModelTemperaturePreference = .inherit,
-        temperature_override: Double? = nil
+        temperature_preference: ModelTemperaturePreference = .inherit
     ) {
         self.id = id
         self.model_identifier = model_identifier
@@ -82,7 +78,6 @@ package final class CloudModelV1: Identifiable, Codable, Equatable, Hashable, Ta
         self.capabilities = capabilities
         self.comment = comment
         self.temperature_preference = temperature_preference
-        self.temperature_override = temperature_override
     }
 
     package required init(from decoder: Decoder) throws {
@@ -98,7 +93,6 @@ package final class CloudModelV1: Identifiable, Codable, Equatable, Hashable, Ta
         context = try container.decodeIfPresent(ModelContextLength.self, forKey: .context) ?? .short_8k
         comment = try container.decodeIfPresent(String.self, forKey: .comment) ?? ""
         temperature_preference = try container.decodeIfPresent(ModelTemperaturePreference.self, forKey: .temperature_preference) ?? .inherit
-        temperature_override = try container.decodeIfPresent(Double.self, forKey: .temperature_override)
     }
 
     package static func == (lhs: CloudModelV1, rhs: CloudModelV1) -> Bool {
@@ -117,6 +111,5 @@ package final class CloudModelV1: Identifiable, Codable, Equatable, Hashable, Ta
         hasher.combine(context)
         hasher.combine(comment)
         hasher.combine(temperature_preference)
-        hasher.combine(temperature_override)
     }
 }

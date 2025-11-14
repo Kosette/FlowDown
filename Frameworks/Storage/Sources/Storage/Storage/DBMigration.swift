@@ -208,7 +208,6 @@ struct MigrationV1ToV2: DBMigration {
             update.capabilities = cloudModel.capabilities
             update.context = cloudModel.context
             update.temperature_preference = cloudModel.temperature_preference
-            update.temperature_override = cloudModel.temperature_override
             update.comment = cloudModel.comment
 
             migrateCloudModels.append(update)

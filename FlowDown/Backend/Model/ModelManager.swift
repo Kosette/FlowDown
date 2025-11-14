@@ -219,48 +219,8 @@ class ModelManager: NSObject {
         return 8192
     }
 
-    func temperatureStrategy(for identifier: ModelIdentifier?) -> TemperatureStrategy {
-        if let identifier, let cloudModel = cloudModel(identifier: identifier) {
-            switch cloudModel.temperature_preference {
-            case .inherit:
-                break
-            case .custom:
-                if let override = cloudModel.temperature_override {
-                    return .send(override)
-                }
-            }
-        }
-
-        if let identifier, let localModel = localModel(identifier: identifier) {
-            switch localModel.temperature_preference {
-            case .inherit:
-                break
-            case .custom:
-                if let override = localModel.temperature_override {
-                    return .send(override)
-                }
-            }
-        }
-
-        return .send(Double(temperature))
-    }
-
-    func displayTextForTemperature(
-        preference: ModelTemperaturePreference,
-        override: Double?
-    ) -> String {
-        switch preference {
-        case .inherit:
-            return String(localized: "Inference default")
-        case .custom:
-            if let override {
-                return String(
-                    format: String(localized: "Custom @ %.2f"),
-                    override
-                )
-            }
-            return String(localized: "Custom")
-        }
+    func temperatureStrategy(for _: ModelIdentifier?) -> TemperatureStrategy {
+        .send(Double(temperature))
     }
 
     var temperaturePresets: [(title: String, value: Double, icon: String)] {

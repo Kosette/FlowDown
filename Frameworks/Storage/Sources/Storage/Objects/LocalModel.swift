@@ -15,7 +15,6 @@ public struct LocalModel: Codable, Equatable, Hashable, Identifiable {
     public var capabilities: Set<ModelCapabilities> = []
     public var context: ModelContextLength
     public var temperature_preference: ModelTemperaturePreference
-    public var temperature_override: Double?
 
     public init(
         id: String = UUID().uuidString,
@@ -24,8 +23,7 @@ public struct LocalModel: Codable, Equatable, Hashable, Identifiable {
         size: UInt64,
         capabilities: Set<ModelCapabilities>,
         context: ModelContextLength = .short_8k,
-        temperature_preference: ModelTemperaturePreference = .inherit,
-        temperature_override: Double? = nil
+        temperature_preference: ModelTemperaturePreference = .inherit
     ) {
         self.id = id
         self.model_identifier = model_identifier
@@ -34,7 +32,6 @@ public struct LocalModel: Codable, Equatable, Hashable, Identifiable {
         self.capabilities = capabilities
         self.context = context
         self.temperature_preference = temperature_preference
-        self.temperature_override = temperature_override
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -45,7 +42,6 @@ public struct LocalModel: Codable, Equatable, Hashable, Identifiable {
         case capabilities
         case context
         case temperature_preference
-        case temperature_override
     }
 
     public init(from decoder: Decoder) throws {
@@ -57,7 +53,6 @@ public struct LocalModel: Codable, Equatable, Hashable, Identifiable {
         capabilities = try container.decodeIfPresent(Set<ModelCapabilities>.self, forKey: .capabilities) ?? []
         context = try container.decodeIfPresent(ModelContextLength.self, forKey: .context) ?? .short_8k
         temperature_preference = try container.decodeIfPresent(ModelTemperaturePreference.self, forKey: .temperature_preference) ?? .inherit
-        temperature_override = try container.decodeIfPresent(Double.self, forKey: .temperature_override)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -71,6 +66,5 @@ public struct LocalModel: Codable, Equatable, Hashable, Identifiable {
         }
         try container.encode(context, forKey: .context)
         try container.encode(temperature_preference, forKey: .temperature_preference)
-        try container.encodeIfPresent(temperature_override, forKey: .temperature_override)
     }
 }

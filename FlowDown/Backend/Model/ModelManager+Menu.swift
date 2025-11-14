@@ -29,7 +29,8 @@ extension ModelManager {
         currentSelection: ModelIdentifier? = nil,
         requiresCapabilities: Set<ModelCapabilities> = [],
         allowSelectionWithNone: Bool = false,
-        onCompletion: @escaping (ModelIdentifier) -> Void
+        onCompletion: @escaping (ModelIdentifier) -> Void,
+        includeQuickActions: Bool = true
     ) -> [UIMenuElement] {
         let localModels = ModelManager.shared.localModels.value.filter {
             !$0.model_identifier.isEmpty
@@ -179,6 +180,120 @@ extension ModelManager {
 
         if !leadingElements.isEmpty {
             finalChildren.insert(contentsOf: leadingElements, at: 0)
+        }
+
+        if includeQuickActions {
+            let quickMenu = UIMenu(
+                title: String(localized: "Quick Actions"),
+                image: UIImage(systemName: "bolt"),
+                children: [UIDeferredMenuElement.uncached { completion in
+                    var quickChildren: [UIMenuElement] = []
+
+                    var auxiliaryElements: [UIMenuElement] = []
+                    let alignAction = UIAction(
+                        title: String(localized: "Align with chat model"),
+                        state: ModelManager.ModelIdentifier.defaultModelForAuxiliaryTaskWillUseCurrentChatModel ? .on : .off
+                    ) { _ in
+                        ModelManager.ModelIdentifier.defaultModelForAuxiliaryTaskWillUseCurrentChatModel.toggle()
+                    }
+                    auxiliaryElements.append(alignAction)
+
+                    if let currentSelection, !currentSelection.isEmpty {
+                        auxiliaryElements.append(UIAction(
+                            title: String(localized: "Use current selection"),
+                            image: UIImage(systemName: "link")
+                        ) { _ in
+                            ModelManager.ModelIdentifier.defaultModelForAuxiliaryTaskWillUseCurrentChatModel = false
+                            ModelManager.ModelIdentifier.defaultModelForAuxiliaryTask = currentSelection
+                        })
+                    }
+
+                    if !ModelManager.ModelIdentifier.defaultModelForAuxiliaryTaskWillUseCurrentChatModel {
+                        let selection = ModelManager.shared.buildModelSelectionMenu(
+                            currentSelection: ModelManager.ModelIdentifier.storedAuxiliaryTaskModel,
+                            requiresCapabilities: [],
+                            allowSelectionWithNone: false,
+                            onCompletion: { identifier in
+                                ModelManager.ModelIdentifier.defaultModelForAuxiliaryTask = identifier
+                            },
+                            includeQuickActions: false
+                        )
+                        if !selection.isEmpty {
+                            auxiliaryElements.append(UIMenu(
+                                title: String(localized: "Choose model"),
+                                options: [.displayInline],
+                                children: selection
+                            ))
+                        }
+                    }
+
+                    quickChildren.append(UIMenu(
+                        title: String(localized: "Auxiliary Model"),
+                        children: auxiliaryElements
+                    ))
+
+                    var visualElements: [UIMenuElement] = []
+                    if let currentSelection,
+                       !currentSelection.isEmpty,
+                       ModelManager.shared.modelCapabilities(identifier: currentSelection).contains(.visual)
+                    {
+                        visualElements.append(UIAction(
+                            title: String(localized: "Use current selection"),
+                            image: UIImage(systemName: "camera.fill")
+                        ) { _ in
+                            ModelManager.ModelIdentifier.defaultModelForAuxiliaryVisualTask = currentSelection
+                        })
+                    }
+
+                    let visualSelection = ModelManager.shared.buildModelSelectionMenu(
+                        currentSelection: ModelManager.ModelIdentifier.defaultModelForAuxiliaryVisualTask,
+                        requiresCapabilities: [.visual],
+                        allowSelectionWithNone: true,
+                        onCompletion: { identifier in
+                            ModelManager.ModelIdentifier.defaultModelForAuxiliaryVisualTask = identifier
+                        },
+                        includeQuickActions: false
+                    )
+                    if !visualSelection.isEmpty {
+                        visualElements.append(UIMenu(
+                            title: String(localized: "Choose model"),
+                            options: [.displayInline],
+                            children: visualSelection
+                        ))
+                    }
+                    visualElements.append(UIAction(
+                        title: String(localized: "Skip visual assistant when possible"),
+                        state: ModelManager.shared.defaultModelForAuxiliaryVisualTaskSkipIfPossible ? .on : .off
+                    ) { _ in
+                        ModelManager.shared.defaultModelForAuxiliaryVisualTaskSkipIfPossible.toggle()
+                    })
+
+                    quickChildren.append(UIMenu(
+                        title: String(localized: "Visual Auxiliary Model"),
+                        children: visualElements
+                    ))
+
+                    let temperatureActions = ModelManager.shared.temperaturePresets.map { preset -> UIAction in
+                        let currentValue = Double(ModelManager.shared.temperature)
+                        let isCurrent = abs(currentValue - preset.value) < 0.0001
+                        let action = UIAction(
+                            title: preset.title,
+                            image: UIImage(systemName: preset.icon),
+                            state: isCurrent ? .on : .off
+                        ) { _ in
+                            ModelManager.shared.temperature = Float(preset.value)
+                        }
+                        return action
+                    }
+                    quickChildren.append(UIMenu(
+                        title: String(localized: "Temperature"),
+                        children: temperatureActions
+                    ))
+
+                    completion(quickChildren)
+                }]
+            )
+            finalChildren.append(quickMenu)
         }
 
         return finalChildren
