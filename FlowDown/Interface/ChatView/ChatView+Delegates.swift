@@ -192,16 +192,17 @@ extension ChatView: RichEditorView.Delegate {
         )?.modelId
         return ModelManager.shared.buildModelSelectionMenu(
             currentSelection: modelIdentifier,
+            onCompletion: { modelIdentifier in
+                ConversationManager.shared.editConversation(identifier: conversationIdentifier) {
+                    $0.update(\.modelId, to: modelIdentifier)
+                }
+                if self.editorApplyModelToDefault {
+                    ModelManager.ModelIdentifier.defaultModelForConversation = modelIdentifier
+                }
+                completion()
+            },
             includeQuickActions: true
-        ) { modelIdentifier in
-            ConversationManager.shared.editConversation(identifier: conversationIdentifier) {
-                $0.update(\.modelId, to: modelIdentifier)
-            }
-            if self.editorApplyModelToDefault {
-                ModelManager.ModelIdentifier.defaultModelForConversation = modelIdentifier
-            }
-            completion()
-        }
+        )
     }
 
     func onRichEditorBuildAlternativeModelMenu() -> [UIMenuElement] {

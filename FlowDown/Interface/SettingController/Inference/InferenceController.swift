@@ -221,12 +221,14 @@ extension SettingController.SettingContent {
                     guard let self else { return [] }
                     return ModelManager.shared.buildModelSelectionMenu(
                         currentSelection: ModelManager.ModelIdentifier.defaultModelForConversation,
+                        requiresCapabilities: [],
                         allowSelectionWithNone: true,
+                        onCompletion: { [weak self] identifier in
+                            ModelManager.ModelIdentifier.defaultModelForConversation = identifier
+                            self?.updateDefaultModelinfoFile()
+                        },
                         includeQuickActions: false
-                    ) { [weak self] identifier in
-                        ModelManager.ModelIdentifier.defaultModelForConversation = identifier
-                        self?.updateDefaultModelinfoFile()
-                    }
+                    )
                 }
                 handledConvModel = true
             }
@@ -242,12 +244,14 @@ extension SettingController.SettingContent {
                     guard let self else { return [] }
                     return ModelManager.shared.buildModelSelectionMenu(
                         currentSelection: ModelManager.ModelIdentifier.defaultModelForConversation,
+                        requiresCapabilities: [],
                         allowSelectionWithNone: true,
+                        onCompletion: { [weak self] identifier in
+                            ModelManager.ModelIdentifier.defaultModelForConversation = identifier
+                            self?.updateDefaultModelinfoFile()
+                        },
                         includeQuickActions: false
-                    ) { [weak self] identifier in
-                        ModelManager.ModelIdentifier.defaultModelForConversation = identifier
-                        self?.updateDefaultModelinfoFile()
-                    }
+                    )
                 }
             }
 
@@ -285,12 +289,14 @@ extension SettingController.SettingContent {
                 }
                 return ModelManager.shared.buildModelSelectionMenu(
                     currentSelection: ModelManager.ModelIdentifier.storedAuxiliaryTaskModel,
+                    requiresCapabilities: [],
                     allowSelectionWithNone: true,
+                    onCompletion: { [weak self] identifier in
+                        ModelManager.ModelIdentifier.defaultModelForAuxiliaryTask = identifier
+                        self?.updateDefaultModelinfoFile()
+                    },
                     includeQuickActions: false
-                ) { [weak self] identifier in
-                    ModelManager.ModelIdentifier.defaultModelForAuxiliaryTask = identifier
-                    self?.updateDefaultModelinfoFile()
-                }
+                )
             }
 
             if defaultAuxiliaryModelAlignWithChatModel.boolValue {
@@ -321,11 +327,12 @@ extension SettingController.SettingContent {
                     currentSelection: ModelManager.ModelIdentifier.defaultModelForAuxiliaryVisualTask,
                     requiresCapabilities: [.visual],
                     allowSelectionWithNone: true,
+                    onCompletion: { [weak self] identifier in
+                        ModelManager.ModelIdentifier.defaultModelForAuxiliaryVisualTask = identifier
+                        self?.updateDefaultModelinfoFile()
+                    },
                     includeQuickActions: false
-                ) { [weak self] identifier in
-                    ModelManager.ModelIdentifier.defaultModelForAuxiliaryVisualTask = identifier
-                    self?.updateDefaultModelinfoFile()
-                }
+                )
             }
         }
     }
