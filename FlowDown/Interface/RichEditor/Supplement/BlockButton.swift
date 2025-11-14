@@ -45,6 +45,7 @@ class BlockButton: UIButton {
 
         registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, _) in
             self.applyDefaultAppearance()
+            self.updateAppearanceAfterTraitChange()
         }
     }
 
@@ -108,4 +109,7 @@ class BlockButton: UIButton {
         )
         textLabel.attributedText = attrText
     }
+
+    /// 给子类留出在 trait change 之后更新 UI 的入口。
+    func updateAppearanceAfterTraitChange() {}
 }
