@@ -966,7 +966,10 @@ private extension CloudModelEditorController {
 
             var providerChildren: [UIMenuElement] = []
             providerChildren.append(
-                UIAction(title: "Set \("data_collection") to \("deny")", image: UIImage(systemName: "hand.raised.fill")) { _ in
+                UIAction(
+                    title: String(localized: "Set \("data_collection") to \("deny")"),
+                    image: UIImage(systemName: "hand.raised.fill")
+                ) { _ in
                     controller.updateValue { dic in
                         var provider = dic["provider"] as? [String: Any] ?? [:]
                         provider["data_collection"] = "deny"
@@ -975,7 +978,10 @@ private extension CloudModelEditorController {
                 }
             )
             providerChildren.append(
-                UIAction(title: "Set \("zdr") to \("true")", image: UIImage(systemName: "hand.raised.fill")) { _ in
+                UIAction(
+                    title: String(localized: "Set \("zdr") to \("true")"),
+                    image: UIImage(systemName: "hand.raised.fill")
+                ) { _ in
                     controller.updateValue { dic in
                         var provider = dic["provider"] as? [String: Any] ?? [:]
                         provider["zdr"] = true
