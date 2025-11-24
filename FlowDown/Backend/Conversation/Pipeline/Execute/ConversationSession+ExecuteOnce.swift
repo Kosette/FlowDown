@@ -36,12 +36,16 @@ extension ConversationSession {
         defer { self.stopThinking(for: message.objectId) }
 
         var pendingToolCalls: [ToolCallRequest] = []
+        var collectedReasoningDetails: [ReasoningDetail] = []
 
         let collapseAfterReasoningComplete = ModelManager.shared.collapseReasoningSectionWhenComplete
 
         for try await resp in stream {
             let reasoningContent = resp.reasoningContent
             let content = resp.content
+            if !resp.reasoningDetails.isEmpty {
+                collectedReasoningDetails = resp.reasoningDetails
+            }
             pendingToolCalls.append(contentsOf: resp.toolCallRequests)
 
             message.update(\.reasoningContent, to: reasoningContent)
@@ -79,10 +83,15 @@ extension ConversationSession {
         await requestUpdate(view: currentMessageListView)
         requestMessages.append(
             .assistant(
-                content: .text(message.document),
+                content: message.document.isEmpty ? nil : .text(message.document),
                 toolCalls: pendingToolCalls.map {
-                    .init(id: $0.id.uuidString, function: .init(name: $0.name, arguments: $0.args))
-                }
+                    .init(id: $0.id, function: .init(name: $0.name, arguments: $0.args))
+                },
+                reasoning: {
+                    let trimmed = message.reasoningContent.trimmingCharacters(in: .whitespacesAndNewlines)
+                    return trimmed.isEmpty ? nil : trimmed
+                }(),
+                reasoningDetails: collectedReasoningDetails.isEmpty ? nil : collectedReasoningDetails
             )
         )
 
@@ -152,12 +161,12 @@ extension ConversationSession {
                 if webAttachments.isEmpty {
                     requestMessages.append(.tool(
                         content: .text(String(localized: "Web search returned no results.")),
-                        toolCallID: request.id.uuidString
+                        toolCallID: request.id
                     ))
                 } else {
                     requestMessages.append(.tool(
                         content: .text(webAttachments.map(\.textRepresentation).joined(separator: "\n")),
-                        toolCallID: request.id.uuidString
+                        toolCallID: request.id
                     ))
                 }
             } else {
@@ -258,13 +267,13 @@ extension ConversationSession {
                     toolStatus.message = toolResponseText
                     toolMessage.update(\.toolStatus, to: toolStatus)
                     await requestUpdate(view: currentMessageListView)
-                    requestMessages.append(.tool(content: .text(toolResponseText), toolCallID: request.id.uuidString))
+                    requestMessages.append(.tool(content: .text(toolResponseText), toolCallID: request.id))
                 } catch {
                     toolStatus.state = 2
                     toolStatus.message = error.localizedDescription
                     toolMessage.update(\.toolStatus, to: toolStatus)
                     await requestUpdate(view: currentMessageListView)
-                    requestMessages.append(.tool(content: .text("Tool execution failed. Reason: \(error.localizedDescription)"), toolCallID: request.id.uuidString))
+                    requestMessages.append(.tool(content: .text("Tool execution failed. Reason: \(error.localizedDescription)"), toolCallID: request.id))
                 }
             }
         }

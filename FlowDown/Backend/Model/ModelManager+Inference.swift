@@ -288,13 +288,20 @@ extension ModelManager {
     struct InferenceMessage: Hashable {
         var reasoningContent: String
         var content: String
+        var reasoningDetails: [ReasoningDetail]
 
         // a json representation for tool call
         var toolCallRequests: [ToolCallRequest]
 
-        init(reasoningContent: String = .init(), content: String = .init(), tool: [ToolCallRequest] = []) {
+        init(
+            reasoningContent: String = .init(),
+            content: String = .init(),
+            reasoningDetails: [ReasoningDetail] = .init(),
+            tool: [ToolCallRequest] = []
+        ) {
             self.reasoningContent = reasoningContent
             self.content = content
+            self.reasoningDetails = reasoningDetails
             toolCallRequests = tool
         }
     }
@@ -367,6 +374,7 @@ extension ModelManager {
                 let reasoning = delta?.reasoning ?? .init()
                 let reasoningContent = delta?.reasoningContent ?? .init()
 
+                msg.reasoningDetails = delta?.reasoningDetails ?? []
                 msg.reasoningContent = if reasoning == reasoningContent, !reasoning.isEmpty {
                     reasoning
                 } else {
@@ -383,6 +391,7 @@ extension ModelManager {
             Task {
                 do {
                     var collectedToolCalls: [ToolCallRequest] = []
+                    var collectedReasoningDetails: [ReasoningDetail] = []
 
                     for try await chunk in stream {
                         //
@@ -395,6 +404,14 @@ extension ModelManager {
 
                         // by calculating for 10ms each time, 0.5s to show all, max update is 50 times
                         var counter = 0
+
+                        if !chunk.reasoningDetails.isEmpty {
+                            collectedReasoningDetails = AssistantTurnContent.mergeReasoningDetails(
+                                existing: collectedReasoningDetails,
+                                incoming: chunk.reasoningDetails,
+                                fallback: nil
+                            )
+                        }
 
                         // 10ms
                         func sleepOnce() async {
@@ -414,7 +431,8 @@ extension ModelManager {
                                     reasoningContent: responseContent.reasoningContent
                                         .trimmingCharacters(in: .whitespacesAndNewlines),
                                     content: responseContent.content
-                                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                                        .trimmingCharacters(in: .whitespacesAndNewlines),
+                                    reasoningDetails: collectedReasoningDetails
                                 ))
                                 await sleepOnce()
                             }
@@ -432,7 +450,8 @@ extension ModelManager {
                                     reasoningContent: responseContent.reasoningContent
                                         .trimmingCharacters(in: .whitespacesAndNewlines),
                                     content: responseContent.content
-                                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                                        .trimmingCharacters(in: .whitespacesAndNewlines),
+                                    reasoningDetails: collectedReasoningDetails
                                 ))
                                 await sleepOnce()
                             }
@@ -455,6 +474,7 @@ extension ModelManager {
                     let final = InferenceMessage(
                         reasoningContent: _reasoningContent,
                         content: _responseContent,
+                        reasoningDetails: collectedReasoningDetails,
                         tool: collectedToolCalls
                     )
                     continuation.yield(final)

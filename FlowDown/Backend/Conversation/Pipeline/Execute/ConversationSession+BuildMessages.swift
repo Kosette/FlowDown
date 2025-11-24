@@ -64,24 +64,24 @@ extension ConversationSession {
                 guard let toolRequest = decodeToolRequestFromToolMessage(message) else {
                     return
                 }
-                requestMessages.append(.assistant(content: nil, name: nil, refusal: nil, toolCalls: [
-                    .init(id: toolRequest.id.uuidString, function: .init(name: toolRequest.name, arguments: toolRequest.args)),
+                requestMessages.append(.assistant(content: nil, toolCalls: [
+                    .init(id: toolRequest.id, function: .init(name: toolRequest.name, arguments: toolRequest.args)),
                 ]))
                 requestMessages.append(.tool(
                     content: .text(content.joined(separator: "\n")),
-                    toolCallID: toolRequest.id.uuidString
+                    toolCallID: toolRequest.id
                 ))
             case .toolHint:
                 let content = message.toolStatus.message
                 guard let toolRequest = decodeToolRequestFromToolMessage(message) else {
                     return
                 }
-                requestMessages.append(.assistant(content: nil, name: nil, refusal: nil, toolCalls: [
-                    .init(id: toolRequest.id.uuidString, function: .init(name: toolRequest.name, arguments: toolRequest.args)),
+                requestMessages.append(.assistant(content: nil, toolCalls: [
+                    .init(id: toolRequest.id, function: .init(name: toolRequest.name, arguments: toolRequest.args)),
                 ]))
                 requestMessages.append(.tool(
                     content: .text(content),
-                    toolCallID: toolRequest.id.uuidString
+                    toolCallID: toolRequest.id
                 ))
             default:
                 continue
