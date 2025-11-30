@@ -41,6 +41,8 @@ let disposableResourcesDir = FileManager.default
     .temporaryDirectory
     .appendingPathComponent("DisposableResources")
 
+AppEnvironment.bootstrap(.live())
+
 import ConfigurableKit
 import MLX
 
@@ -56,24 +58,6 @@ import MLX
     ConfigurableKit.set(value: true, forKey: MLX.GPU.isSupportedKey)
     assert(MLX.GPU.isSupported)
 #endif
-
-import Storage
-
-let sdb: Storage = {
-    do {
-        return try Storage.db()
-    } catch {
-        fatalError(error.localizedDescription)
-    }
-}()
-
-let syncEngine = SyncEngine(
-    storage: sdb,
-    containerIdentifier: CloudKitConfig.containerIdentifier,
-    mode: .live,
-    automaticallySync: true
-)
-Storage.setSyncEngine(syncEngine)
 
 _ = ModelManager.shared
 _ = ModelToolsManager.shared
