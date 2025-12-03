@@ -229,7 +229,7 @@ extension WebSearchStateView {
             } else if numberOfResults > 0 {
                 String(localized: "Browsed \(numberOfResults) website(s)")
             } else if phase.proccessProgress >= 1.0, numberOfResults == 0 {
-                String(localized: "No web search results.")
+                String(localized: "Search completed with no results")
             } else if phase.proccessProgress > 0, numberOfWebsites > 0 {
                 String(localized: "Searched \(numberOfWebsites) website(s), fetching them") + "..."
             } else if let keyword {

@@ -69,7 +69,7 @@ extension ConversationSession {
                 ]))
                 let webSearchContent = content.joined(separator: "\n")
                 requestMessages.append(.tool(
-                    content: .text(webSearchContent.isEmpty ? String(localized: "Web search completed with no results.") : webSearchContent),
+                    content: .text(webSearchContent.isEmpty ? String(localized: "Search completed with no results") : webSearchContent),
                     toolCallID: toolRequest.id
                 ))
             case .toolHint:
@@ -82,7 +82,7 @@ extension ConversationSession {
                 ]))
                 let toolContent = content.trimmingCharacters(in: .whitespacesAndNewlines)
                 requestMessages.append(.tool(
-                    content: .text(toolContent.isEmpty ? String(localized: "Tool executed successfully with no output.") : content),
+                    content: .text(toolContent.isEmpty ? String(localized: "Tool executed successfully with no output") : content),
                     toolCallID: toolRequest.id
                 ))
             default:

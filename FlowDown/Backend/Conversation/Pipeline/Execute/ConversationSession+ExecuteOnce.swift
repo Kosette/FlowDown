@@ -269,7 +269,7 @@ extension ConversationSession {
                     await requestUpdate(view: currentMessageListView)
                     let finalToolContent = toolResponseText.trimmingCharacters(in: .whitespacesAndNewlines)
                     requestMessages.append(.tool(
-                        content: .text(finalToolContent.isEmpty ? String(localized: "Tool executed successfully with no output.") : toolResponseText),
+                        content: .text(finalToolContent.isEmpty ? String(localized: "Tool executed successfully with no output") : toolResponseText),
                         toolCallID: request.id
                     ))
                 } catch {
