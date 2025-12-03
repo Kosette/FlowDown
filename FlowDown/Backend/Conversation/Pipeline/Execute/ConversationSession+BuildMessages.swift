@@ -67,8 +67,9 @@ extension ConversationSession {
                 requestMessages.append(.assistant(content: nil, toolCalls: [
                     .init(id: toolRequest.id, function: .init(name: toolRequest.name, arguments: toolRequest.args)),
                 ]))
+                let webSearchContent = content.joined(separator: "\n")
                 requestMessages.append(.tool(
-                    content: .text(content.joined(separator: "\n")),
+                    content: .text(webSearchContent.isEmpty ? String(localized: "Search completed with no results") : webSearchContent),
                     toolCallID: toolRequest.id
                 ))
             case .toolHint:
@@ -79,8 +80,9 @@ extension ConversationSession {
                 requestMessages.append(.assistant(content: nil, toolCalls: [
                     .init(id: toolRequest.id, function: .init(name: toolRequest.name, arguments: toolRequest.args)),
                 ]))
+                let toolContent = content.trimmingCharacters(in: .whitespacesAndNewlines)
                 requestMessages.append(.tool(
-                    content: .text(content),
+                    content: .text(toolContent.isEmpty ? String(localized: "Tool executed successfully with no output") : content),
                     toolCallID: toolRequest.id
                 ))
             default:

@@ -81,6 +81,7 @@ final class WebSearchStateView: MessageListRowView {
     override func prepareForReuse() {
         super.prepareForReuse()
         results = []
+        menuButton.isEnabled = false
     }
 
     func update(with phase: Message.WebSearchStatus) {
@@ -88,6 +89,7 @@ final class WebSearchStateView: MessageListRowView {
             searchIndicatorView.phase = phase
         }
         results = phase.searchResults
+        menuButton.isEnabled = !results.isEmpty
     }
 
     override func themeDidUpdate() {
@@ -220,12 +222,14 @@ extension WebSearchStateView {
             let keyword: String? = phase.queries[safe: phase.currentQuery]
             let numberOfResults = phase.numberOfResults
             let numberOfWebsites = phase.numberOfWebsites
-            progressBar.isHidden = numberOfResults > 0
+            progressBar.isHidden = numberOfResults > 0 || phase.proccessProgress >= 1.0
 
             let text = if phase.proccessProgress < 0 {
                 String(localized: "Failed to search")
             } else if numberOfResults > 0 {
                 String(localized: "Browsed \(numberOfResults) website(s)")
+            } else if phase.proccessProgress >= 1.0, numberOfResults == 0 {
+                String(localized: "Search completed with no results")
             } else if phase.proccessProgress > 0, numberOfWebsites > 0 {
                 String(localized: "Searched \(numberOfWebsites) website(s), fetching them") + "..."
             } else if let keyword {

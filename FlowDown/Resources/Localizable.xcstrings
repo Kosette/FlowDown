@@ -11720,6 +11720,22 @@
         }
       }
     },
+    "Search completed with no results" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search completed with no results"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "网页搜索没有找到结果"
+          }
+        }
+      }
+    },
     "Search Conversations" : {
       "localizations" : {
         "en" : {
@@ -14702,6 +14718,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "开始调用工具 %@"
+          }
+        }
+      }
+    },
+    "Tool executed successfully with no output" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tool executed successfully with no output"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "工具执行成功但没有输出任何结果"
           }
         }
       }
