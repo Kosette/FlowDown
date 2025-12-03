@@ -267,7 +267,11 @@ extension ConversationSession {
                     toolStatus.message = toolResponseText
                     toolMessage.update(\.toolStatus, to: toolStatus)
                     await requestUpdate(view: currentMessageListView)
-                    requestMessages.append(.tool(content: .text(toolResponseText), toolCallID: request.id))
+                    let finalToolContent = toolResponseText.trimmingCharacters(in: .whitespacesAndNewlines)
+                    requestMessages.append(.tool(
+                        content: .text(finalToolContent.isEmpty ? String(localized: "Tool executed successfully with no output") : toolResponseText),
+                        toolCallID: request.id
+                    ))
                 } catch {
                     toolStatus.state = 2
                     toolStatus.message = error.localizedDescription

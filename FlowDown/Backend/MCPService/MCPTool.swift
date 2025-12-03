@@ -137,7 +137,20 @@ extension MCPTool {
         }
 
         if case let .object(dict) = convertMCPValueToJSONValue(mcpSchema) {
-            return dict
+            // Preserve original values if present, otherwise set default values
+            var result = dict
+            if result["properties"] == nil {
+                result["properties"] = .object([:])
+            }
+            if let additionalProps = result["additionalProperties"] {
+                // Convert empty object {} to false
+                if case let .object(obj) = additionalProps, obj.isEmpty {
+                    result["additionalProperties"] = .bool(false)
+                }
+            } else {
+                result["additionalProperties"] = .bool(false)
+            }
+            return result
         }
         return ["type": .string("object"), "properties": .object([:]), "additionalProperties": .bool(false)]
     }
