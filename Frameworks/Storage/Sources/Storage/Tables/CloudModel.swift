@@ -141,19 +141,12 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
         headers = try container.decodeIfPresent([String: String].self, forKey: .headers) ?? [:]
         body_fields = try container.decodeIfPresent(String.self, forKey: .body_fields) ?? ""
-        if body_fields.isEmpty {
-            let legacyContainer = try? decoder.container(keyedBy: LegacyCodingKeys.self)
-            if let legacyValue = try legacyContainer?.decodeIfPresent(String.self, forKey: .bodyFields) {
-                body_fields = legacyValue
-            }
-        }
         capabilities = try container.decodeIfPresent(Set<ModelCapabilities>.self, forKey: .capabilities) ?? []
         context = try container.decodeIfPresent(ModelContextLength.self, forKey: .context) ?? .short_8k
         comment = try container.decodeIfPresent(String.self, forKey: .comment) ?? ""
         name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
         temperature_preference = try container.decodeIfPresent(ModelTemperaturePreference.self, forKey: .temperature_preference) ?? .inherit
         response_format = try container.decodeIfPresent(CloudModelResponseFormat.self, forKey: .response_format) ?? .default
-
         removed = try container.decodeIfPresent(Bool.self, forKey: .removed) ?? false
     }
 
@@ -184,10 +177,6 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         hasher.combine(temperature_preference)
         hasher.combine(removed)
     }
-}
-
-private enum LegacyCodingKeys: String, CodingKey {
-    case bodyFields
 }
 
 extension CloudModel: Updatable {

@@ -43,3 +43,4 @@ private extension LogLevel {
         }
     }
 }
+

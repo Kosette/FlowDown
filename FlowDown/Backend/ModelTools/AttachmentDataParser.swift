@@ -47,3 +47,4 @@ enum AttachmentDataParser {
         return dataString.data(using: .utf8)
     }
 }
+

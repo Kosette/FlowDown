@@ -17,3 +17,4 @@ public extension Logger {
     static let network = Logger(subsystem: loggingSubsystem, category: "Network")
     static let model = Logger(subsystem: loggingSubsystem, category: "Model")
 }
+

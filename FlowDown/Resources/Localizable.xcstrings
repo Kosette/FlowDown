@@ -12505,22 +12505,6 @@
         }
       }
     },
-    "Show Apple Intelligence Foundation Model in the model picker when available." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Apple Intelligence Foundation Model in the model picker when available."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "可用时在模型选择器中显示 Foundation Model。"
-          }
-        }
-      }
-    },
     "Show Cloud Models" : {
       "localizations" : {
         "en" : {
@@ -12549,6 +12533,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "显示对话"
+          }
+        }
+      }
+    },
+    "Show Foundation Model in the model picker when available." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Foundation Model in the model picker when available."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可用时在模型选择器中显示 Foundation Model。"
           }
         }
       }

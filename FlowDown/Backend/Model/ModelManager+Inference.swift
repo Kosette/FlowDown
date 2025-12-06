@@ -135,7 +135,7 @@ extension ModelManager {
             do {
                 let inference = try await infer(
                     with: model.id,
-                    maxCompletionTokens: 64,
+                    maxCompletionTokens: 512,
                     input: [
                         .system(content: .text("Reply YES to every query.")),
                         .user(content: .text("YES or NO")),
