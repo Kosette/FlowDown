@@ -154,7 +154,7 @@ class ModelToolsManager {
                                     code: 500,
                                     userInfo: [
                                         NSLocalizedDescriptionKey: String(localized: "Tool execution cancelled by user"),
-                                    ]
+                                    ],
                                 )
                                 continuation.resume(throwing: error)
                             }
@@ -172,7 +172,7 @@ class ModelToolsManager {
                                             code: 500,
                                             userInfo: [
                                                 NSLocalizedDescriptionKey: String(localized: "Tool execution failed: \(error.localizedDescription)"),
-                                            ]
+                                            ],
                                         )
                                         continuation.resume(throwing: error)
                                     }
@@ -185,13 +185,13 @@ class ModelToolsManager {
                         AlertViewController(
                             title: "Execute MCP Tool",
                             message: "The model wants to execute '\(tool.toolInfo.name)' from \(tool.toolInfo.serverName). This tool can access external resources.\n\nDescription: \(tool.toolInfo.description?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "No description available")",
-                            setupActions: setupContext
+                            setupActions: setupContext,
                         )
                     } else {
                         AlertViewController(
                             title: "Tool Call",
                             message: "Your model is calling a tool: \(tool.interfaceName)",
-                            setupActions: setupContext
+                            setupActions: setupContext,
                         )
                     }
 
@@ -202,7 +202,7 @@ class ModelToolsManager {
                             code: 500,
                             userInfo: [
                                 NSLocalizedDescriptionKey: String(localized: "Tool execution failed: parent view controller not found."),
-                            ]
+                            ],
                         )
                         continuation.resume(throwing: error)
                         return
@@ -214,7 +214,7 @@ class ModelToolsManager {
                             code: 500,
                             userInfo: [
                                 NSLocalizedDescriptionKey: String(localized: "Tool execution failed: authorization dialog is already presented."),
-                            ]
+                            ],
                         )
                         continuation.resume(throwing: error)
                         return
@@ -246,7 +246,7 @@ class ModelToolsManager {
                         imageAttachments.append(.init(
                             name: name,
                             data: data,
-                            mimeType: mimeType.nilIfEmpty
+                            mimeType: mimeType.nilIfEmpty,
                         ))
                     } else {
                         Logger.model.errorFile("failed to parse image data from string")
@@ -261,7 +261,7 @@ class ModelToolsManager {
                         audioAttachments.append(.init(
                             name: name,
                             data: data,
-                            mimeType: mimeType.nilIfEmpty
+                            mimeType: mimeType.nilIfEmpty,
                         ))
                     } else {
                         Logger.model.errorFile("failed to parse audio data from string")
@@ -273,7 +273,7 @@ class ModelToolsManager {
             return .init(
                 text: textContent.joined(separator: "\n"),
                 imageAttachments: imageAttachments,
-                audioAttachments: audioAttachments
+                audioAttachments: audioAttachments,
             )
         } else {
             return .init(text: ans, imageAttachments: [], audioAttachments: [])

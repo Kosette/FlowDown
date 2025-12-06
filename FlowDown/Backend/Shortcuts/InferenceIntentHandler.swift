@@ -23,7 +23,7 @@ enum InferenceIntentHandler {
             allowsImages: Bool,
             allowsAudio: Bool = false,
             saveToConversation: Bool = false,
-            enableMemory: Bool = false
+            enableMemory: Bool = false,
         ) {
             self.allowsImages = allowsImages
             self.allowsAudio = allowsAudio
@@ -47,7 +47,7 @@ enum InferenceIntentHandler {
         message: String,
         image: IntentFile?,
         audio: IntentFile?,
-        options: Options
+        options: Options,
     ) async throws -> String {
         let trimmedMessage = message.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasImage = image != nil
@@ -124,7 +124,7 @@ enum InferenceIntentHandler {
         let inference = try await ModelManager.shared.streamingInfer(
             with: modelIdentifier,
             input: requestMessages,
-            tools: toolDefinitions
+            tools: toolDefinitions,
         )
 
         var content = ""
@@ -167,7 +167,7 @@ enum InferenceIntentHandler {
                 userMessage: trimmedMessage,
                 attachments: attachmentsForConversation,
                 response: response,
-                reasoning: trimmedReasoning
+                reasoning: trimmedReasoning,
             )
         }
 
@@ -246,7 +246,7 @@ enum InferenceIntentHandler {
             previewImage: previewData,
             imageRepresentation: data,
             textRepresentation: "",
-            storageSuffix: UUID().uuidString
+            storageSuffix: UUID().uuidString,
         )
 
         return PreparedImageResources(contentPart: .imageURL(url), attachment: attachment)
@@ -265,13 +265,13 @@ enum InferenceIntentHandler {
         let transcoded = try await AudioTranscoder.transcode(
             data: data,
             fileExtension: inferredAudioFileExtension(from: file),
-            output: .compressedQualityWAV
+            output: .compressedQualityWAV,
         )
         let format = transcoded.format.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty?.lowercased() ?? "wav"
         let attachment = try await RichEditorView.Object.Attachment.makeAudioAttachment(
             transcoded: transcoded,
             storage: nil,
-            suggestedName: file.filename.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+            suggestedName: file.filename.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty,
         )
         let base64 = transcoded.data.base64EncodedString()
 
@@ -326,7 +326,7 @@ enum InferenceIntentHandler {
         userMessage: String,
         attachments: [RichEditorView.Object.Attachment],
         response: String,
-        reasoning: String
+        reasoning: String,
     ) {
         let formatter = DateFormatter()
         formatter.locale = .current
@@ -335,7 +335,7 @@ enum InferenceIntentHandler {
         let suffix = formatter.string(from: Date())
 
         let titleFormat = String(
-            localized: "Quick Reply %@"
+            localized: "Quick Reply %@",
         )
         let title = String(format: titleFormat, suffix)
 
@@ -382,8 +382,7 @@ enum InferenceIntentHandler {
         var guidance = String(localized:
             """
             The system provides several tools for your convenience. Please use them wisely and according to the user's query. Avoid requesting information that is already provided or easily inferred.
-            """
-        )
+            """)
 
         guidance += "\n\n" + MemoryStore.memoryToolsPrompt
 

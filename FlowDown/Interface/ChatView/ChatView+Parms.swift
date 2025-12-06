@@ -42,10 +42,10 @@ extension ChatView {
                 .init(
                     icon: $0.icon,
                     title: $0.title,
-                    rawValue: $0.rawValue
+                    rawValue: $0.rawValue,
                 )
             }
-        }
+        },
     )
 
     static let editorApplyModelToDefault: ConfigurableObject = .init(
@@ -54,6 +54,6 @@ extension ChatView {
         explain: "When selecting a new chat model, also set it as the default model.",
         key: "app.chat.model.picker.apply.to.default",
         defaultValue: true,
-        annotation: .boolean
+        annotation: .boolean,
     )
 }

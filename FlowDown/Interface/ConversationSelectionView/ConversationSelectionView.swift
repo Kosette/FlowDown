@@ -66,7 +66,7 @@ class ConversationSelectionView: UIView {
 
         Publishers.CombineLatest(
             ConversationManager.shared.conversations,
-            ChatSelection.shared.selection
+            ChatSelection.shared.selection,
         )
         .debounce(for: .milliseconds(16), scheduler: DispatchQueue.main)
         .ensureMainThread()
@@ -97,7 +97,7 @@ class ConversationSelectionView: UIView {
                 tableView.selectRow(
                     at: indexPath,
                     animated: false,
-                    scrollPosition: visible ? .none : .middle
+                    scrollPosition: visible ? .none : .middle,
                 )
             } else if dataSource.numberOfSections(in: tableView) > 0,
                       dataSource.tableView(tableView, numberOfRowsInSection: 0) > 0
@@ -107,7 +107,7 @@ class ConversationSelectionView: UIView {
                 tableView.selectRow(
                     at: indexPath,
                     animated: false,
-                    scrollPosition: visible ? .none : .middle
+                    scrollPosition: visible ? .none : .middle,
                 )
             }
         }

@@ -28,7 +28,7 @@ extension ScrubberConfiguration {
         explain: "Web search will fetch results from Google if enabled.",
         key: googleEnabledKey,
         defaultValue: true,
-        annotation: .boolean
+        annotation: .boolean,
     )
     nonisolated(unsafe) static let duckduckgoEnabledConfigurableObject: ConfigurableObject = .init(
         icon: "sparkle.magnifyingglass",
@@ -36,7 +36,7 @@ extension ScrubberConfiguration {
         explain: "Web search will fetch results from Duck Duck Go if enabled.",
         key: duckduckgoEnabledKey,
         defaultValue: true,
-        annotation: .boolean
+        annotation: .boolean,
     )
     nonisolated(unsafe) static let yahooEnabledConfigurableObject: ConfigurableObject = .init(
         icon: "sparkle.magnifyingglass",
@@ -44,7 +44,7 @@ extension ScrubberConfiguration {
         explain: "Web search will fetch results from Yahoo if enabled.",
         key: yahooEnabledKey,
         defaultValue: true,
-        annotation: .boolean
+        annotation: .boolean,
     )
     nonisolated(unsafe) static let bingEnabledConfigurableObject: ConfigurableObject = .init(
         icon: "sparkle.magnifyingglass",
@@ -52,7 +52,7 @@ extension ScrubberConfiguration {
         explain: "Web search will fetch results from Bing if enabled.",
         key: bingEnabledKey,
         defaultValue: true,
-        annotation: .boolean
+        annotation: .boolean,
     )
 
     nonisolated(unsafe) static let limitConfigurableObject: ConfigurableObject = .init(
@@ -67,7 +67,7 @@ extension ScrubberConfiguration {
             .init(title: "15 Pages", rawValue: 15),
             .init(title: "20 Pages", rawValue: 20),
             .init(title: "Unlimited Pages", rawValue: 100),
-        ] }
+        ] },
     )
 
     static var limitConfigurableObjectValue: Int {
@@ -89,7 +89,7 @@ extension ScrubberConfiguration {
                 .eraseToAnyPublisher(),
             ConfigurableKit.publisher(forKey: bingEnabledKey, type: Bool.self)
                 .compactMap { $0 ?? true }
-                .eraseToAnyPublisher()
+                .eraseToAnyPublisher(),
         )
         .eraseToAnyPublisher()
 

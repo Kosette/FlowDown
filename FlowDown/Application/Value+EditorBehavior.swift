@@ -22,7 +22,7 @@ extension EditorBehavior {
         explain: "Enable this to require Command + Enter to send message. On touch devices, you will need to tap the send button manually.",
         key: useConfirmationOnSendKey,
         defaultValue: false,
-        annotation: .boolean
+        annotation: .boolean,
     )
 
     static let pasteAsFileConfigurableObject: ConfigurableObject = .init(
@@ -31,7 +31,7 @@ extension EditorBehavior {
         explain: "When enabled, large content pasted into the editor will be attached as a file. You can tap on the file to edit it.",
         key: pasteAsFileStorageKey,
         defaultValue: true,
-        annotation: .boolean
+        annotation: .boolean,
     )
 
     static let compressImageConfigurableObject: ConfigurableObject = .init(
@@ -40,7 +40,7 @@ extension EditorBehavior {
         explain: "If enabled, images will be compressed before added to chat. Compressed image will be easier to upload but may lose some quality.",
         key: compressImageStorageKey,
         defaultValue: true,
-        annotation: .boolean
+        annotation: .boolean,
     )
 
     static func subscribeToConfigurableItem() {

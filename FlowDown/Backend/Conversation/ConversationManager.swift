@@ -25,7 +25,7 @@ class ConversationManager: NSObject {
             NSObject.cancelPreviousPerformRequests(
                 withTarget: self,
                 selector: #selector(saveObjects),
-                object: nil
+                object: nil,
             )
             perform(#selector(saveObjects), with: nil, afterDelay: 1.0)
         }

@@ -14,7 +14,7 @@ enum Errors {
             code: 0,
             userInfo: [
                 NSLocalizedDescriptionKey: error,
-            ]
+            ],
         )
     }
 }

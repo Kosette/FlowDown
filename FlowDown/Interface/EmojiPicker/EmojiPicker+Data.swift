@@ -50,7 +50,7 @@ extension EmojiPickerView {
                 .map { EmojiElement(emoji: $0) }
             let section = EmojiSection(
                 sectionTitle: key.isEmpty ? String(localized: "Ungrouped") : key,
-                emojis: elements
+                emojis: elements,
             )
             dataSource.append(section)
         }
@@ -121,7 +121,7 @@ extension EmojiPickerView: UICollectionViewDataSource, UICollectionViewDelegate,
         let cell = collectionView
             .dequeueReusableCell(
                 withReuseIdentifier: EmojiPickerCell.cellId,
-                for: indexPath
+                for: indexPath,
             ) as? EmojiPickerCell
             ?? .init()
 
@@ -151,7 +151,7 @@ extension EmojiPickerView: UICollectionViewDataSource, UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
             withReuseIdentifier: EmojiPickerSectionHeader.headerId,
-            for: indexPath
+            for: indexPath,
         ) as? EmojiPickerSectionHeader
             ?? EmojiPickerSectionHeader()
 

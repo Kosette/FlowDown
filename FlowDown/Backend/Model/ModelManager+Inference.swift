@@ -17,7 +17,7 @@ extension ModelManager {
     // - imageProcessingFailure : "height: 1 must be larger than factor: 28"
     static let testImage: UIImage = .init(
         color: .accent,
-        size: .init(width: 64, height: 64)
+        size: .init(width: 64, height: 64),
     )
 
     private static let testImageDataURL: URL? = {
@@ -40,7 +40,7 @@ extension ModelManager {
                 let preferredKind: MLXModelKind = model.capabilities.contains(.visual) ? .vlm : .llm
                 let client = MLXChatClient(
                     url: ModelManager.shared.modelContent(for: model),
-                    preferredKind: preferredKind
+                    preferredKind: preferredKind,
                 )
                 await client.errorCollector.clear()
 
@@ -63,8 +63,8 @@ extension ModelManager {
                             .user(content: userContent),
                         ],
                         maxCompletionTokens: 32,
-                        temperature: 0
-                    )
+                        temperature: 0,
+                    ),
                 )
 
                 var reasoning = ""
@@ -104,7 +104,7 @@ extension ModelManager {
                         throw NSError(
                             domain: "Model",
                             code: -1,
-                            userInfo: [NSLocalizedDescriptionKey: error]
+                            userInfo: [NSLocalizedDescriptionKey: error],
                         )
                     }
 
@@ -113,9 +113,9 @@ extension ModelManager {
                             NSError(
                                 domain: "Model",
                                 code: -1,
-                                userInfo: [NSLocalizedDescriptionKey: String(localized: "Failed to generate text.")]
-                            )
-                        )
+                                userInfo: [NSLocalizedDescriptionKey: String(localized: "Failed to generate text.")],
+                            ),
+                        ),
                     )
                 } else {
                     Logger.model.debugFile("model \(model.model_identifier) generates output for test case: \(trimmedContent)")
@@ -129,30 +129,57 @@ extension ModelManager {
     }
 
     func testCloudModel(_ model: CloudModel, completion: @escaping (Result<Void, Error>) -> Void) {
-        var dic: [String: Any] = [
-            "model": model.model_identifier,
-            "stream": true,
-            "messages": [
-                [
-                    "role": "system",
-                    "content": "Reply YES to every query.",
-                ],
-                [
-                    "role": "user",
-                    "content": "YES or NO",
-                ],
-            ],
-        ]
-        // Get model's configured bodyFields for testing
-        if !model.bodyFields.isEmpty,
-           let data = model.bodyFields.data(using: .utf8),
-           let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
-        {
-            for (key, value) in jsonObject where dic[key] == nil {
-                dic[key] = value
+        func mergeBodyFields(into payload: inout [String: Any]) {
+            guard !model.body_fields.isEmpty,
+                  let data = model.body_fields.data(using: .utf8),
+                  let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+            else {
+                return
+            }
+            for (key, value) in jsonObject where payload[key] == nil {
+                payload[key] = value
             }
         }
-        guard let data = try? JSONSerialization.data(withJSONObject: dic),
+
+        var payload: [String: Any] = [:]
+        switch model.response_format {
+        case .chatCompletions:
+            payload = [
+                "model": model.model_identifier,
+                "stream": true,
+                "messages": [
+                    [
+                        "role": "system",
+                        "content": "Reply YES to every query.",
+                    ],
+                    [
+                        "role": "user",
+                        "content": "YES or NO",
+                    ],
+                ],
+            ]
+        case .responses:
+            payload = [
+                "model": model.model_identifier,
+                "instructions": "Reply YES to every query.",
+                "input": [
+                    [
+                        "type": "message",
+                        "role": "user",
+                        "content": [
+                            [
+                                "type": "input_text",
+                                "text": "YES or NO",
+                            ],
+                        ],
+                    ],
+                ],
+                "stream": false,
+            ]
+        }
+        mergeBodyFields(into: &payload)
+
+        guard let data = try? JSONSerialization.data(withJSONObject: payload),
               let endpoint = URL(string: model.endpoint)
         else {
             completion(
@@ -160,9 +187,9 @@ extension ModelManager {
                     NSError(
                         domain: "Model",
                         code: -1,
-                        userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid model configuration.")]
-                    )
-                )
+                        userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid model configuration.")],
+                    ),
+                ),
             )
             return
         }
@@ -182,9 +209,9 @@ extension ModelManager {
                         NSError(
                             domain: "Model",
                             code: -1,
-                            userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid response.")]
-                        )
-                    )
+                            userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid response.")],
+                        ),
+                    ),
                 )
                 return
             }
@@ -194,9 +221,9 @@ extension ModelManager {
                         NSError(
                             domain: "Model",
                             code: -1,
-                            userInfo: [NSLocalizedDescriptionKey: String(format: String(localized: "Invalid status code: %d"), resp.statusCode)]
-                        )
-                    )
+                            userInfo: [NSLocalizedDescriptionKey: String(format: String(localized: "Invalid status code: %d"), resp.statusCode)],
+                        ),
+                    ),
                 )
                 return
             }
@@ -218,7 +245,7 @@ extension ModelManager {
                             .system(content: .text("Reply YES to every query.")),
                             .user(content: .text("YES or NO")),
                         ],
-                        temperature: 0
+                        temperature: 0,
                     )
                     let response = try await client.chatCompletionRequest(body: body)
                     if let content = response.choices.first?.message.content, !content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -244,8 +271,8 @@ extension ModelManager {
     /// - Returns: A dictionary of body fields, or empty dictionary if not found or empty
     public func modelBodyFields(for identifier: ModelIdentifier) -> [String: Any] {
         guard let model = cloudModel(identifier: identifier),
-              !model.bodyFields.isEmpty,
-              let data = model.bodyFields.data(using: .utf8),
+              !model.body_fields.isEmpty,
+              let data = model.body_fields.data(using: .utf8),
               let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
         else {
             return [:]
@@ -255,32 +282,46 @@ extension ModelManager {
 
     private func chatService(
         for identifier: ModelIdentifier,
-        additionalBodyField: [String: Any]
+        additionalBodyField: [String: Any],
     ) throws -> any ChatService {
         if #available(iOS 26.0, macCatalyst 26.0, *), identifier == AppleIntelligenceModel.shared.modelIdentifier {
             return AppleIntelligenceChatClient()
         }
         if let model = cloudModel(identifier: identifier) {
-            // Use additionalBodyField directly without merging model's bodyFields
-            // Callers should explicitly merge bodyFields if needed
-            return RemoteCompletionsChatClient(
-                model: model.model_identifier,
-                baseURL: model.endpoint,
-                apiKey: model.token,
-                additionalHeaders: model.headers,
-                additionalBodyField: additionalBodyField
-            )
+            let endpoint = resolveEndpointComponents(from: model.endpoint)
+            // Use additionalBodyField directly without merging model's body_fields
+            // Callers should explicitly merge body_fields if needed
+            switch model.response_format {
+            case .chatCompletions:
+                return RemoteCompletionsChatClient(
+                    model: model.model_identifier,
+                    baseURL: endpoint.baseURL,
+                    path: endpoint.path,
+                    apiKey: model.token,
+                    additionalHeaders: model.headers,
+                    additionalBodyField: additionalBodyField,
+                )
+            case .responses:
+                return RemoteResponsesChatClient(
+                    model: model.model_identifier,
+                    baseURL: endpoint.baseURL,
+                    path: endpoint.path,
+                    apiKey: model.token,
+                    additionalHeaders: model.headers,
+                    additionalBodyField: additionalBodyField,
+                )
+            }
         } else if let model = localModel(identifier: identifier) {
             let preferredKind: MLXModelKind = model.capabilities.contains(.visual) ? .vlm : .llm
             return MLXChatClient(
                 url: modelContent(for: model),
-                preferredKind: preferredKind
+                preferredKind: preferredKind,
             )
         } else {
             throw NSError(
                 domain: "Model",
                 code: -1,
-                userInfo: [NSLocalizedDescriptionKey: String(localized: "Model not found.")]
+                userInfo: [NSLocalizedDescriptionKey: String(localized: "Model not found.")],
             )
         }
     }
@@ -297,7 +338,7 @@ extension ModelManager {
             reasoningContent: String = .init(),
             content: String = .init(),
             reasoningDetails: [ReasoningDetail] = .init(),
-            tool: [ToolCallRequest] = []
+            tool: [ToolCallRequest] = [],
         ) {
             self.reasoningContent = reasoningContent
             self.content = content
@@ -306,9 +347,35 @@ extension ModelManager {
         }
     }
 
+    private func resolveEndpointComponents(from endpoint: String) -> (baseURL: String?, path: String?) {
+        guard !endpoint.isEmpty,
+              let components = URLComponents(string: endpoint),
+              components.host != nil
+        else {
+            return (endpoint.isEmpty ? nil : endpoint, endpoint.isEmpty ? nil : "/")
+        }
+
+        var baseComponents = URLComponents()
+        baseComponents.scheme = components.scheme
+        baseComponents.user = components.user
+        baseComponents.password = components.password
+        baseComponents.host = components.host
+        baseComponents.port = components.port
+        let baseURL = baseComponents.string
+
+        var pathComponents = URLComponents()
+        let pathValue = components.path.isEmpty ? "/" : components.path
+        pathComponents.path = pathValue
+        pathComponents.queryItems = components.queryItems
+        pathComponents.fragment = components.fragment
+        let normalizedPath = pathComponents.string ?? pathValue
+
+        return (baseURL, normalizedPath)
+    }
+
     func prepareRequestBody(
         modelID: ModelIdentifier,
-        messages: [ChatRequestBody.Message]
+        messages: [ChatRequestBody.Message],
     ) throws -> [ChatRequestBody.Message] {
         var messages = messages
         if let model = cloudModel(identifier: modelID) {
@@ -331,13 +398,13 @@ extension ModelManager {
         with modelID: ModelIdentifier,
         maxCompletionTokens: Int? = nil,
         input: [ChatRequestBody.Message],
-        tools: [ChatRequestBody.Tool]? = nil
+        tools: [ChatRequestBody.Tool]? = nil,
     ) async throws -> InferenceMessage {
         let stream = try await streamingInfer(
             with: modelID,
             maxCompletionTokens: maxCompletionTokens,
             input: input,
-            tools: tools
+            tools: tools,
         )
 
         var latest: InferenceMessage?
@@ -351,11 +418,11 @@ extension ModelManager {
         with modelID: ModelIdentifier,
         maxCompletionTokens: Int? = nil,
         input: [ChatRequestBody.Message],
-        tools: [ChatRequestBody.Tool]? = nil
+        tools: [ChatRequestBody.Tool]? = nil,
     ) async throws -> AsyncThrowingStream<InferenceMessage, any Error> {
         let client = try chatService(
             for: modelID,
-            additionalBodyField: modelBodyFields(for: modelID)
+            additionalBodyField: modelBodyFields(for: modelID),
         )
         await client.errorCollector.clear()
 
@@ -364,8 +431,8 @@ extension ModelManager {
                 messages: prepareRequestBody(modelID: modelID, messages: input),
                 maxCompletionTokens: maxCompletionTokens,
                 temperature: .init(temperature),
-                tools: tools
-            )
+                tools: tools,
+            ),
         ).compactMap { streamObject -> InferenceMessage in
             var msg = InferenceMessage()
             switch streamObject {
@@ -409,7 +476,7 @@ extension ModelManager {
                             collectedReasoningDetails = AssistantTurnContent.mergeReasoningDetails(
                                 existing: collectedReasoningDetails,
                                 incoming: chunk.reasoningDetails,
-                                fallback: nil
+                                fallback: nil,
                             )
                         }
 
@@ -432,7 +499,7 @@ extension ModelManager {
                                         .trimmingCharacters(in: .whitespacesAndNewlines),
                                     content: responseContent.content
                                         .trimmingCharacters(in: .whitespacesAndNewlines),
-                                    reasoningDetails: collectedReasoningDetails
+                                    reasoningDetails: collectedReasoningDetails,
                                 ))
                                 await sleepOnce()
                             }
@@ -451,7 +518,7 @@ extension ModelManager {
                                         .trimmingCharacters(in: .whitespacesAndNewlines),
                                     content: responseContent.content
                                         .trimmingCharacters(in: .whitespacesAndNewlines),
-                                    reasoningDetails: collectedReasoningDetails
+                                    reasoningDetails: collectedReasoningDetails,
                                 ))
                                 await sleepOnce()
                             }
@@ -475,7 +542,7 @@ extension ModelManager {
                         reasoningContent: _reasoningContent,
                         content: _responseContent,
                         reasoningDetails: collectedReasoningDetails,
-                        tool: collectedToolCalls
+                        tool: collectedToolCalls,
                     )
                     continuation.yield(final)
 
@@ -489,7 +556,7 @@ extension ModelManager {
                             throw NSError(
                                 domain: String(localized: "Inference Service"),
                                 code: -1,
-                                userInfo: [NSLocalizedDescriptionKey: error]
+                                userInfo: [NSLocalizedDescriptionKey: error],
                             )
                         }
                     }
@@ -504,12 +571,12 @@ extension ModelManager {
 
     func calculateEstimateTokensUsingCommonEncoder(
         input: [ChatRequestBody.Message],
-        tools: [ChatRequestBody.Tool]
+        tools: [ChatRequestBody.Tool],
     ) -> Int {
         assert(!Thread.isMainThread)
 
         func text(
-            _ content: ChatRequestBody.Message.MessageContent<String, [String]>
+            _ content: ChatRequestBody.Message.MessageContent<String, [String]>,
         ) -> String {
             switch content {
             case let .text(text):

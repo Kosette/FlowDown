@@ -154,7 +154,7 @@ extension ModelManager {
     @discardableResult
     func downloadModelFromHuggingFace(
         identifier: String,
-        populateProgressTo progress: HubDownloadProgress
+        populateProgressTo progress: HubDownloadProgress,
     ) async throws -> LocalModel {
         assert(!Thread.isMainThread)
 
@@ -168,12 +168,12 @@ extension ModelManager {
         try? FileManager.default.createDirectory(
             at: manifestDir,
             withIntermediateDirectories: true,
-            attributes: nil
+            attributes: nil,
         )
         try? FileManager.default.createDirectory(
             at: contentDir,
             withIntermediateDirectories: true,
-            attributes: nil
+            attributes: nil,
         )
 
         Logger.model.infoFile("downloading manifest for \(identifier)...")
@@ -246,7 +246,7 @@ extension ModelManager {
                     try? FileManager.default.createDirectory(
                         at: dest.deletingLastPathComponent(),
                         withIntermediateDirectories: true,
-                        attributes: nil
+                        attributes: nil,
                     )
                     try FileManager.default.moveItem(at: result, to: dest)
                     capturedError = nil
@@ -283,7 +283,7 @@ extension ModelManager {
             model_identifier: identifier,
             downloaded: .init(),
             size: size,
-            capabilities: []
+            capabilities: [],
         )
         let manifest = manifestDir
             .appendingPathComponent("info")

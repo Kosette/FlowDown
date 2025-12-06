@@ -386,7 +386,7 @@ class CloudModelEditorController: StackScrollController {
         let bodyFieldsEditorView = ConfigurableInfoView()
         bodyFieldsEditorView.setTapBlock { [weak self] view in
             guard let model = ModelManager.shared.cloudModel(identifier: model?.id) else { return }
-            var text = model.bodyFields
+            var text = model.body_fields
             if text.isEmpty { text = "{}" }
             else if let formatted = Self.prettyPrintedJson(from: text) {
                 text = formatted
@@ -421,7 +421,7 @@ class CloudModelEditorController: StackScrollController {
                     result
                 }
                 ModelManager.shared.editCloudModel(identifier: model.id) { editable in
-                    editable.update(\.bodyFields, to: normalizedResult)
+                    editable.update(\.body_fields, to: normalizedResult)
                 }
                 view.configure(value: normalizedResult.isEmpty ? String(localized: "N/A") : String(localized: "Configured"))
             }
@@ -431,10 +431,33 @@ class CloudModelEditorController: StackScrollController {
         bodyFieldsEditorView.configure(icon: .init(systemName: "pencil"))
         bodyFieldsEditorView.configure(title: "Body Fields")
         bodyFieldsEditorView.configure(description: "Configure inference-specific body fields here. The json key-value pairs you enter are merged into every request.")
-        let hasBodyFields = !(model?.bodyFields.isEmpty ?? true) && !Self.isEmptyJsonObject(model?.bodyFields ?? "")
+        let hasBodyFields = !(model?.body_fields.isEmpty ?? true) && !Self.isEmptyJsonObject(model?.body_fields ?? "")
         bodyFieldsEditorView.configure(value: hasBodyFields ? String(localized: "Configured") : String(localized: "N/A"))
 
         stackView.addArrangedSubviewWithMargin(bodyFieldsEditorView)
+        stackView.addArrangedSubview(SeparatorView())
+
+        let responseFormatView = ConfigurableInfoView()
+        responseFormatView.configure(icon: .init(systemName: "arrow.triangle.2.circlepath"))
+        responseFormatView.configure(title: String(localized: "Response Format"))
+        responseFormatView.configure(description: String(localized: "Select which API format this model should use when performing network requests."))
+        let currentFormat = model?.response_format ?? .default
+        responseFormatView.configure(value: currentFormat.localizedTitle)
+        responseFormatView.use { [weak self, weak responseFormatView] in
+            guard let self else { return [] }
+            let current = ModelManager.shared.responseFormat(for: identifier)
+            return CloudModelResponseFormat.allCases.map { format in
+                UIAction(
+                    title: format.localizedTitle,
+                    image: UIImage(systemName: format.symbolName),
+                    state: format == current ? .on : .off
+                ) { _ in
+                    ModelManager.shared.updateResponseFormat(for: identifier, to: format)
+                    responseFormatView?.configure(value: format.localizedTitle)
+                }
+            }
+        }
+        stackView.addArrangedSubviewWithMargin(responseFormatView)
         stackView.addArrangedSubview(SeparatorView())
 
         stackView.addArrangedSubviewWithMargin(

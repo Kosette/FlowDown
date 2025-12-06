@@ -69,8 +69,7 @@ extension ConversationManager {
                     3. For any issues, feel free to [contact us](https://discord.gg/UHKMRyJcgc).
 
                     ✨ **Enjoy your FlowDown experience!**
-                    """
-                )
+                    """)
 
                 session.appendNewMessage(role: .assistant) {
                     $0.update(\.document, to: guide)
@@ -117,7 +116,7 @@ extension ConversationManager {
         let ans = sdb.conversationDuplicate(identifier: identifier) { conv in
             let title = String(
                 format: String(localized: "%@ Copy"),
-                conv.title
+                conv.title,
             )
 
             conv.update(\.title, to: title)

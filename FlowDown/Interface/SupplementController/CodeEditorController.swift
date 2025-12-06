@@ -16,12 +16,12 @@ class CodeEditorController: UIViewController {
     lazy var doneBarButtonItem: UIBarButtonItem = .init(
         barButtonSystemItem: .done,
         target: self,
-        action: #selector(done)
+        action: #selector(done),
     )
     lazy var cancelBarButtonItem: UIBarButtonItem = .init(
         barButtonSystemItem: .cancel,
         target: self,
-        action: #selector(dispose)
+        action: #selector(dispose),
     )
 
     init(language: String? = nil, text: String) {

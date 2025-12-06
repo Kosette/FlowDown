@@ -507,3 +507,39 @@ struct MigrationV3ToV4: DBMigration {
         Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) end elapsed \(Int(elapsed))ms")
     }
 }
+
+struct MigrationV4ToV5: DBMigration {
+    let fromVersion: DBVersion = .Version4
+    let toVersion: DBVersion = .Version5
+    let requiresDataMigration: Bool = false
+
+    func migrate(db: Database) throws {
+        let start = Date.now
+        Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) begin")
+
+        try renameLegacyBodyFieldsColumnIfNeeded(db: db)
+
+        // Ensure new schema additions (response_format, body_fields) are created
+        try db.create(table: CloudModel.tableName, of: CloudModel.self)
+
+        try db.exec(StatementPragma().pragma(.userVersion).to(toVersion.rawValue))
+
+        let elapsed = Date.now.timeIntervalSince(start) * 1000.0
+        Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) end elapsed \(Int(elapsed))ms")
+    }
+
+    private func renameLegacyBodyFieldsColumnIfNeeded(db: Database) throws {
+        let tableName = CloudModel.tableName
+        let pragma = StatementPragma().pragma(.tableInfo, ofTable: tableName)
+        guard let rows = try? db.getRows(from: pragma) else {
+            return
+        }
+
+        let columnNames = rows.map { $0[1].stringValue }
+        guard columnNames.contains("bodyFields") else {
+            return
+        }
+        Logger.database.infoFile("[*] migrating column bodyFields -> body_fields on table \(tableName)")
+        try db.exec("ALTER TABLE \"\(tableName)\" RENAME COLUMN bodyFields TO body_fields")
+    }
+}

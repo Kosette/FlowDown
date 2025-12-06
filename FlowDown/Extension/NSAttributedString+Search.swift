@@ -12,7 +12,7 @@ extension NSAttributedString {
         text: String,
         searchTerm: String,
         baseAttributes: [NSAttributedString.Key: Any] = [:],
-        highlightAttributes: [NSAttributedString.Key: Any] = [:]
+        highlightAttributes: [NSAttributedString.Key: Any] = [:],
     ) -> NSAttributedString {
         guard !searchTerm.isEmpty else {
             return NSAttributedString(string: text, attributes: baseAttributes)

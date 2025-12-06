@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var templateMenuCancellable: AnyCancellable?
     func application(
         _ application: UIApplication,
-        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil,
     ) -> Bool {
         UITableView.appearance().backgroundColor = .clear
         UIButton.appearance().tintColor = .accent
@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(
         _: UIApplication,
-        didDiscardSceneSessions _: Set<UISceneSession>
+        didDiscardSceneSessions _: Set<UISceneSession>,
     ) {}
 
     func applicationDidBecomeActive(_: UIApplication) {

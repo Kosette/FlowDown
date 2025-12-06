@@ -42,7 +42,7 @@ class MessageListRowView: ListRowView, UIContextMenuInteractionDelegate {
             x: insets.left,
             y: 0,
             width: bounds.width - insets.horizontal,
-            height: bounds.height - insets.bottom
+            height: bounds.height - insets.bottom,
         )
     }
 
@@ -65,7 +65,7 @@ class MessageListRowView: ListRowView, UIContextMenuInteractionDelegate {
 
     func contextMenuInteraction(
         _: UIContextMenuInteraction,
-        configurationForMenuAtLocation location: CGPoint
+        configurationForMenuAtLocation location: CGPoint,
     ) -> UIContextMenuConfiguration? {
         guard let menu = contextMenuProvider?(location) else { return nil }
         return .init {

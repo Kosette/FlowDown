@@ -58,7 +58,7 @@ class PollinationsService {
         if pollinationsModel.audio == true { capabilities.insert(.auditory) }
 
         let comment = String(
-            localized: "This service is provided free of charge by pollinations.ai and includes rate limits. It may be unavailable in certain countries or regions. If you encounter issues, please set up your own model service."
+            localized: "This service is provided free of charge by pollinations.ai and includes rate limits. It may be unavailable in certain countries or regions. If you encounter issues, please set up your own model service.",
         )
 
         return CloudModel(
@@ -68,7 +68,7 @@ class PollinationsService {
             endpoint: openaiEndpoint,
             context: .medium_64k,
             capabilities: capabilities,
-            comment: comment
+            comment: comment,
         )
     }
 }

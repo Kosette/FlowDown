@@ -46,7 +46,7 @@ extension MLX.GPU {
                 ListAnnotation.ValueItem(title: item.title, rawValue: item.rawValue)
             }
         },
-        availabilityRequirement: .init(key: isSupportedKey, match: true, reversed: false)
+        availabilityRequirement: .init(key: isSupportedKey, match: true, reversed: false),
     )
 
     static func subscribeToConfigurableItem() {

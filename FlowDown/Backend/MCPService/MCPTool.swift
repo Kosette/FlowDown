@@ -47,7 +47,7 @@ class MCPTool: ModelTool, @unchecked Sendable {
             name: toolInfo.name,
             description: toolInfo.description ?? String(localized: "MCP Tool"),
             parameters: parameters,
-            strict: true
+            strict: true,
         )
     }
 
@@ -64,7 +64,7 @@ class MCPTool: ModelTool, @unchecked Sendable {
             explain: "Tools from connected MCP servers",
             key: "MCP.Tools.Enabled",
             defaultValue: true,
-            annotation: .boolean
+            annotation: .boolean,
         )
     }
 
@@ -85,7 +85,7 @@ class MCPTool: ModelTool, @unchecked Sendable {
             let result = try await mcpService.callTool(
                 name: toolInfo.name,
                 arguments: arguments,
-                from: toolInfo.serverID
+                from: toolInfo.serverID,
             )
 
             // isError is optional
@@ -95,7 +95,7 @@ class MCPTool: ModelTool, @unchecked Sendable {
                 throw NSError(
                     domain: "MCPToolErrorDomain",
                     code: -1,
-                    userInfo: [NSLocalizedDescriptionKey: text]
+                    userInfo: [NSLocalizedDescriptionKey: text],
                 )
             }
 

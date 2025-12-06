@@ -18,7 +18,7 @@ import UIKit
             else { return }
             nsWindow.perform(
                 NSSelectorFromString("performWindowDragWithEvent:"),
-                with: currentEvent
+                with: currentEvent,
             )
         }
     }

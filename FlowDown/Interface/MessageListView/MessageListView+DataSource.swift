@@ -116,7 +116,7 @@ extension MessageListView {
                         previewImage: $0.previewImageData,
                         imageRepresentation: $0.imageRepresentation,
                         textRepresentation: $0.representedDocument,
-                        storageSuffix: $0.storageSuffix
+                        storageSuffix: $0.storageSuffix,
                     )
                 }
                 if !attachmentItems.isEmpty {

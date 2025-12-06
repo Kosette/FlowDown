@@ -65,7 +65,7 @@ extension AppEnvironment.Container {
             storage: storage,
             containerIdentifier: CloudKitConfig.containerIdentifier,
             mode: .live,
-            automaticallySync: true
+            automaticallySync: true,
         )
         return .init(storage: storage, syncEngine: syncEngine)
     }

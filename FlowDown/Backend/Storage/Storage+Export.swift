@@ -28,14 +28,14 @@ extension Storage {
                 .appendingPathComponent(UUID().uuidString)
             try? FileManager.default.createDirectory(
                 at: tempURL,
-                withIntermediateDirectories: true
+                withIntermediateDirectories: true,
             )
             let zipURL = tempURL
                 .appendingPathComponent(
                     String(
                         format: String(localized: "Exported Database %@"),
-                        dateFormatter.string(from: Date())
-                    )
+                        dateFormatter.string(from: Date()),
+                    ),
                 )
                 .appendingPathExtension("zip")
             do {

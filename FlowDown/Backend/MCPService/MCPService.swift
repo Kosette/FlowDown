@@ -96,7 +96,7 @@ class MCPService: NSObject {
 
     func testConnection(
         serverID: ModelContextServer.ID,
-        completion: @escaping (Result<String, Swift.Error>) -> Void
+        completion: @escaping (Result<String, Swift.Error>) -> Void,
     ) {
         Task {
             await MCPService.executor.run {

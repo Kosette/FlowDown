@@ -49,7 +49,7 @@ class HTMLPreviewController: UIViewController, WKNavigationDelegate {
             UIBarButtonItem(
                 barButtonSystemItem: .done,
                 target: self,
-                action: #selector(done)
+                action: #selector(done),
             ),
         ]
     }

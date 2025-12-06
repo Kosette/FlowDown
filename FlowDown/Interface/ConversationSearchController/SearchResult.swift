@@ -23,7 +23,7 @@ struct ConversationSearchResult {
         conversation: Conversation,
         matchType: MatchType,
         matchedText: String,
-        messagePreview: String? = nil
+        messagePreview: String? = nil,
     ) {
         self.conversation = conversation
         self.matchType = matchType

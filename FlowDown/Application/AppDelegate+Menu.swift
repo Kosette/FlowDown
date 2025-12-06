@@ -26,16 +26,16 @@ extension AppDelegate {
                         title: String(localized: "New Chat"),
                         action: #selector(requestNewChatFromMenu(_:)),
                         input: "n",
-                        modifierFlags: .command
+                        modifierFlags: .command,
                     ),
                     UIMenu(
                         title: String(localized: "New Chat with Template"),
                         options: .displayInline,
-                        children: Self.buildTemplateMenuItems(target: self)
+                        children: Self.buildTemplateMenuItems(target: self),
                     ),
-                ]
+                ],
             ),
-            atStartOfMenu: .file
+            atStartOfMenu: .file,
         )
         builder.insertChild(
             UIMenu(
@@ -46,11 +46,11 @@ extension AppDelegate {
                         title: String(localized: "Delete Chat"),
                         action: #selector(deleteConversationFromMenu(_:)),
                         input: "\u{8}",
-                        modifierFlags: [.command, .shift]
+                        modifierFlags: [.command, .shift],
                     ),
-                ]
+                ],
             ),
-            atEndOfMenu: .file
+            atEndOfMenu: .file,
         )
 
         if UpdateManager.shared.canCheckForUpdates {
@@ -63,11 +63,11 @@ extension AppDelegate {
                             title: String(localized: "Check for Updates..."),
                             action: #selector(checkForUpdatesFromMenu(_:)),
                             input: "u",
-                            modifierFlags: [.command, .shift]
+                            modifierFlags: [.command, .shift],
                         ),
-                    ]
+                    ],
                 ),
-                afterMenu: .preferences
+                afterMenu: .preferences,
             )
         }
 
@@ -80,11 +80,11 @@ extension AppDelegate {
                         title: String(localized: "Settings..."),
                         action: #selector(openSettingsFromMenu(_:)),
                         input: ",",
-                        modifierFlags: .command
+                        modifierFlags: .command,
                     ),
-                ]
+                ],
             ),
-            afterMenu: .preferences
+            afterMenu: .preferences,
         )
 
         builder.insertChild(
@@ -96,11 +96,11 @@ extension AppDelegate {
                         title: String(localized: "Search…"),
                         action: #selector(searchConversationsFromMenu(_:)),
                         input: "f",
-                        modifierFlags: [.command, .shift]
+                        modifierFlags: [.command, .shift],
                     ),
-                ]
+                ],
             ),
-            atStartOfMenu: .edit
+            atStartOfMenu: .edit,
         )
         builder.insertChild(
             UIMenu(
@@ -111,23 +111,23 @@ extension AppDelegate {
                         title: String(localized: "Previous Conversation"),
                         action: #selector(selectPreviousConversationFromMenu(_:)),
                         input: UIKeyCommand.inputUpArrow,
-                        modifierFlags: [.command, .alternate]
+                        modifierFlags: [.command, .alternate],
                     ),
                     UIKeyCommand(
                         title: String(localized: "Next Conversation"),
                         action: #selector(selectNextConversationFromMenu(_:)),
                         input: UIKeyCommand.inputDownArrow,
-                        modifierFlags: [.command, .alternate]
+                        modifierFlags: [.command, .alternate],
                     ),
                     UIKeyCommand(
                         title: String(localized: "Toggle Sidebar"),
                         action: #selector(toggleSidebarFromMenu(_:)),
                         input: "/",
-                        modifierFlags: [.control, .shift]
+                        modifierFlags: [.control, .shift],
                     ),
-                ].compactMap(\.self)
+                ].compactMap(\.self),
             ),
-            atStartOfMenu: .view
+            atStartOfMenu: .view,
         )
     }
 
@@ -151,8 +151,8 @@ extension AppDelegate {
                         action: action,
                         input: keyInput,
                         modifierFlags: [.command, .alternate],
-                        propertyList: propertyList
-                    )
+                        propertyList: propertyList,
+                    ),
                 )
             } else {
                 items.append(
@@ -160,8 +160,8 @@ extension AppDelegate {
                         title: title,
                         handler: { _ in
                             target.requestNewChatWithTemplateFromMenuWithID(propertyList)
-                        }
-                    )
+                        },
+                    ),
                 )
             }
         }
@@ -225,7 +225,7 @@ extension AppDelegate {
 
     // conversation related
     private func withCurrentConversation(
-        _ block: (MainController, Conversation.ID, Conversation) -> Void
+        _ block: (MainController, Conversation.ID, Conversation) -> Void,
     ) {
         guard let mainVC = mainWindow?.rootViewController as? MainController,
               let conversationID = mainVC.chatView.conversationIdentifier,

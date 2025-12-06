@@ -19,7 +19,7 @@ enum ShortcutsEntities {
             let titleValue = sanitizedTitle.isEmpty ? String(localized: "Untitled") : sanitizedTitle
             return DisplayRepresentation(
                 title: LocalizedStringResource(stringLiteral: titleValue),
-                subtitle: LocalizedStringResource(stringLiteral: id)
+                subtitle: LocalizedStringResource(stringLiteral: id),
             )
         }
 
@@ -44,7 +44,7 @@ enum ShortcutsEntities {
         static var findIntentDescription: IntentDescription? {
             IntentDescription(
                 LocalizedStringResource("Browse and select any FlowDown conversation."),
-                categoryName: LocalizedStringResource("Conversations")
+                categoryName: LocalizedStringResource("Conversations"),
             )
         }
 
@@ -77,7 +77,7 @@ enum ShortcutsEntities {
                 sdb.conversationList().map { conv in
                     ConversationEntity(
                         id: conv.id,
-                        title: conv.title
+                        title: conv.title,
                     )
                 }
             }
@@ -116,7 +116,7 @@ enum ShortcutsEntities {
         var displayRepresentation: DisplayRepresentation {
             DisplayRepresentation(
                 title: LocalizedStringResource(stringLiteral: displayName),
-                subtitle: source.localizedDescription
+                subtitle: source.localizedDescription,
             )
         }
 
@@ -124,7 +124,7 @@ enum ShortcutsEntities {
             id: ModelManager.ModelIdentifier,
             displayName: String,
             source: Source,
-            searchKeywords: [String] = []
+            searchKeywords: [String] = [],
         ) {
             self.id = id
             self.displayName = displayName
@@ -145,7 +145,7 @@ enum ShortcutsEntities {
         static var findIntentDescription: IntentDescription? {
             IntentDescription(
                 LocalizedStringResource("Choose from the models available in FlowDown."),
-                categoryName: LocalizedStringResource("Models")
+                categoryName: LocalizedStringResource("Models"),
             )
         }
 
@@ -197,7 +197,7 @@ enum ShortcutsEntities {
                         id: identifier,
                         displayName: name,
                         source: .local,
-                        searchKeywords: keywords
+                        searchKeywords: keywords,
                     )
                 }
 
@@ -220,7 +220,7 @@ enum ShortcutsEntities {
                         id: identifier,
                         displayName: name,
                         source: .cloud,
-                        searchKeywords: normalized
+                        searchKeywords: normalized,
                     )
                 }
 
@@ -233,7 +233,7 @@ enum ShortcutsEntities {
                         searchKeywords: normalizedKeywords([
                             AppleIntelligenceModel.shared.modelDisplayName,
                             identifier,
-                        ])
+                        ]),
                     )
                 }
 

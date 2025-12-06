@@ -32,7 +32,7 @@ final class MessageListView: UIView {
             sessionScopedCancellables.removeAll()
             Publishers.CombineLatest(
                 session.messagesDidChange,
-                loadingIndicatorPublisher
+                loadingIndicatorPublisher,
             )
             .receive(on: updateQueue)
             .sink { [weak self] v1, v2 in
@@ -174,7 +174,7 @@ final class MessageListView: UIView {
         else {
             let alert = AlertViewController(
                 title: "Unable to open link.",
-                message: "We are unable to process the link you tapped, either it is invalid or not supported."
+                message: "We are unable to process the link you tapped, either it is invalid or not supported.",
             ) { context in
                 context.allowSimpleDispose()
                 context.addAction(title: "Dismiss") {
@@ -191,7 +191,7 @@ final class MessageListView: UIView {
 
         let alert = AlertViewController(
             title: "Open Link",
-            message: "Do you want to open this link in your default browser?\n\n\(link.absoluteString)"
+            message: "Do you want to open this link in your default browser?\n\n\(link.absoluteString)",
         ) { context in
             context.allowSimpleDispose()
             context.addAction(title: "Cancel") {

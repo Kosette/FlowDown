@@ -32,7 +32,7 @@ class ConfigurableInfoView: ConfigurableView {
             .foregroundColor: isDestructive ? .red : UIColor.accent,
             .font: UIFont.systemFont(
                 ofSize: UIFont.preferredFont(forTextStyle: .subheadline).pointSize,
-                weight: .semibold
+                weight: .semibold,
             ),
             .underlineStyle: NSUnderlineStyle.single.rawValue,
         ])

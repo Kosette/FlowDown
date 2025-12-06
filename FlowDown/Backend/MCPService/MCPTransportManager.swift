@@ -25,7 +25,7 @@ extension ModelContextServer {
 
         let headers = try? JSONDecoder().decode(
             [String: String].self,
-            from: header.data(using: .utf8) ?? .init()
+            from: header.data(using: .utf8) ?? .init(),
         )
         config.timeoutIntervalForRequest = .init(timeout)
         config.timeoutIntervalForResource = .init(timeout)

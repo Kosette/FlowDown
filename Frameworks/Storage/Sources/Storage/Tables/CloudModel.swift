@@ -8,6 +8,13 @@
 import Foundation
 import WCDBSwift
 
+public enum CloudModelResponseFormat: String, CaseIterable, Codable, Sendable {
+    case chatCompletions
+    case responses
+
+    public static let `default`: CloudModelResponseFormat = .chatCompletions
+}
+
 public final class CloudModel: Identifiable, Codable, Equatable, Hashable, TableNamed, DeviceOwned, TableCodable {
     public static let tableName: String = "CloudModel"
 
@@ -25,10 +32,11 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
     public package(set) var endpoint: String = ""
     public package(set) var token: String = ""
     public package(set) var headers: [String: String] = [:] // additional headers
-    public package(set) var bodyFields: String = "" // additional body fields as JSON string
+    public package(set) var body_fields: String = "" // additional body fields as JSON string
     public package(set) var capabilities: Set<ModelCapabilities> = []
     public package(set) var context: ModelContextLength = .short_8k
     public package(set) var temperature_preference: ModelTemperaturePreference = .inherit
+    public package(set) var response_format: CloudModelResponseFormat = .default
     // can be used when loading model from our server
     // present to user on the top of the editor page
     public package(set) var comment: String = ""
@@ -51,9 +59,10 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
             BindColumnConstraint(endpoint, isNotNull: true, defaultTo: "")
             BindColumnConstraint(token, isNotNull: true, defaultTo: "")
             BindColumnConstraint(headers, isNotNull: true, defaultTo: [String: String]())
-            BindColumnConstraint(bodyFields, isNotNull: true, defaultTo: "")
+            BindColumnConstraint(body_fields, isNotNull: true, defaultTo: "")
             BindColumnConstraint(capabilities, isNotNull: true, defaultTo: Set<ModelCapabilities>())
             BindColumnConstraint(context, isNotNull: true, defaultTo: ModelContextLength.short_8k)
+            BindColumnConstraint(response_format, isNotNull: true, defaultTo: CloudModelResponseFormat.default)
             BindColumnConstraint(comment, isNotNull: true, defaultTo: "")
             BindColumnConstraint(name, isNotNull: true, defaultTo: "")
             BindColumnConstraint(temperature_preference, isNotNull: true, defaultTo: ModelTemperaturePreference.inherit)
@@ -70,9 +79,10 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         case endpoint
         case token
         case headers
-        case bodyFields
+        case body_fields
         case capabilities
         case context
+        case response_format
         case comment
         case name
         case temperature_preference
@@ -93,12 +103,13 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
             "HTTP-Referer": "https://flowdown.ai/",
             "X-Title": "FlowDown",
         ],
-        bodyFields: String = "",
+        body_fields: String = "",
         context: ModelContextLength = .medium_64k,
         capabilities: Set<ModelCapabilities> = [],
         comment: String = "",
         name: String = "",
-        temperature_preference: ModelTemperaturePreference = .inherit
+        temperature_preference: ModelTemperaturePreference = .inherit,
+        response_format: CloudModelResponseFormat = .default
     ) {
         self.deviceId = deviceId
         self.objectId = objectId
@@ -109,12 +120,13 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         self.endpoint = endpoint
         self.token = token
         self.headers = headers
-        self.bodyFields = bodyFields
+        self.body_fields = body_fields
         self.capabilities = capabilities
         self.comment = comment
         self.name = name
         self.context = context
         self.temperature_preference = temperature_preference
+        self.response_format = response_format
     }
 
     public required init(from decoder: Decoder) throws {
@@ -128,12 +140,19 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         endpoint = try container.decodeIfPresent(String.self, forKey: .endpoint) ?? ""
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
         headers = try container.decodeIfPresent([String: String].self, forKey: .headers) ?? [:]
-        bodyFields = try container.decodeIfPresent(String.self, forKey: .bodyFields) ?? ""
+        body_fields = try container.decodeIfPresent(String.self, forKey: .body_fields) ?? ""
+        if body_fields.isEmpty {
+            let legacyContainer = try? decoder.container(keyedBy: LegacyCodingKeys.self)
+            if let legacyValue = try legacyContainer?.decodeIfPresent(String.self, forKey: .bodyFields) {
+                body_fields = legacyValue
+            }
+        }
         capabilities = try container.decodeIfPresent(Set<ModelCapabilities>.self, forKey: .capabilities) ?? []
         context = try container.decodeIfPresent(ModelContextLength.self, forKey: .context) ?? .short_8k
         comment = try container.decodeIfPresent(String.self, forKey: .comment) ?? ""
         name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
         temperature_preference = try container.decodeIfPresent(ModelTemperaturePreference.self, forKey: .temperature_preference) ?? .inherit
+        response_format = try container.decodeIfPresent(CloudModelResponseFormat.self, forKey: .response_format) ?? .default
 
         removed = try container.decodeIfPresent(Bool.self, forKey: .removed) ?? false
     }
@@ -156,14 +175,19 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         hasher.combine(endpoint)
         hasher.combine(token)
         hasher.combine(headers)
-        hasher.combine(bodyFields)
+        hasher.combine(body_fields)
         hasher.combine(capabilities)
         hasher.combine(context)
+        hasher.combine(response_format)
         hasher.combine(comment)
         hasher.combine(name)
         hasher.combine(temperature_preference)
         hasher.combine(removed)
     }
+}
+
+private enum LegacyCodingKeys: String, CodingKey {
+    case bodyFields
 }
 
 extension CloudModel: Updatable {
@@ -227,5 +251,20 @@ extension ModelContextLength: ColumnCodable {
 
     public static var columnType: ColumnType {
         .integer64
+    }
+}
+
+extension CloudModelResponseFormat: ColumnCodable {
+    public init?(with value: WCDBSwift.Value) {
+        let text = value.stringValue
+        self = CloudModelResponseFormat(rawValue: text) ?? .default
+    }
+
+    public func archivedValue() -> WCDBSwift.Value {
+        .init(rawValue)
+    }
+
+    public static var columnType: ColumnType {
+        .text
     }
 }

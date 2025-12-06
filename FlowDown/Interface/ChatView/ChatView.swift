@@ -255,7 +255,7 @@ class ChatView: UIView {
             top: title.frame.maxY + 16,
             left: 0,
             bottom: bounds.height - editor.frame.minY + 16,
-            right: 0
+            right: 0,
         )
     }
 
@@ -389,7 +389,7 @@ extension ChatView {
 
         func contextMenuInteraction(
             _: UIContextMenuInteraction,
-            configurationForMenuAtLocation _: CGPoint
+            configurationForMenuAtLocation _: CGPoint,
         ) -> UIContextMenuConfiguration? {
             UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
                 self?.buildMenu()
@@ -400,7 +400,7 @@ extension ChatView {
             guard let conv else { return nil }
             guard let convMenu = ConversationManager.shared.menu(
                 forConversation: conv,
-                view: self
+                view: self,
             ) else { return nil }
 
             #if targetEnvironment(macCatalyst)
@@ -432,7 +432,7 @@ extension ChatView {
                         // No templates, just show "Start New Chat"
                         newChatOptions.append(UIAction(
                             title: String(localized: "Start New Chat"),
-                            image: UIImage(systemName: "plus")
+                            image: UIImage(systemName: "plus"),
                         ) { [weak self] _ in
                             self?.onCreateNewChat?()
                         })
@@ -440,7 +440,7 @@ extension ChatView {
                         // Show template options
                         newChatOptions.append(UIAction(
                             title: String(localized: "Start New Chat"),
-                            image: UIImage(systemName: "plus")
+                            image: UIImage(systemName: "plus"),
                         ) { [weak self] _ in
                             self?.onCreateNewChat?()
                         })
@@ -449,7 +449,7 @@ extension ChatView {
                         for template in templates.values {
                             templatesMenuActions.append(UIAction(
                                 title: template.name,
-                                image: UIImage(data: template.avatar)
+                                image: UIImage(data: template.avatar),
                             ) { [weak self] _ in
                                 let convId = ChatTemplateManager.shared.createConversationFromTemplate(template)
                                 self?.onSuggestSelection?(convId)
@@ -458,7 +458,7 @@ extension ChatView {
                         newChatOptions.append(UIMenu(
                             title: String(localized: "Choose Template"),
                             image: UIImage(systemName: "folder"),
-                            children: templatesMenuActions
+                            children: templatesMenuActions,
                         ))
                     }
 
@@ -466,7 +466,7 @@ extension ChatView {
                         UIMenu(
                             title: String(localized: "New Conversation"),
                             options: [.displayInline],
-                            children: newChatOptions
+                            children: newChatOptions,
                         ),
                         convMenu,
                     ])

@@ -18,7 +18,7 @@ extension ConversationManager {
     func exportConversation(
         identifier: Conversation.ID,
         exportFormat: ExportFormat,
-        completion: @escaping (Result<String, Error>) -> Void
+        completion: @escaping (Result<String, Error>) -> Void,
     ) {
         guard let conversation = ConversationManager.shared.conversation(identifier: identifier) else {
             assertionFailure()

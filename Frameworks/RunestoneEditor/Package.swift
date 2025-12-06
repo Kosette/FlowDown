@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "RunestoneEditor",
-            targets: ["RunestoneEditor"]
+            targets: ["RunestoneEditor"],
         ),
     ],
     dependencies: [
@@ -23,5 +23,5 @@ let package = Package(
             "RunestoneThemeSupport",
             "RunestoneLanguageSupport",
         ]),
-    ]
+    ],
 )

@@ -11,7 +11,7 @@ struct Shortcuts: AppShortcutsProvider {
                     "Ask Model on \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("Ask Model"),
-                systemImageName: "text.bubble"
+                systemImageName: "text.bubble",
             ),
             AppShortcut(
                 intent: SetConversationModelIntent(),
@@ -20,7 +20,7 @@ struct Shortcuts: AppShortcutsProvider {
                     "Set default model on \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("Set Model"),
-                systemImageName: "slider.horizontal.3"
+                systemImageName: "slider.horizontal.3",
             ),
             AppShortcut(
                 intent: GenerateNewConversationLinkIntent(),
@@ -29,7 +29,7 @@ struct Shortcuts: AppShortcutsProvider {
                     "New conversation link on \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("Conversation Link"),
-                systemImageName: "link"
+                systemImageName: "link",
             ),
         ]
 
@@ -41,8 +41,8 @@ struct Shortcuts: AppShortcutsProvider {
                     "Classify with \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("Classify"),
-                systemImageName: "checklist"
-            )
+                systemImageName: "checklist",
+            ),
         )
 
         shortcuts.append(
@@ -53,8 +53,8 @@ struct Shortcuts: AppShortcutsProvider {
                     "Find chats on \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("Search Chats"),
-                systemImageName: "magnifyingglass"
-            )
+                systemImageName: "magnifyingglass",
+            ),
         )
 
         shortcuts.append(
@@ -65,8 +65,8 @@ struct Shortcuts: AppShortcutsProvider {
                     "New chat on \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("New Conversation"),
-                systemImageName: "plus.message"
-            )
+                systemImageName: "plus.message",
+            ),
         )
 
         shortcuts.append(
@@ -77,8 +77,8 @@ struct Shortcuts: AppShortcutsProvider {
                     "Add content to conversation on \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("Fill Message"),
-                systemImageName: "pencil.and.list.clipboard"
-            )
+                systemImageName: "pencil.and.list.clipboard",
+            ),
         )
 
         shortcuts.append(
@@ -89,8 +89,8 @@ struct Shortcuts: AppShortcutsProvider {
                     "Open chat on \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("Show Conversation"),
-                systemImageName: "bubble.left"
-            )
+                systemImageName: "bubble.left",
+            ),
         )
 
         shortcuts.append(
@@ -101,8 +101,8 @@ struct Shortcuts: AppShortcutsProvider {
                     "Show and send on \(.applicationName)",
                 ],
                 shortTitle: LocalizedStringResource("Show & Send"),
-                systemImageName: "paperplane.circle"
-            )
+                systemImageName: "paperplane.circle",
+            ),
         )
 
         if #available(iOS 18.0, macCatalyst 18.0, *) {
@@ -114,8 +114,8 @@ struct Shortcuts: AppShortcutsProvider {
                         "Turn audio into text with \(.applicationName)",
                     ],
                     shortTitle: LocalizedStringResource("Transcribe Audio"),
-                    systemImageName: "waveform"
-                )
+                    systemImageName: "waveform",
+                ),
             )
 
             shortcuts.append(
@@ -125,8 +125,8 @@ struct Shortcuts: AppShortcutsProvider {
                         "Ask Model with image on \(.applicationName)",
                     ],
                     shortTitle: LocalizedStringResource("Ask Model + Image"),
-                    systemImageName: "photo"
-                )
+                    systemImageName: "photo",
+                ),
             )
 
             shortcuts.append(
@@ -137,8 +137,8 @@ struct Shortcuts: AppShortcutsProvider {
                         "Classify content with image on \(.applicationName)",
                     ],
                     shortTitle: LocalizedStringResource("Classify + Image"),
-                    systemImageName: "photo.badge.checkmark"
-                )
+                    systemImageName: "photo.badge.checkmark",
+                ),
             )
         }
 

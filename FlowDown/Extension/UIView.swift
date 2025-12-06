@@ -15,7 +15,7 @@ extension UIView {
             delay: 0,
             usingSpringWithDamping: 0.9,
             initialSpringVelocity: 1.0,
-            options: .curveEaseInOut
+            options: .curveEaseInOut,
         ) {
             execute()
             self.layoutIfNeeded()

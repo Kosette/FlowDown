@@ -17,7 +17,7 @@ import UIKit
             super.init(
                 rootViewController: NavigationController(callback: callback),
                 preferredWidth: 750,
-                preferredHeight: 550
+                preferredHeight: 550,
             )
             shouldDismissWhenTappedAround = true
             shouldDismissWhenEscapeKeyPressed = true

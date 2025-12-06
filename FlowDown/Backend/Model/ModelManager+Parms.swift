@@ -61,9 +61,9 @@ extension ModelManager {
             PromptType.allCases.map { .init(
                 icon: $0.icon,
                 title: $0.title,
-                rawValue: $0.rawValue
+                rawValue: $0.rawValue,
             ) }
-        }
+        },
     )
 
     static let extraPromptConfigurableObject: ConfigurableObject = .init(
@@ -79,7 +79,7 @@ extension ModelManager {
                 ModelManager.shared.additionalPrompt = text
             }
             view.parentViewController?.navigationController?.pushViewController(controller, animated: true)
-        }
+        },
     )
 
     static let includeDynamicSystemInfo = ConfigurableObject(
@@ -88,7 +88,7 @@ extension ModelManager {
         explain: "Insert the current model name, date, and locale in the system prompt for each request. Turn this off if your use caching systems to save cost.",
         key: ModelManager.shared.includeDynamicSystemInfoKey,
         defaultValue: true,
-        annotation: .boolean
+        annotation: .boolean,
     )
 
     static let temperatureConfigurableObject: ConfigurableObject = .init(
@@ -102,40 +102,40 @@ extension ModelManager {
                 .init(
                     icon: "snowflake",
                     title: "Freezing @ 0.0",
-                    rawValue: 0.1
+                    rawValue: 0.1,
                 ),
                 .init(
                     icon: "thermometer.low",
                     title: "Precise @ 0.25",
-                    rawValue: 0.25
+                    rawValue: 0.25,
                 ),
                 .init(
                     icon: "thermometer.low",
                     title: "Stable @ 0.5",
-                    rawValue: 0.5
+                    rawValue: 0.5,
                 ),
                 .init(
                     icon: "thermometer.medium",
                     title: "Humankind @ 0.75",
-                    rawValue: 0.75
+                    rawValue: 0.75,
                 ),
                 .init(
                     icon: "thermometer.medium",
                     title: "Creative @ 1.0",
-                    rawValue: 1
+                    rawValue: 1,
                 ),
                 .init(
                     icon: "thermometer.high",
                     title: "Imaginative @ 1.5",
-                    rawValue: 1.5
+                    rawValue: 1.5,
                 ),
                 .init(
                     icon: "thermometer.high",
                     title: "Magical @ 2.0",
-                    rawValue: 2.0
+                    rawValue: 2.0,
                 ),
             ]
-        }
+        },
     )
 }
 
@@ -227,7 +227,7 @@ extension ModelManager {
             SearchSensitivity.allCases.map {
                 .init(icon: $0.icon, title: $0.title, rawValue: $0.rawValue)
             }
-        }
+        },
     )
 }
 
@@ -288,19 +288,19 @@ extension ModelManager.PromptType {
             """###
             .replacingOccurrences(
                 of: "{{Template.applicationName}}",
-                with: Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "unknown AI app"
+                with: Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "unknown AI app",
             )
             .replacingOccurrences(
                 of: "{{Template.currentDateTime}}",
-                with: DateFormatter.localizedString(from: Date(), dateStyle: .full, timeStyle: .full)
+                with: DateFormatter.localizedString(from: Date(), dateStyle: .full, timeStyle: .full),
             )
             .replacingOccurrences(
                 of: "{{Template.systemLanguage}}",
-                with: Locale.current.identifier
+                with: Locale.current.identifier,
             )
             .replacingOccurrences(
                 of: "{{Template.appLanguage}}",
-                with: Bundle.main.preferredLocalizations.first ?? "en"
+                with: Bundle.main.preferredLocalizations.first ?? "en",
             )
         case .complete:
             ###"""
@@ -321,19 +321,19 @@ extension ModelManager.PromptType {
         return template
             .replacingOccurrences(
                 of: "{{Template.applicationName}}",
-                with: Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "unknown AI app"
+                with: Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "unknown AI app",
             )
             .replacingOccurrences(
                 of: "{{Template.currentDateTime}}",
-                with: DateFormatter.localizedString(from: Date(), dateStyle: .full, timeStyle: .full)
+                with: DateFormatter.localizedString(from: Date(), dateStyle: .full, timeStyle: .full),
             )
             .replacingOccurrences(
                 of: "{{Template.systemLanguage}}",
-                with: Locale.current.identifier
+                with: Locale.current.identifier,
             )
             .replacingOccurrences(
                 of: "{{Template.appLanguage}}",
-                with: Bundle.main.preferredLocalizations.first ?? "en"
+                with: Bundle.main.preferredLocalizations.first ?? "en",
             )
     }
 }

@@ -32,7 +32,7 @@ class TextEditorController: ContentHolderController {
             super.init(
                 rootViewController: UINavigationController(rootViewController: rootController),
                 preferredWidth: 555,
-                preferredHeight: 555
+                preferredHeight: 555,
             )
         }
     #else

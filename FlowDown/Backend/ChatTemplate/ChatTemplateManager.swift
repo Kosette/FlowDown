@@ -34,7 +34,7 @@ class ChatTemplateManager {
         let data = UserDefaults.standard.data(forKey: "ChatTemplates") ?? Data()
         if let decoded = try? PropertyListDecoder().decode(
             OrderedDictionary<ChatTemplate.ID, ChatTemplate>.self,
-            from: data
+            from: data,
         ) {
             Logger.model.infoFile("loaded \(decoded.count) chat templates")
             templates = decoded
@@ -116,7 +116,7 @@ class ChatTemplateManager {
     func createTemplateFromConversation(
         _ conversation: Conversation,
         model: ModelManager.ModelIdentifier,
-        completion: @escaping (Result<ChatTemplate, Error>) -> Void
+        completion: @escaping (Result<ChatTemplate, Error>) -> Void,
     ) {
         Task {
             do {
@@ -136,14 +136,14 @@ class ChatTemplateManager {
         template: ChatTemplate,
         request: String,
         model: ModelManager.ModelIdentifier,
-        completion: @escaping (Result<ChatTemplate, Error>) -> Void
+        completion: @escaping (Result<ChatTemplate, Error>) -> Void,
     ) {
         Task {
             do {
                 let template = try await rewriteTemplate(
                     template: template,
                     request: request,
-                    model: model
+                    model: model,
                 )
                 await MainActor.run {
                     completion(.success(template))
@@ -159,7 +159,7 @@ class ChatTemplateManager {
     private func rewriteTemplate(
         template: ChatTemplate,
         request: String,
-        model: ModelManager.ModelIdentifier
+        model: ModelManager.ModelIdentifier,
     ) async throws -> ChatTemplate {
         let prompt = """
         You are a chat template expert. Please modify the following chat template according to the user's request. 
@@ -209,7 +209,7 @@ class ChatTemplateManager {
                 code: 1,
                 userInfo: [
                     NSLocalizedDescriptionKey: String(localized: "Conversation does not have enough messages to create a template."),
-                ]
+                ],
             )
         }
 
@@ -226,8 +226,8 @@ class ChatTemplateManager {
                 name: "Short descriptive name for the template using concise language",
                 emoji: "Single emoji representing the template purpose",
                 prompt: "System prompt that captures the conversation pattern and purpose",
-                inherit_app_prompt: true
-            )
+                inherit_app_prompt: true,
+            ),
         )
 
         let encoder = XMLEncoder()
@@ -257,7 +257,7 @@ class ChatTemplateManager {
                 name: templateResponse.name.trimmingCharacters(in: .whitespacesAndNewlines),
                 avatar: emojiData,
                 prompt: templateResponse.prompt.trimmingCharacters(in: .whitespacesAndNewlines),
-                inheritApplicationPrompt: templateResponse.inherit_app_prompt
+                inheritApplicationPrompt: templateResponse.inherit_app_prompt,
             )
         }
 
@@ -278,7 +278,7 @@ class ChatTemplateManager {
             throw NSError(
                 domain: "ChatTemplateGenerator",
                 code: 2,
-                userInfo: [NSLocalizedDescriptionKey: String(localized: "Failed to create regex patterns")]
+                userInfo: [NSLocalizedDescriptionKey: String(localized: "Failed to create regex patterns")],
             )
         }
 
@@ -328,7 +328,7 @@ class ChatTemplateManager {
             name: name,
             avatar: emojiData,
             prompt: prompt,
-            inheritApplicationPrompt: inheritAppPrompt
+            inheritApplicationPrompt: inheritAppPrompt,
         )
     }
 }

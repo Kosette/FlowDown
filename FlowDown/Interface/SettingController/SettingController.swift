@@ -17,7 +17,7 @@ import UIKit
                     action: #selector(escapePressed), // escape
                     input: "\u{1b}",
                     modifierFlags: [],
-                    propertyList: nil
+                    propertyList: nil,
                 ),
             ]
         }
@@ -29,7 +29,7 @@ import UIKit
             self.init(
                 rootViewController: nav,
                 preferredWidth: 600,
-                preferredHeight: 600
+                preferredHeight: 600,
             )
 
             content = nav

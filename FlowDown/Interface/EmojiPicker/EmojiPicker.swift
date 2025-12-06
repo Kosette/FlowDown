@@ -28,7 +28,7 @@ class EmojiPickerView: UIView, UISearchBarDelegate {
 
     init() {
         let alignedFlowLayout = AlignedCollectionViewFlowLayout(
-            horizontalAlignment: .justified, verticalAlignment: .center
+            horizontalAlignment: .justified, verticalAlignment: .center,
         )
         alignedFlowLayout.scrollDirection = .vertical
         alignedFlowLayout.sectionInset = UIEdgeInsets()
@@ -37,16 +37,16 @@ class EmojiPickerView: UIView, UISearchBarDelegate {
         alignedFlowLayout.sectionHeadersPinToVisibleBounds = true
         collectionView = UICollectionView(
             frame: CGRect(),
-            collectionViewLayout: alignedFlowLayout
+            collectionViewLayout: alignedFlowLayout,
         )
         collectionView.register(
             EmojiPickerCell.self,
-            forCellWithReuseIdentifier: EmojiPickerCell.cellId
+            forCellWithReuseIdentifier: EmojiPickerCell.cellId,
         )
         collectionView.register(
             EmojiPickerSectionHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: EmojiPickerSectionHeader.headerId
+            withReuseIdentifier: EmojiPickerSectionHeader.headerId,
         )
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 8, right: 8)
         collectionView.backgroundView = UIView()
@@ -131,7 +131,7 @@ class EmojiPickerViewController: UIViewController, UIPopoverPresentationControll
             x: -padding,
             y: -padding,
             width: sourceView.frame.width + padding * 2,
-            height: sourceView.frame.height + padding * 2
+            height: sourceView.frame.height + padding * 2,
         )
         popoverPresentationController?.permittedArrowDirections = .any
         view.addSubview(pickerView)
@@ -144,7 +144,7 @@ class EmojiPickerViewController: UIViewController, UIPopoverPresentationControll
 
     func adaptivePresentationStyle(
         for _: UIPresentationController,
-        traitCollection _: UITraitCollection
+        traitCollection _: UITraitCollection,
     ) -> UIModalPresentationStyle {
         .none
     }

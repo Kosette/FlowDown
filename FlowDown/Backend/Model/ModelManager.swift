@@ -272,6 +272,21 @@ class ModelManager: NSObject {
     }
 }
 
+extension ModelManager {
+    func responseFormat(for identifier: ModelIdentifier) -> CloudModelResponseFormat {
+        cloudModel(identifier: identifier)?.response_format ?? .default
+    }
+
+    func updateResponseFormat(
+        for identifier: ModelIdentifier,
+        to newFormat: CloudModelResponseFormat
+    ) {
+        editCloudModel(identifier: identifier) { model in
+            model.update(\.response_format, to: newFormat)
+        }
+    }
+}
+
 extension ModelManager.ModelIdentifier {
     static var defaultModelForAuxiliaryTaskWillUseCurrentChatModel: Bool {
         get { ModelManager.shared.defaultModelForAuxiliaryTaskWillUseCurrentChatModel }

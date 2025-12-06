@@ -26,5 +26,12 @@ let package = Package(
             .product(name: "ZIPFoundation", package: "ZIPFoundation"),
             .product(name: "Logger", package: "Logger"),
         ]),
-    ]
+        .testTarget(
+            name: "StorageTests",
+            dependencies: [
+                "Storage",
+                .product(name: "WCDBSwift", package: "wcdb-spm-prebuilt"),
+            ],
+        ),
+    ],
 )

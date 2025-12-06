@@ -65,7 +65,7 @@ class UpdateManager: NSObject {
                     Indicator.present(
                         title: "No Update Available",
                         preset: .done,
-                        referencingView: controller.view
+                        referencingView: controller.view,
                     )
                 }
             }
@@ -73,7 +73,7 @@ class UpdateManager: NSObject {
 
         Indicator.progress(
             title: "Checking for Updates",
-            controller: controller
+            controller: controller,
         ) { completionHandler in
             var package: DistributionChannel.RemotePackage?
             do {
@@ -109,7 +109,7 @@ class UpdateManager: NSObject {
     private func presentUpdateAlert(controller: UIViewController, package: DistributionChannel.RemotePackage) {
         let alert = AlertViewController(
             title: "Update Available",
-            message: "A new version \(package.tag) is available. Would you like to download it?"
+            message: "A new version \(package.tag) is available. Would you like to download it?",
         ) { context in
             context.allowSimpleDispose()
             context.addAction(title: "Cancel") {

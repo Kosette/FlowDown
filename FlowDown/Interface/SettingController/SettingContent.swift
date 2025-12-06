@@ -21,49 +21,49 @@ extension SettingController {
                 icon: "gear",
                 title: "General",
                 explain: "Change the behavior of the application, adjust text sizes, tuning editor behavior.",
-                ephemeralAnnotation: .page { GeneralController() }
+                ephemeralAnnotation: .page { GeneralController() },
             ),
             .init(
                 icon: "bolt",
                 title: "Inference",
                 explain: "Configure global prompt, adjust parameters when inferencing.",
-                ephemeralAnnotation: .page { InferenceController() }
+                ephemeralAnnotation: .page { InferenceController() },
             ),
             .init(
                 icon: "doc.text.magnifyingglass",
                 title: "Model",
                 explain: "Manage language model providers or download local models.",
-                ephemeralAnnotation: .page { ModelController() }
+                ephemeralAnnotation: .page { ModelController() },
             ),
             .init(
                 icon: "hammer",
                 title: "Tools",
                 explain: "Configure tool settings, choose search engine for internet searches, adding custom tools.",
-                ephemeralAnnotation: .page { ToolsController() }
+                ephemeralAnnotation: .page { ToolsController() },
             ),
             .init(
                 icon: "moon.stars",
                 title: "Memory",
                 explain: "Manage AI memory tools and stored conversation memories.",
-                ephemeralAnnotation: .page { MemoryController() }
+                ephemeralAnnotation: .page { MemoryController() },
             ),
             .init(
                 icon: "lock.shield",
                 title: "Data",
                 explain: "Get control of your data, configure cloud sync, export database or reset the app.",
-                ephemeralAnnotation: .page { DataControlController() }
+                ephemeralAnnotation: .page { DataControlController() },
             ),
             .init(
                 icon: "key",
                 title: "Permission",
                 explain: "Manage permissions for the application. Your privacy is important to us.",
-                ephemeralAnnotation: .page { PermissionController() }
+                ephemeralAnnotation: .page { PermissionController() },
             ),
             .init(
                 icon: "envelope",
                 title: "Support",
                 explain: "Have any questions or just wanna keep in touch? Contact us.",
-                ephemeralAnnotation: .page { SupportController() }
+                ephemeralAnnotation: .page { SupportController() },
             ),
         ]
 

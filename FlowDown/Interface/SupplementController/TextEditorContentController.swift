@@ -31,7 +31,7 @@ class TextEditorContentController: UIViewController {
 
         textView.font = .monospacedSystemFont(
             ofSize: UIFont.systemFontSize,
-            weight: .regular
+            weight: .regular,
         )
         textView.showsVerticalScrollIndicator = true
         textView.showsHorizontalScrollIndicator = false
@@ -59,14 +59,14 @@ class TextEditorContentController: UIViewController {
             systemItem: .done,
             primaryAction: .init { [weak self] _ in
                 self?.done()
-            }
+            },
         )
 
         navigationItem.leftBarButtonItem = .init(
             systemItem: .cancel,
             primaryAction: .init { [weak self] _ in
                 self?.cancelDone()
-            }
+            },
         )
     }
 

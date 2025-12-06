@@ -81,7 +81,7 @@ class JsonEditorController: CodeEditorController {
                 throw NSError(
                     domain: "JSONValidation",
                     code: -1,
-                    userInfo: [NSLocalizedDescriptionKey: String(localized: "JSON must be an object (dictionary), not an array or primitive.")]
+                    userInfo: [NSLocalizedDescriptionKey: String(localized: "JSON must be an object (dictionary), not an array or primitive.")],
                 )
             }
             Logger.ui.infoFile("JsonEditorController done with valid JSON object")
@@ -95,7 +95,7 @@ class JsonEditorController: CodeEditorController {
     private func presentErrorAlert(message: String) {
         let alert = AlertViewController(
             title: "Error",
-            message: message
+            message: message,
         ) { context in
             context.allowSimpleDispose()
             context.addAction(title: "OK", attribute: .accent) {

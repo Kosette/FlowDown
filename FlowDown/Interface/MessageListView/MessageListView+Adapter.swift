@@ -102,7 +102,7 @@ extension MessageListView: ListViewAdapter {
                 if message.isRevealed {
                     return boundingSize(
                         with: containerWidth - 16,
-                        for: attributedContent
+                        for: attributedContent,
                     ).height + ReasoningContentView.spacing + ReasoningContentView.revealedTileHeight + 2
                 } else {
                     return ReasoningContentView.unrevealedTileHeight
@@ -268,7 +268,7 @@ extension MessageListView: ListViewAdapter {
         case let .toolCallStatus(messageID, status):
             let action = UIAction(
                 title: String(localized: "View Details"),
-                image: UIImage(systemName: "doc.text.magnifyingglass")
+                image: UIImage(systemName: "doc.text.magnifyingglass"),
             ) { [weak self] _ in
                 self?.presentToolCallDetails(for: messageID, status: status)
             }
@@ -281,7 +281,7 @@ extension MessageListView: ListViewAdapter {
             for: messageIdentifier,
             representation: representation,
             isReasoningContent: isReasoningContent,
-            referenceView: referenceView
+            referenceView: referenceView,
         )
     }
 
@@ -290,7 +290,7 @@ extension MessageListView: ListViewAdapter {
         presentAndReturnDetailCodeController(
             code: text,
             language: "json",
-            title: String(localized: "Text Content")
+            title: String(localized: "Text Content"),
         )
     }
 
@@ -357,7 +357,7 @@ extension MessageListView: ListViewAdapter {
         for messageIdentifier: Message.ID,
         representation: MessageRepresentation,
         isReasoningContent: Bool,
-        referenceView: UIView?
+        referenceView: UIView?,
     ) -> UIMenu {
         UIMenu(children: [
             UIMenu(options: [.displayInline], children: [
@@ -380,7 +380,7 @@ extension MessageListView: ListViewAdapter {
                                     previewImage: $0.previewImageData,
                                     imageRepresentation: $0.imageRepresentation,
                                     textRepresentation: $0.representedDocument,
-                                    storageSuffix: $0.storageSuffix
+                                    storageSuffix: $0.storageSuffix,
                                 )
                             }
                         editor.refill(withText: message.document, attachments: attachments)
@@ -407,14 +407,14 @@ extension MessageListView: ListViewAdapter {
                     Indicator.present(
                         title: "Copied",
                         preset: .done,
-                        referencingView: self
+                        referencingView: self,
                     )
                 },
                 UIAction(title: String(localized: "View Raw"), image: .init(systemName: "eye")) { [weak self] _ in
                     self?.presentAndReturnDetailCodeController(
                         code: .init(string: representation.content),
                         language: "markdown",
-                        title: String(localized: "Raw Content")
+                        title: String(localized: "Raw Content"),
                     )
                 },
             ].compactMap(\.self)),
@@ -439,7 +439,7 @@ extension MessageListView: ListViewAdapter {
                         Indicator.present(
                             title: "Copied",
                             preset: .done,
-                            referencingView: self
+                            referencingView: self,
                         )
                     },
                 ]),
@@ -448,7 +448,7 @@ extension MessageListView: ListViewAdapter {
                         let viewer = self?.presentAndReturnDetailCodeController(
                             code: .init(string: representation.content),
                             language: "markdown",
-                            title: String(localized: "Edit")
+                            title: String(localized: "Edit"),
                         )
                         guard let viewer = viewer as? CodeEditorController else {
                             assertionFailure()
@@ -503,7 +503,7 @@ extension MessageListView: ListViewAdapter {
             let holder = AlertBaseController(
                 rootViewController: nav,
                 preferredWidth: 555,
-                preferredHeight: 555
+                preferredHeight: 555,
             )
             holder.shouldDismissWhenTappedAround = true
             holder.shouldDismissWhenEscapeKeyPressed = true

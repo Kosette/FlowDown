@@ -62,7 +62,7 @@ class NewChatButton: UIButton {
 
         let newEmpty = UIAction(
             title: String(localized: "New Conversation"),
-            image: UIImage(systemName: "plus")
+            image: UIImage(systemName: "plus"),
         ) { [weak self] _ in
             let conv = ConversationManager.shared.createNewConversation()
             self?.delegate?.newChatDidCreated(conv.id)
@@ -93,7 +93,7 @@ class NewChatButton: UIButton {
                 return renderer.image { _ in
                     let origin = CGPoint(
                         x: (targetSize.width - drawSize.width) / 2,
-                        y: (targetSize.height - drawSize.height) / 2
+                        y: (targetSize.height - drawSize.height) / 2,
                     )
                     originalImage.draw(in: CGRect(origin: origin, size: drawSize))
                 }
@@ -101,7 +101,7 @@ class NewChatButton: UIButton {
 
             let action = UIAction(
                 title: template.name,
-                image: scaledImage
+                image: scaledImage,
             ) { [weak self] _ in
                 let convId = ChatTemplateManager.shared.createConversationFromTemplate(template)
                 self?.delegate?.newChatDidCreated(convId)
@@ -113,7 +113,7 @@ class NewChatButton: UIButton {
             title: String(localized: "Choose Template"),
             image: UIImage(systemName: "folder"),
             options: [.displayInline],
-            children: actions
+            children: actions,
         )
 
         return [newEmpty, templateMenu]

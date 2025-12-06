@@ -39,10 +39,10 @@ extension MarkdownTheme {
                 ListAnnotation.ValueItem(
                     icon: "circle",
                     title: input.title,
-                    rawValue: input.rawValue
+                    rawValue: input.rawValue,
                 )
             }
-        }
+        },
     )
 
     static func subscribeToConfigurableItem() {

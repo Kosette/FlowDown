@@ -14,7 +14,7 @@ extension ConversationManager {
         identifier: Conversation.ID,
         model: ModelManager.ModelIdentifier,
         onConversationCreated: @escaping (Conversation.ID) -> Void,
-        completion: @escaping (Result<Conversation.ID, Error>) -> Void
+        completion: @escaping (Result<Conversation.ID, Error>) -> Void,
     ) {
         guard let conv = conversation(identifier: identifier) else {
             assertionFailure()
@@ -25,7 +25,7 @@ extension ConversationManager {
         }
         exportConversation(
             identifier: identifier,
-            exportFormat: .markdown
+            exportFormat: .markdown,
         ) { result in
             switch result {
             case let .success(success):
@@ -34,7 +34,7 @@ extension ConversationManager {
                     title: conv.title,
                     text: success,
                     onConversationCreated: onConversationCreated,
-                    completion: completion
+                    completion: completion,
                 )
             case let .failure(failure):
                 completion(.failure(failure))
@@ -47,7 +47,7 @@ extension ConversationManager {
         title: String,
         text: String,
         onConversationCreated: @escaping (Conversation.ID) -> Void,
-        completion: @escaping (Result<Conversation.ID, Error>) -> Void
+        completion: @escaping (Result<Conversation.ID, Error>) -> Void,
     ) {
         let conv = ConversationManager.shared.createNewConversation {
             let icon = "🗜️".textToImage(size: 64)?.pngData() ?? .init()
@@ -84,7 +84,7 @@ extension ConversationManager {
                         "- Do not output any code blocks or unnecessary formatting.",
                         "- Please ensure the output is concise and focused on the key points of the conversation.",
                         "**DO NOT START THE OUTPUT WITH ``` NOR ENDING WITH IT**",
-                    ].joined(separator: "\n")
+                    ].joined(separator: "\n"),
             )),
             .user(content: .text(String(localized: "Please summarize the following conversation:"))),
             .user(content: .text(text), name: String(localized: "Previous Conversation")),
@@ -95,7 +95,7 @@ extension ConversationManager {
             do {
                 let stream = try await ModelManager.shared.streamingInfer(
                     with: model,
-                    input: messageBody
+                    input: messageBody,
                 )
                 let mess = sess.appendNewMessage(role: .assistant)
                 for try await resp in stream where !resp.content.isEmpty {
@@ -111,7 +111,7 @@ extension ConversationManager {
                     sess.appendNewMessage(role: .assistant) {
                         $0.update(
                             \.document,
-                            to: String(localized: "An error occurred during compression: \(error.localizedDescription)")
+                            to: String(localized: "An error occurred during compression: \(error.localizedDescription)"),
                         )
                     }
                     sess.notifyMessagesDidChange()

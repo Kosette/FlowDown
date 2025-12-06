@@ -65,10 +65,10 @@ extension UIUserInterfaceStyle {
                 .init(
                     icon: item.icon,
                     title: item.title,
-                    rawValue: item.rawValue
+                    rawValue: item.rawValue,
                 )
             }
-        }
+        },
     )
 
     static func subscribeToConfigurableItem() {

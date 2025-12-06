@@ -38,7 +38,7 @@ extension ConversationManager {
         ephemeralAnnotation: .action { controller in
             let alert = AlertViewController(
                 title: "Clear Editing",
-                message: "This will delete all edits, including unsent conversation text and attachments."
+                message: "This will delete all edits, including unsent conversation text and attachments.",
             ) { context in
                 context.allowSimpleDispose()
                 context.addAction(title: "Cancel") {
@@ -51,12 +51,12 @@ extension ConversationManager {
                         Indicator.present(
                             title: "Done",
                             preset: .done,
-                            referencingView: controller.view
+                            referencingView: controller.view,
                         )
                     }
                 }
             }
             controller.present(alert, animated: true)
-        }
+        },
     )
 }

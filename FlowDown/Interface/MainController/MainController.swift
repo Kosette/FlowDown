@@ -96,7 +96,7 @@ class MainController: UIViewController {
             self,
             selector: #selector(resetGestures),
             name: UIApplication.willResignActiveNotification,
-            object: nil
+            object: nil,
         )
 
         sidebarDragger.$currentValue
@@ -188,7 +188,7 @@ class MainController: UIViewController {
     func updateShadowPath() {
         contentShadowView.layer.shadowPath = UIBezierPath(
             roundedRect: view.convert(contentView.frame, to: contentShadowView),
-            cornerRadius: contentView.layer.cornerRadius
+            cornerRadius: contentView.layer.cornerRadius,
         ).cgPath
     }
 
@@ -218,7 +218,7 @@ class MainController: UIViewController {
         lastTouchBegin = .init()
 
         NSObject.cancelPreviousPerformRequests(
-            withTarget: self, selector: #selector(resetGestures), object: nil
+            withTarget: self, selector: #selector(resetGestures), object: nil,
         )
         perform(#selector(resetGestures), with: nil, afterDelay: 0.25)
     }
@@ -254,7 +254,7 @@ class MainController: UIViewController {
         super.touchesMoved(touches, with: event)
 
         NSObject.cancelPreviousPerformRequests(
-            withTarget: self, selector: #selector(resetGestures), object: nil
+            withTarget: self, selector: #selector(resetGestures), object: nil,
         )
         perform(#selector(resetGestures), with: nil, afterDelay: 0.25)
         guard presentedViewController == nil else { return }
@@ -323,7 +323,7 @@ class MainController: UIViewController {
             Logger.app.errorFile("conversation missing from database: id \(currentConversationID)")
             showErrorAlert(
                 title: "Conversation Missing",
-                message: "The selected conversation could not be found. Please choose another conversation or create a new one."
+                message: "The selected conversation could not be found. Please choose another conversation or create a new one.",
             )
             return
         }
@@ -337,7 +337,7 @@ class MainController: UIViewController {
             Logger.app.errorFile("no default model configured")
             showErrorAlert(
                 title: "No Model Available",
-                message: "Please add some models to use. You can choose to download models, or use cloud model from well known service providers."
+                message: "Please add some models to use. You can choose to download models, or use cloud model from well known service providers.",
             ) {
                 let setting = SettingController()
                 SettingController.setNextEntryPage(.modelManagement)
@@ -356,7 +356,7 @@ class MainController: UIViewController {
         let trimmedMessage = message.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedMessage.isEmpty else {
             showErrorAlert(
-                title: "Error", message: "Empty message."
+                title: "Error", message: "Empty message.",
             )
             return
         }
@@ -366,7 +366,7 @@ class MainController: UIViewController {
         session.doInfere(
             modelID: modelID,
             currentMessageListView: currentMessageListView,
-            inputObject: editorObject
+            inputObject: editorObject,
         ) {
             Logger.app.infoFile("message sent and AI response triggered successfully via URL scheme")
         }
@@ -375,13 +375,13 @@ class MainController: UIViewController {
     private func showErrorAlert(
         title: String.LocalizationValue,
         message: String.LocalizationValue,
-        completion: @escaping () -> Void = {}
+        completion: @escaping () -> Void = {},
     ) {
         Task { @MainActor [weak self] in
             guard let self else { return }
             let alert = AlertViewController(
                 title: title,
-                message: message
+                message: message,
             ) { context in
                 context.allowSimpleDispose()
                 context.addAction(title: "OK") {

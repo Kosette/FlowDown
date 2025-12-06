@@ -16,7 +16,7 @@ extension MainController {
         NSObject.cancelPreviousPerformRequests(
             withTarget: self,
             selector: #selector(presentNextBootMessage),
-            object: nil
+            object: nil,
         )
         perform(#selector(presentNextBootMessage), with: nil, afterDelay: 0.5)
     }
@@ -27,7 +27,7 @@ extension MainController {
 
         let alert = AlertViewController(
             title: "External Resources",
-            message: "\(text)"
+            message: "\(text)",
         ) { context in
             context.allowSimpleDispose()
             context.addAction(title: "OK", attribute: .accent) {

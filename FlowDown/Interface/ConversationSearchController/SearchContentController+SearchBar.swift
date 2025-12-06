@@ -19,7 +19,7 @@ extension SearchContentController: UISearchBarDelegate {
         NSObject.cancelPreviousPerformRequests(
             withTarget: self,
             selector: #selector(performSearch(query:)),
-            object: nil
+            object: nil,
         )
         perform(#selector(performSearch(query:)), with: searchText, afterDelay: 0.1)
     }

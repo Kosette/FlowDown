@@ -66,7 +66,7 @@ extension RewriteAction {
         guard let model = session.models.chat else {
             let alert = AlertViewController(
                 title: "Model Not Available",
-                message: "Please select a model to rewrite this message."
+                message: "Please select a model to rewrite this message.",
             ) { context in
                 context.allowSimpleDispose()
                 context.addAction(title: "OK", attribute: .accent) {
@@ -90,19 +90,18 @@ extension RewriteAction {
                 "- Do not output any code blocks or unnecessary formatting.",
                 "- Please ensure the output is concise and focused on the key points of the conversation.",
                 "**DO NOT START THE OUTPUT WITH ``` NOR ENDING WITH IT**",
-            ].joined(separator: "\n")
-            )),
+            ].joined(separator: "\n"))),
             .user(content: .text(String(localized: "Please rewrite accordingly"))),
             .user(content: .text(message.document), name: String(localized: "Original Message")),
         ]
 
         Indicator.progress(
             title: "Rewriting Message",
-            controller: controller
+            controller: controller,
         ) { completionHandler in
             let stream = try await ModelManager.shared.streamingInfer(
                 with: model,
-                input: messageBody
+                input: messageBody,
             )
             for try await resp in stream {
                 message.update(\.document, to: resp.content)

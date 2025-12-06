@@ -229,10 +229,10 @@ private extension ConversationCaptureView {
         appLabel.layoutIfNeeded()
 
         let titleHeight = titleBar.systemLayoutSizeFitting(
-            .init(width: layoutWidth, height: UIView.layoutFittingCompressedSize.height)
+            .init(width: layoutWidth, height: UIView.layoutFittingCompressedSize.height),
         ).height
         let labelHeight = appLabel.systemLayoutSizeFitting(
-            .init(width: layoutWidth, height: UIView.layoutFittingCompressedSize.height)
+            .init(width: layoutWidth, height: UIView.layoutFittingCompressedSize.height),
         ).height
 
         let topSpacing: CGFloat = 16 - 4

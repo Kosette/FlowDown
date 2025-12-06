@@ -109,7 +109,7 @@ extension ModelManager {
         let contents = try? FileManager.default.contentsOfDirectory(
             at: localModelDir,
             includingPropertiesForKeys: nil,
-            options: []
+            options: [],
         )
         var ans = [LocalModel]()
         for content in contents ?? [] {
@@ -135,7 +135,7 @@ extension ModelManager {
             let dirContent = try? FileManager.default.contentsOfDirectory(
                 at: url,
                 includingPropertiesForKeys: nil,
-                options: []
+                options: [],
             )
             for item in dirContent ?? [] {
                 if item.lastPathComponent == "manifest" || item.lastPathComponent == "content" { continue }
@@ -251,7 +251,7 @@ extension ModelManager {
                     at: copy,
                     to: zipFile,
                     shouldKeepParent: false,
-                    compressionMethod: .none
+                    compressionMethod: .none,
                 )
                 completion(zipFile, cleanUpBlock)
             } catch {
@@ -291,7 +291,7 @@ extension ModelManager {
                 throw NSError(
                     domain: "Model",
                     code: -1,
-                    userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid model identifier.")]
+                    userInfo: [NSLocalizedDescriptionKey: String(localized: "Invalid model identifier.")],
                 )
             }
             let target = dirForLocalModel(identifier: model.id)

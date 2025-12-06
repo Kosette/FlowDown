@@ -28,7 +28,7 @@ extension ConversationManager {
                         conversation: conversation,
                         matchType: .message,
                         matchedText: query,
-                        messagePreview: preview
+                        messagePreview: preview,
                     ))
                     addedConversations.insert(conversation.id)
                     foundInMessage = true
@@ -40,7 +40,7 @@ extension ConversationManager {
                 titleResults.append(ConversationSearchResult(
                     conversation: conversation,
                     matchType: .title,
-                    matchedText: conversation.title
+                    matchedText: conversation.title,
                 ))
             }
         }

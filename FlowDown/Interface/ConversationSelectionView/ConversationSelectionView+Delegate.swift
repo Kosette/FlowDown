@@ -44,7 +44,7 @@ extension ConversationSelectionView: UITableViewDelegate {
                    let currentSelectionIndex,
                    let nextIdentifier = (
                        identifiers.dropFirst(currentSelectionIndex + 1).first
-                           ?? identifiers.prefix(currentSelectionIndex).last
+                           ?? identifiers.prefix(currentSelectionIndex).last,
                    )
                 {
                     ChatSelection.shared.select(nextIdentifier)

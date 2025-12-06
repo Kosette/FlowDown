@@ -26,7 +26,7 @@ enum Indicator {
         title: String.LocalizationValue,
         message: String.LocalizationValue? = nil,
         preset: SPIndicatorIconPreset = .done,
-        referencingView: UIView? = nil
+        referencingView: UIView? = nil,
     ) {
         ensureMainThread {
             let titleString = String(localized: title)
@@ -49,14 +49,14 @@ enum Indicator {
         title: String.LocalizationValue,
         message: String.LocalizationValue? = nil,
         controller: UIViewController,
-        completionExecutor: @escaping ExecutionWithCompletion
+        completionExecutor: @escaping ExecutionWithCompletion,
     ) {
         Task { @MainActor in
             let titleString = String(localized: title)
             let messageString = String(localized: message ?? "")
             let alert = AlertProgressIndicatorViewController(
                 title: "\(titleString)",
-                message: "\(messageString)"
+                message: "\(messageString)",
             )
             controller.present(alert, animated: true) {
                 Task.detached(priority: .userInitiated) {
@@ -66,7 +66,7 @@ enum Indicator {
                         if let error = capturedError {
                             let errorAlert = AlertViewController(
                                 title: "Error",
-                                message: "An error occurred: \(error.localizedDescription)"
+                                message: "An error occurred: \(error.localizedDescription)",
                             ) { context in
                                 context.allowSimpleDispose()
                                 context.addAction(title: "OK", attribute: .accent) {

@@ -124,10 +124,10 @@ enum MemoryProactiveProvisionSetting {
                 .init(
                     icon: scope.icon,
                     title: scope.title,
-                    rawValue: scope.rawValue
+                    rawValue: scope.rawValue,
                 )
             }
-        }
+        },
     )
 
     static var currentScope: MemoryProactiveProvisionScope {

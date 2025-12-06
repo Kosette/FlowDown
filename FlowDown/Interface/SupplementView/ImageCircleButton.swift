@@ -42,7 +42,7 @@ class ImageCircleButton: UIView {
             imageView.image = image
         } else if let image = UIImage(
             systemName: name,
-            withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)
+            withConfiguration: UIImage.SymbolConfiguration(weight: .semibold),
         ) {
             imageView.image = image
         }

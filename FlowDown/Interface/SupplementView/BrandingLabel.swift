@@ -24,13 +24,13 @@ class BrandingLabel: GlyphixTextLabel {
                 placeholder: "FlowDown",
                 text: BrandingLabel.readBrandingValue(),
                 cancelButtonText: "Cancel",
-                doneButtonText: "Set"
+                doneButtonText: "Set",
             ) { text in
                 BrandingLabel.setBrandingValue(text)
                 NotificationCenter.default.post(name: .brandingLabelNeedsUpdate, object: nil)
             }
             controller.present(alert, animated: true)
-        }
+        },
     )
 
     static func setBrandingValue(_ value: String) {
@@ -59,7 +59,7 @@ class BrandingLabel: GlyphixTextLabel {
             self,
             selector: #selector(updateBrandingLabel),
             name: .brandingLabelNeedsUpdate,
-            object: nil
+            object: nil,
         )
         updateBrandingLabel()
     }

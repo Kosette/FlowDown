@@ -125,7 +125,7 @@ enum AudioTranscoder {
     static func transcode(
         data: Data,
         fileExtension: String?,
-        output: OutputFormat = .mediumQualityM4A
+        output: OutputFormat = .mediumQualityM4A,
     ) async throws -> Result {
         try await withWorkingDirectory { directory in
             let sanitizedExtension = sanitizedInputExtension(fileExtension)
@@ -136,7 +136,7 @@ enum AudioTranscoder {
                 for: data,
                 originalURL: inputURL,
                 providedExtension: sanitizedExtension,
-                workingDirectory: directory
+                workingDirectory: directory,
             )
 
             return try await transcode(sourceURL: sourceURL, output: output, workingDirectory: directory)
@@ -152,7 +152,7 @@ enum AudioTranscoder {
     private static func transcode(
         sourceURL: URL,
         output: OutputFormat,
-        workingDirectory: URL
+        workingDirectory: URL,
     ) async throws -> Result {
         let asset = AVURLAsset(url: sourceURL)
         guard try await asset.load(.isExportable) else {
@@ -171,7 +171,7 @@ enum AudioTranscoder {
         if let exported = try await exportUsingAssetExportSession(
             asset: asset,
             output: output,
-            workingDirectory: workingDirectory
+            workingDirectory: workingDirectory,
         ) {
             return exported
         }
@@ -182,14 +182,14 @@ enum AudioTranscoder {
             sampleRate: sampleRate,
             channelCount: channelCount,
             output: output,
-            workingDirectory: workingDirectory
+            workingDirectory: workingDirectory,
         )
     }
 
     private static func exportUsingAssetExportSession(
         asset: AVAsset,
         output: OutputFormat,
-        workingDirectory: URL
+        workingDirectory: URL,
     ) async throws -> Result? {
         guard output != .compressedQualityWAV else {
             return nil
@@ -236,12 +236,12 @@ enum AudioTranscoder {
         sampleRate: Double,
         channelCount: Int,
         output: OutputFormat,
-        workingDirectory: URL
+        workingDirectory: URL,
     ) async throws -> Result {
         let reader = try AVAssetReader(asset: asset)
         let readerOutput = AVAssetReaderTrackOutput(
             track: track,
-            outputSettings: output.readerOutputSettings(sampleRate: sampleRate, channelCount: channelCount)
+            outputSettings: output.readerOutputSettings(sampleRate: sampleRate, channelCount: channelCount),
         )
         readerOutput.alwaysCopiesSampleData = false
         guard reader.canAdd(readerOutput) else {
@@ -259,7 +259,7 @@ enum AudioTranscoder {
         let writer = try AVAssetWriter(outputURL: outputURL, fileType: output.fileType)
         let writerInput = AVAssetWriterInput(
             mediaType: .audio,
-            outputSettings: output.writerOutputSettings(sampleRate: sampleRate, channelCount: channelCount)
+            outputSettings: output.writerOutputSettings(sampleRate: sampleRate, channelCount: channelCount),
         )
         writerInput.expectsMediaDataInRealTime = false
         guard writer.canAdd(writerInput) else {
@@ -287,7 +287,7 @@ enum AudioTranscoder {
                         continuation.resume(returning: Result(
                             data: data,
                             duration: duration,
-                            format: output.fileExtension
+                            format: output.fileExtension,
                         ))
                     } catch {
                         continuation.resume(throwing: AudioTranscoderError.readerWriterFailed(error.localizedDescription))
@@ -363,7 +363,7 @@ enum AudioTranscoder {
         for data: Data,
         originalURL: URL,
         providedExtension: String?,
-        workingDirectory: URL
+        workingDirectory: URL,
     ) async throws -> URL {
         if await canDecodeAudio(at: originalURL) {
             return originalURL

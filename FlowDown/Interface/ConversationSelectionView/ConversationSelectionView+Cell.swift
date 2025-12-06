@@ -87,7 +87,7 @@ extension ConversationSelectionView {
 
         func contextMenuInteraction(
             _: UIContextMenuInteraction,
-            configurationForMenuAtLocation _: CGPoint
+            configurationForMenuAtLocation _: CGPoint,
         ) -> UIContextMenuConfiguration? {
             guard let conversationIdentifier else { return nil }
 
@@ -95,7 +95,7 @@ extension ConversationSelectionView {
                 guard let self else { return nil }
                 return ConversationManager.shared.menu(
                     forConversation: conversationIdentifier,
-                    view: self
+                    view: self,
                 )
             }
         }

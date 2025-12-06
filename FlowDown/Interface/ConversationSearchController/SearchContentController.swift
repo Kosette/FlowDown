@@ -111,7 +111,7 @@ class SearchContentController: UIViewController {
 
     private let searchQueue = DispatchQueue(
         label: "SearchContentController.searchQueue",
-        qos: .userInitiated
+        qos: .userInitiated,
     )
 
     @objc func performSearch(query: String) {

@@ -16,7 +16,7 @@ final class DisposableExporter: NSObject {
 
     init(
         deletableItem: URL,
-        title: String.LocalizationValue? = nil
+        title: String.LocalizationValue? = nil,
     ) {
         self.deletableItem = deletableItem
         self.title = title.map { String(localized: $0) }
@@ -27,7 +27,7 @@ final class DisposableExporter: NSObject {
         data: Data,
         name: String = UUID().uuidString,
         pathExtension: String,
-        title: String.LocalizationValue? = nil
+        title: String.LocalizationValue? = nil,
     ) {
         let tempDir = disposableResourcesDir
         let tempURL = tempDir

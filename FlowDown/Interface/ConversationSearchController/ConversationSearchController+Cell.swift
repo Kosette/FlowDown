@@ -92,7 +92,7 @@ extension SearchContentController {
                     text: result.conversation.title,
                     searchTerm: searchTerm,
                     baseAttributes: [.font: UIFont.preferredFont(forTextStyle: .body).bold],
-                    highlightAttributes: [.backgroundColor: UIColor.systemYellow.withAlphaComponent(0.3)]
+                    highlightAttributes: [.backgroundColor: UIColor.systemYellow.withAlphaComponent(0.3)],
                 )
             } else {
                 titleLabel.text = result.conversation.title
@@ -114,7 +114,7 @@ extension SearchContentController {
                         .font: UIFont.preferredFont(forTextStyle: .body),
                         .foregroundColor: UIColor.secondaryLabel,
                     ],
-                    highlightAttributes: [.backgroundColor: UIColor.systemYellow.withAlphaComponent(0.3)]
+                    highlightAttributes: [.backgroundColor: UIColor.systemYellow.withAlphaComponent(0.3)],
                 )
             } else {
                 subtitleLabel.isHidden = true
