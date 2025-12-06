@@ -45,6 +45,7 @@ FlowDown is a Swift-based AI/LLM client for iOS and macOS (Catalyst) with a priv
 - Localization validation helpers:
   - `python3 Resources/DevKit/scripts/check_translations.py FlowDown/Resources/Localizable.xcstrings`
   - `python3 Resources/DevKit/scripts/check_untranslated.py FlowDown/Resources/Localizable.xcstrings`
+  - `python3 Resources/DevKit/scripts/update_missing_i18n.py FlowDown/Resources/Localizable.xcstrings` to scaffold missing locales; extend `NEW_STRINGS` in that script when adding new keys.
 
 ## Development Guidelines
 ### Swift Style

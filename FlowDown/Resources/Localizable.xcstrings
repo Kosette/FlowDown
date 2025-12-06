@@ -52,8 +52,8 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "..."
           }
         },
         "en": {
@@ -64,32 +64,32 @@
         },
         "es": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "..."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "..."
           }
         },
         "ja": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "..."
           }
         },
         "ko": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "..."
           }
         },
         "zh-Hans": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "..."
           }
         }
       },
@@ -192,7 +192,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "(Begründung) %@"
+            "value": "(Gedankengang) %@"
           }
         },
         "en": {
@@ -228,7 +228,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "（推理中）%@"
+            "value": "（推理）%@"
           }
         }
       }
@@ -376,8 +376,8 @@
       "localizations": {
         "de": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "%@ • %@"
           }
         },
         "en": {
@@ -388,32 +388,32 @@
         },
         "es": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "%@ • %@"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "%@ • %@"
           }
         },
         "ja": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "%@ • %@"
           }
         },
         "ko": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "%@ • %@"
           }
         },
         "zh-Hans": {
           "stringUnit": {
-            "state": "new",
-            "value": ""
+            "state": "translated",
+            "value": "%@ • %@"
           }
         }
       },
@@ -4743,7 +4743,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "请求体"
+            "value": "请求体字段"
           }
         }
       }
@@ -11824,7 +11824,7 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "삭제(지연)"
+            "value": "이후 내용 포함 삭제"
           }
         },
         "zh-Hans": {
@@ -18741,7 +18741,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "霜冻 @ 0.0"
+            "value": "严谨 @ 0.0"
           }
         }
       }
@@ -32014,7 +32014,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "推理参数"
+            "value": "推理键名"
           }
         }
       }
@@ -34041,7 +34041,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "即时信息提示"
+            "value": "运行时系统提示词"
           }
         }
       }
