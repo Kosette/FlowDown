@@ -56,8 +56,8 @@ final class ColorfulShadowView: UIView {
     }
 
     func refreshAfterReturningToForeground() {
-        gradientView.speed = 1
-        scheduleSpeedStop()
+        assert(Thread.isMainThread)
+        applyCurrentMode()
     }
 
     init() {
@@ -153,6 +153,7 @@ private extension ColorfulShadowView {
     }
 
     func applyCurrentMode() {
+        cancelScheduledSpeedStop()
         switch mode {
         case .idle:
             shadowRadius = 1.0
@@ -166,13 +167,18 @@ private extension ColorfulShadowView {
     }
 
     @MainActor
-    @objc func scheduleSpeedStop() {
-        assert(Thread.isMainThread)
+    func cancelScheduledSpeedStop() {
         NSObject.cancelPreviousPerformRequests(
             withTarget: self,
             selector: #selector(stopAnimation),
             object: nil,
         )
+    }
+
+    @MainActor
+    @objc func scheduleSpeedStop() {
+        assert(Thread.isMainThread)
+        cancelScheduledSpeedStop()
         perform(
             #selector(stopAnimation),
             with: nil,
