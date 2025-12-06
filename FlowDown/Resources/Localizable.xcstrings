@@ -11110,18 +11110,18 @@
         }
       }
     },
-    "Received an image." : {
+    "Received an image" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Received an image."
+            "value" : "Received an image"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "收到一张图像。"
+            "value" : "收到一张图片"
           }
         }
       }

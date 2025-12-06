@@ -74,7 +74,7 @@ extension ConversationSession {
                 let receivedText = if attachments.count > 1 {
                     String(localized: "Received \(attachments.count) images.")
                 } else {
-                    String(localized: "Received an image.")
+                    String(localized: "Received an image")
                 }
                 attachmentHolder.update(\.document, to: receivedText)
                 addAttachments(attachments, to: attachmentHolder)
