@@ -9232,18 +9232,18 @@
     "N/A" : {
       "shouldTranslate" : false
     },
-    "N/A @ -1" : {
+    "Disabled @ -1" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "N/A @ -1"
+            "value" : "Disabled @ -1"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不适用 @ -1"
+            "value" : "禁用 @ -1"
           }
         }
       }

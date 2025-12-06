@@ -101,7 +101,7 @@ extension ModelManager {
             [
                 .init(
                     icon: "gear",
-                    title: "N/A @ -1",
+                    title: "Disabled @ -1",
                     rawValue: -1,
                 ),
                 .init(

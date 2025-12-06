@@ -224,7 +224,7 @@ class ModelManager: NSObject {
 
     var temperaturePresets: [(title: String, value: Double, icon: String)] {
         [
-            (String(localized: "N/A @ -1"), -1.0, "gear"),
+            (String(localized: "Disabled @ -1"), -1.0, "gear"),
             (String(localized: "Freezing @ 0.0"), 0.0, "snowflake"),
             (String(localized: "Precise @ 0.25"), 0.25, "thermometer.low"),
             (String(localized: "Stable @ 0.5"), 0.5, "thermometer.low"),
