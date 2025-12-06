@@ -225,18 +225,34 @@ enum InferenceIntentHandler {
             throw ShortcutError.invalidImage
         }
 
-        let processedForRequest = resize(image: image, maxDimension: 1024)
-        guard let pngData = processedForRequest.pngData() else {
+        // Compress and normalize before sending or storing
+        let compressedData = image.prepareAttachment() ?? data
+        guard let compressedImage = UIImage(data: compressedData) else {
             throw ShortcutError.invalidImage
         }
 
-        let base64 = pngData.base64EncodedString()
-        guard let url = URL(string: "data:image/png;base64,\(base64)") else {
+        let processedForRequest = resize(image: compressedImage, maxDimension: 1024)
+        let requestData: Data
+        let mimeType: String
+        if let jpegData = processedForRequest.jpegData(compressionQuality: 0.8) {
+            requestData = jpegData
+            mimeType = "image/jpeg"
+        } else if let pngData = processedForRequest.pngData() {
+            requestData = pngData
+            mimeType = "image/png"
+        } else {
             throw ShortcutError.invalidImage
         }
 
-        let previewImage = resize(image: image, maxDimension: 320)
-        let previewData = previewImage.pngData() ?? Data()
+        let base64 = requestData.base64EncodedString()
+        guard let url = URL(string: "data:\(mimeType);base64,\(base64)") else {
+            throw ShortcutError.invalidImage
+        }
+
+        let previewImage = resize(image: compressedImage, maxDimension: 320)
+        let previewData = previewImage.jpegData(compressionQuality: 0.7)
+            ?? previewImage.pngData()
+            ?? Data()
         let attachmentName = file.filename.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
             ?? String(localized: "Image")
 
@@ -244,7 +260,7 @@ enum InferenceIntentHandler {
             type: .image,
             name: attachmentName,
             previewImage: previewData,
-            imageRepresentation: data,
+            imageRepresentation: compressedData,
             textRepresentation: "",
             storageSuffix: UUID().uuidString,
         )
