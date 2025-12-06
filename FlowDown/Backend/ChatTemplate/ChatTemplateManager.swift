@@ -188,8 +188,8 @@ class ChatTemplateManager {
         ]
 
         let response = try await ModelManager.shared.infer(with: model, input: messages)
-
-        let parsedResponse = try parseTemplateResponse(response.content)
+        let raw = response.text.isEmpty ? response.reasoning : response.text
+        let parsedResponse = try parseTemplateResponse(raw)
         return template.with {
             $0.name = parsedResponse.name
             $0.prompt = parsedResponse.prompt
@@ -241,8 +241,8 @@ class ChatTemplateManager {
         ]
 
         let response = try await ModelManager.shared.infer(with: model, input: messages)
-
-        return try parseTemplateResponse(response.content)
+        let raw = response.text.isEmpty ? response.reasoning : response.text
+        return try parseTemplateResponse(raw)
     }
 
     private func parseTemplateResponse(_ xmlString: String) throws -> ChatTemplate {

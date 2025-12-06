@@ -80,13 +80,14 @@ extension ConversationSessionManager.Session {
                 input: messages,
             )
 
-            let sanitizedContent = ModelResponseSanitizer.stripReasoning(from: ans.content)
+            let raw = ans.text.isEmpty ? ans.reasoning : ans.text
+            let sanitizedContent = ModelResponseSanitizer.stripReasoning(from: raw)
 
             if let icon = extractIconFromXML(sanitizedContent) {
                 return validateIcon(icon)
             }
 
-            let ret = sanitizedContent.trimmingCharacters(in: .whitespacesAndNewlines)
+            let ret = sanitizedContent.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             Logger.ui.debugFile("generated conversation icon: \(ret)")
             return validateIcon(ret)
         } catch {

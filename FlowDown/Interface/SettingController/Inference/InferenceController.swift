@@ -56,6 +56,16 @@ extension SettingController.SettingContent {
             $0.configure(description: "The model is used for visual input when the current model does not support it. It will extract information before using the current model for inference.")
         }
 
+        private let appleIntelligenceToggle = ConfigurableBooleanBlockView(storage: .init(
+            key: ModelManager.appleIntelligenceEnabledKey,
+            defaultValue: true,
+            storage: UserDefaultKeyValueStorage(suite: .standard),
+        )).with {
+            $0.configure(icon: UIImage(systemName: "switch.2"))
+            $0.configure(title: "Enable Foundation Model")
+            $0.configure(description: "Show Apple Intelligence Foundation Model in the model picker when available.")
+        }
+
         private let skipVisualAssessmentView = ConfigurableObject(
             icon: "arrowshape.zigzag.forward",
             title: "Skip Recognization If Possible",
@@ -166,6 +176,9 @@ extension SettingController.SettingContent {
                 ) { $0.bottom /= 2 }
                 stackView.addArrangedSubview(SeparatorView())
 
+                stackView.addArrangedSubviewWithMargin(appleIntelligenceToggle)
+                stackView.addArrangedSubview(SeparatorView())
+
                 let appleIntelligenceStatusView = ConfigurableInfoView().with {
                     $0.configure(icon: UIImage(systemName: "apple.intelligence"))
                     $0.configure(title: "Apple Intelligence")
@@ -181,6 +194,11 @@ extension SettingController.SettingContent {
                     ),
                 ) { $0.top /= 2 }
                 stackView.addArrangedSubview(SeparatorView())
+
+                appleIntelligenceToggle.onUpdated = { [weak self] isOn in
+                    ModelManager.shared.appleIntelligenceEnabled = isOn
+                    self?.updateDefaultModelinfoFile()
+                }
             }
 
             stackView.addArrangedSubviewWithMargin(

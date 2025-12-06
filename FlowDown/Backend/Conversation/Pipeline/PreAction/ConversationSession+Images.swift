@@ -74,14 +74,21 @@ extension ConversationSession {
 
         var llmText = ""
         let message = appendNewMessage(role: .assistant)
-        for try await resp in try await ModelManager.shared.streamingInfer(
+        for try await chunk in try await ModelManager.shared.streamingInfer(
             with: decision,
             input: messages,
         ) {
             await requestUpdate(view: currentMessageListView)
+            switch chunk {
+            case let .text(value):
+                llmText += value
+                message.update(\.reasoningContent, to: llmText)
+            case let .reasoning(value):
+                message.update(\.reasoningContent, to: message.reasoningContent + value)
+            case .tool, .image:
+                break
+            }
             startThinking(for: message.objectId)
-            llmText = resp.content
-            message.update(\.reasoningContent, to: llmText)
             await requestUpdate(view: currentMessageListView)
         }
 

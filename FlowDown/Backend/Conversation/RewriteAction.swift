@@ -103,8 +103,17 @@ extension RewriteAction {
                 with: model,
                 input: messageBody,
             )
+            var rewritten = message.document
             for try await resp in stream {
-                message.update(\.document, to: resp.content)
+                switch resp {
+                case let .text(value):
+                    rewritten += value
+                    message.update(\.document, to: rewritten)
+                case let .reasoning(value):
+                    message.update(\.reasoningContent, to: message.reasoningContent + value)
+                case .tool, .image:
+                    break
+                }
                 session.notifyMessagesDidChange(scrolling: false)
                 session.save()
             }

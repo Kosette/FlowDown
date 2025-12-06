@@ -139,7 +139,8 @@ public final actor SyncEngine: Sendable {
     // deprecated: use isAutomaticallySyncEnabled computed property
     private let automaticallySync: Bool
 
-    private nonisolated var isAutomaticallySyncEnabled: Bool { !SyncPreferences.isManualSyncEnabled }
+    nonisolated
+    private var isAutomaticallySyncEnabled: Bool { !SyncPreferences.isManualSyncEnabled }
 
     private var debounceEnqueueTask: Task<Void, Error>?
 

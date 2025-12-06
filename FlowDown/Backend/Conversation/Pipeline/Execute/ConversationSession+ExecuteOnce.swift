@@ -35,28 +35,58 @@ extension ConversationSession {
         )
         defer { self.stopThinking(for: message.objectId) }
 
-        var pendingToolCalls: [ToolCallRequest] = []
-        var collectedReasoningDetails: [ReasoningDetail] = []
-
+        var pendingToolCalls: [ToolRequest] = []
+        var generatedImages: [ImageContent] = []
         let collapseAfterReasoningComplete = ModelManager.shared.collapseReasoningSectionWhenComplete
 
         for try await resp in stream {
-            let reasoningContent = resp.reasoningContent
-            let content = resp.content
-            if !resp.reasoningDetails.isEmpty {
-                collectedReasoningDetails = resp.reasoningDetails
+            switch resp {
+            case let .reasoning(value):
+                message.update(\.reasoningContent, to: message.reasoningContent + value)
+            case let .text(value):
+                message.update(\.document, to: message.document + value)
+            case let .tool(call):
+                pendingToolCalls.append(call)
+            case let .image(imageContent):
+                // Skip invalid image payloads
+                guard UIImage(data: imageContent.data) != nil else {
+                    Logger.model.warning("skip invalid generated image payload (size: \(imageContent.data.count) bytes)")
+                    break
+                }
+                generatedImages.append(imageContent)
+
+                let sequence = generatedImages.count
+                let name = sequence > 1
+                    ? String(localized: "Generated Image #\(sequence)")
+                    : String(localized: "Generated Image")
+                let attachments: [RichEditorView.Object.Attachment] = [
+                    .init(
+                        type: .image,
+                        name: name,
+                        previewImage: imageContent.data,
+                        imageRepresentation: imageContent.data,
+                        textRepresentation: "",
+                        storageSuffix: UUID().uuidString,
+                    ),
+                ]
+
+                let attachmentHolder = appendNewMessage(role: .user)
+                let receivedText = if attachments.count > 1 {
+                    String(localized: "Received \(attachments.count) images.")
+                } else {
+                    String(localized: "Received an image.")
+                }
+                attachmentHolder.update(\.document, to: receivedText)
+                addAttachments(attachments, to: attachmentHolder)
+                await requestUpdate(view: currentMessageListView)
             }
-            pendingToolCalls.append(contentsOf: resp.toolCallRequests)
 
-            message.update(\.reasoningContent, to: reasoningContent)
-            message.update(\.document, to: content)
-
-            if !content.isEmpty {
+            if !message.document.isEmpty {
                 stopThinking(for: message.objectId)
                 if collapseAfterReasoningComplete {
                     message.update(\.isThinkingFold, to: true)
                 }
-            } else if !reasoningContent.isEmpty {
+            } else if !message.reasoningContent.isEmpty {
                 startThinking(for: message.objectId)
             }
             await requestUpdate(view: currentMessageListView)
@@ -91,11 +121,10 @@ extension ConversationSession {
                     let trimmed = message.reasoningContent.trimmingCharacters(in: .whitespacesAndNewlines)
                     return trimmed.isEmpty ? nil : trimmed
                 }(),
-                reasoningDetails: collectedReasoningDetails.isEmpty ? nil : collectedReasoningDetails,
             ),
         )
 
-        if message.document.isEmpty, message.reasoningContent.isEmpty, !modelWillExecuteTools {
+        if message.document.isEmpty, message.reasoningContent.isEmpty, generatedImages.isEmpty, !modelWillExecuteTools {
             throw NSError(
                 domain: "Inference Service",
                 code: -1,

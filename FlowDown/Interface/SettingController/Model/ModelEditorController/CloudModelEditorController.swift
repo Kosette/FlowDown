@@ -31,6 +31,7 @@ class CloudModelEditorController: StackScrollController {
     }
 
     var cancellables: Set<AnyCancellable> = .init()
+    private weak var responseFormatInfoView: ConfigurableInfoView?
 
     deinit {
         cancellables.forEach { $0.cancel() }
@@ -438,6 +439,7 @@ class CloudModelEditorController: StackScrollController {
         stackView.addArrangedSubview(SeparatorView())
 
         let responseFormatView = ConfigurableInfoView()
+        responseFormatInfoView = responseFormatView
         responseFormatView.configure(icon: .init(systemName: "arrow.triangle.2.circlepath"))
         responseFormatView.configure(title: "Content Format")
         responseFormatView.configure(description: "Select which format this model should use when performing network requests.")
@@ -576,20 +578,21 @@ class CloudModelEditorController: StackScrollController {
         let editAction = UIAction(
             title: String(localized: "Edit"),
             image: UIImage(systemName: "character.cursor.ibeam"),
-        ) { _ in
-            guard let model = ModelManager.shared.cloudModel(identifier: modelId) else { return }
+        ) { [weak self, weak view] _ in
+            guard let self,
+                  let infoView = view,
+                  let model = ModelManager.shared.cloudModel(identifier: modelId)
+            else { return }
             let input = AlertInputViewController(
                 title: "Edit Endpoint",
                 message: "This endpoint is used to send inference requests.",
                 placeholder: "https://",
                 text: model.endpoint.isEmpty ? "https://" : model.endpoint,
-            ) { output in
-                ModelManager.shared.editCloudModel(identifier: model.id) {
-                    $0.update(\.endpoint, to: output)
-                }
-                view.configure(value: output.isEmpty ? String(localized: "Not Configured") : output)
+            ) { [weak self, weak infoView] output in
+                guard let self, let infoView else { return }
+                applyEndpoint(output, toModel: model.id, view: infoView)
             }
-            view.parentViewController?.present(input, animated: true)
+            infoView.parentViewController?.present(input, animated: true)
         }
 
         var menuElements: [UIMenuElement] = [editAction]
@@ -612,11 +615,9 @@ class CloudModelEditorController: StackScrollController {
 
         if !existingEndpoints.isEmpty {
             let selectActions = existingEndpoints.map { endpoint in
-                UIAction(title: endpoint) { _ in
-                    ModelManager.shared.editCloudModel(identifier: modelId) {
-                        $0.update(\.endpoint, to: endpoint)
-                    }
-                    view.configure(value: endpoint)
+                UIAction(title: endpoint) { [weak self, weak view] _ in
+                    guard let self, let infoView = view else { return }
+                    applyEndpoint(endpoint, toModel: modelId, view: infoView)
                 }
             }
 
@@ -629,6 +630,53 @@ class CloudModelEditorController: StackScrollController {
         }
 
         return menuElements
+    }
+
+    private func applyEndpoint(
+        _ endpoint: String,
+        toModel modelId: CloudModel.ID,
+        view: ConfigurableInfoView,
+    ) {
+        let trimmed = endpoint.trimmingCharacters(in: .whitespacesAndNewlines)
+        ModelManager.shared.editCloudModel(identifier: modelId) { model in
+            model.update(\.endpoint, to: trimmed)
+        }
+
+        let displayValue = trimmed.isEmpty ? String(localized: "Not Configured") : trimmed
+        view.configure(value: displayValue)
+
+        guard !trimmed.isEmpty else { return }
+
+        guard let inferredFormat = CloudModelResponseFormat.inferredFormat(fromEndpoint: trimmed) else {
+            presentEndpointFormatMismatchAlert()
+            return
+        }
+
+        let currentFormat = ModelManager.shared.responseFormat(for: modelId)
+        if currentFormat != inferredFormat {
+            ModelManager.shared.updateResponseFormat(for: modelId, to: inferredFormat)
+        }
+
+        responseFormatInfoView?.configure(value: inferredFormat.localizedTitle)
+    }
+
+    private func presentEndpointFormatMismatchAlert() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let alert = AlertViewController(
+                title: "Unable to Match Request Format",
+                message: "This data has been saved, but we could not match a request format for this endpoint. This is usually a mistake. In most cases your request should end with /v1/chat/completions.",
+            ) { context in
+                context.addAction(title: "OK", attribute: .accent) {
+                    context.dispose()
+                }
+            }
+            if let presented = presentedViewController {
+                presented.present(alert, animated: true)
+            } else {
+                present(alert, animated: true)
+            }
+        }
     }
 
     private func buildModelIdentifierMenu(for modelId: CloudModel.ID, view: ConfigurableInfoView) -> [UIMenuElement] {
@@ -985,6 +1033,23 @@ private extension CloudModelEditorController {
                 title: String(localized: "Sampling Parameters"),
                 image: UIImage(systemName: "slider.horizontal.3"),
                 children: samplingActions,
+            ))
+
+            let modalitiesActions: [UIAction] = [
+                UIAction(title: String(localized: "Add modalities: text + image"), image: UIImage(systemName: "photo.on.rectangle")) { _ in
+                    controller.updateValue { $0["modalities"] = ["text", "image"] }
+                },
+                UIAction(title: String(localized: "Add modalities: text only"), image: UIImage(systemName: "text.bubble")) { _ in
+                    controller.updateValue { $0["modalities"] = ["text"] }
+                },
+                UIAction(title: String(localized: "Remove modalities"), image: UIImage(systemName: "xmark.circle")) { _ in
+                    controller.updateValue { $0.removeValue(forKey: "modalities") }
+                },
+            ]
+            children.append(UIMenu(
+                title: String(localized: "Modalities"),
+                image: UIImage(systemName: "rectangle.stack.badge.play"),
+                children: modalitiesActions,
             ))
 
             var providerChildren: [UIMenuElement] = []

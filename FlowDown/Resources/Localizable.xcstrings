@@ -441,6 +441,12 @@
         }
       }
     },
+    "Add modalities: text + image" : {
+
+    },
+    "Add modalities: text only" : {
+
+    },
     "Add Model" : {
       "localizations" : {
         "en" : {
@@ -4869,6 +4875,9 @@
         }
       }
     },
+    "Enable Foundation Model" : {
+
+    },
     "Enable iCloud Sync" : {
       "localizations" : {
         "en" : {
@@ -6539,6 +6548,12 @@
           }
         }
       }
+    },
+    "Generated Image" : {
+
+    },
+    "Generated Image #%lld" : {
+
     },
     "Generating New Icon" : {
       "localizations" : {
@@ -8767,6 +8782,9 @@
         }
       }
     },
+    "Modalities" : {
+
+    },
     "Model" : {
       "localizations" : {
         "en" : {
@@ -10980,6 +10998,12 @@
         }
       }
     },
+    "Received %lld images." : {
+
+    },
+    "Received an image." : {
+
+    },
     "Recent Used" : {
       "localizations" : {
         "en" : {
@@ -11109,6 +11133,9 @@
           }
         }
       }
+    },
+    "Remove modalities" : {
+
     },
     "Rename" : {
       "localizations" : {
@@ -12346,6 +12373,9 @@
           }
         }
       }
+    },
+    "Show Apple Intelligence Foundation Model in the model picker when available." : {
+
     },
     "Show Cloud Models" : {
       "localizations" : {
@@ -14179,6 +14209,9 @@
         }
       }
     },
+    "This data has been saved, but we could not match a request format for this endpoint. This is usually a mistake. In most cases your request should end with /v1/chat/completions." : {
+
+    },
     "This device is not eligible for Apple Intelligence. Requires compatible hardware." : {
       "localizations" : {
         "en" : {
@@ -15269,6 +15302,9 @@
           }
         }
       }
+    },
+    "Unable to Match Request Format" : {
+
     },
     "Unable to open link." : {
       "localizations" : {

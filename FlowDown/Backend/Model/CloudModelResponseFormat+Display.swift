@@ -36,3 +36,44 @@ extension CloudModelResponseFormat {
         }
     }
 }
+
+extension CloudModelResponseFormat {
+    static func inferredFormat(fromEndpoint endpoint: String) -> CloudModelResponseFormat? {
+        guard let normalized = normalizeEndpoint(endpoint) else { return nil }
+        return allCases.first { $0.matchesNormalizedEndpoint(normalized) }
+    }
+}
+
+// MARK: - Helpers
+
+private extension CloudModelResponseFormat {
+    static func normalizeEndpoint(_ endpoint: String) -> String? {
+        var normalized = endpoint.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !normalized.isEmpty else { return nil }
+        normalized = normalized.lowercased()
+        if let fragmentIndex = normalized.firstIndex(of: "#") {
+            normalized = String(normalized[..<fragmentIndex])
+        }
+        if let queryIndex = normalized.firstIndex(of: "?") {
+            normalized = String(normalized[..<queryIndex])
+        }
+        normalized = normalized.trimmingCharacters(in: .whitespacesAndNewlines)
+        while normalized.last == "/" {
+            normalized.removeLast()
+        }
+        return normalized.isEmpty ? nil : normalized
+    }
+
+    func matchesNormalizedEndpoint(_ endpoint: String) -> Bool {
+        endpointSuffixes.contains { endpoint.hasSuffix($0) }
+    }
+
+    var endpointSuffixes: [String] {
+        switch self {
+        case .chatCompletions:
+            ["/v1/chat/completions", "/chat/completions"]
+        case .responses:
+            ["/v1/responses", "/responses"]
+        }
+    }
+}

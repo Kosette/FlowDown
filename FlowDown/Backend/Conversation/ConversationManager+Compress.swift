@@ -98,8 +98,17 @@ extension ConversationManager {
                     input: messageBody,
                 )
                 let mess = sess.appendNewMessage(role: .assistant)
-                for try await resp in stream where !resp.content.isEmpty {
-                    mess.update(\.document, to: resp.content)
+                var compressed = ""
+                for try await chunk in stream {
+                    switch chunk {
+                    case let .text(value):
+                        compressed += value
+                        mess.update(\.document, to: compressed)
+                    case let .reasoning(value):
+                        mess.update(\.reasoningContent, to: mess.reasoningContent + value)
+                    case .tool, .image:
+                        break
+                    }
                     sess.notifyMessagesDidChange()
                     sess.save()
                 }

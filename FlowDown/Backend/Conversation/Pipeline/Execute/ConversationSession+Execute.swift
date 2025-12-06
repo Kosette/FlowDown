@@ -249,10 +249,6 @@ extension ConversationSession {
             await requestUpdate(view: currentMessageListView)
         }
 
-        // MARK: - 挪动系统提示词到最前面
-
-        moveSystemMessagesToFront(&requestMessages)
-
         // MARK: - 开始循环调用接口
 
         try checkCancellation()

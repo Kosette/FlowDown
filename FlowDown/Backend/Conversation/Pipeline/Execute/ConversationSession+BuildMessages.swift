@@ -116,19 +116,19 @@ extension ConversationSession {
         logger.debugFile("[*] encoded additional info to message \(message.objectId) with value \(dic)")
     }
 
-    func encodeToolRequestAndAttachToToolMessage(_ toolRequest: ToolCallRequest, message: Message) {
+    func encodeToolRequestAndAttachToToolMessage(_ toolRequest: ToolRequest, message: Message) {
         let precoded = try? JSONEncoder().encode(toolRequest)
         let predic = try? JSONSerialization.jsonObject(with: precoded ?? .init(), options: [.fragmentsAllowed]) as? [String: Any]
         encodeAdditionalInfoAndAttachToMessage(message, dic: ["tool_request": predic ?? [:]])
         logger.debugFile("[*] encoded tool request \(toolRequest.name) to message \(message.objectId) with value \(predic ?? [:])")
     }
 
-    func decodeToolRequestFromToolMessage(_ message: Message) -> ToolCallRequest? {
+    func decodeToolRequestFromToolMessage(_ message: Message) -> ToolRequest? {
         let read = message.metadata ?? .init()
         guard let orig = try? JSONSerialization.jsonObject(with: read, options: [.fragmentsAllowed]) as? [String: Any],
               let toolRequestDic = orig["tool_request"],
               let data = try? JSONSerialization.data(withJSONObject: toolRequestDic, options: [.fragmentsAllowed]),
-              let toolRequest = try? JSONDecoder().decode(ToolCallRequest.self, from: data)
+              let toolRequest = try? JSONDecoder().decode(ToolRequest.self, from: data)
         else { return nil }
         return toolRequest
     }

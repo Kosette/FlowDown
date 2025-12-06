@@ -17,6 +17,7 @@ import UIKit
 class ModelManager: NSObject {
     static let shared = ModelManager()
     static let flowdownModelConfigurationExtension = "fdmodel"
+    static let appleIntelligenceEnabledKey = "Model.Inference.AppleIntelligence.Enabled"
 
     typealias ModelIdentifier = String
     typealias LocalModelIdentifier = LocalModel.ID
@@ -41,6 +42,12 @@ class ModelManager: NSObject {
     var temperature: Float
     @BareCodableStorage(key: "Model.Inference.SearchSensitivity", defaultValue: SearchSensitivity.balanced)
     var searchSensitivity: SearchSensitivity
+
+    @BareCodableStorage(
+        key: ModelManager.appleIntelligenceEnabledKey,
+        defaultValue: true,
+    )
+    var appleIntelligenceEnabled: Bool
 
     @BareCodableStorage(key: "Model.Default.Conversation", defaultValue: "")
     // swiftformat:disable:next redundantFileprivate

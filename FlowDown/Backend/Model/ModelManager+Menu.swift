@@ -40,7 +40,8 @@ extension ModelManager {
         }.filter { requiresCapabilities.isSubset(of: $0.capabilities) }
 
         var appleIntelligenceAvailable = false
-        if #available(iOS 26.0, macCatalyst 26.0, *),
+        if ModelManager.shared.appleIntelligenceEnabled,
+           #available(iOS 26.0, macCatalyst 26.0, *),
            AppleIntelligenceModel.shared.isAvailable,
            requiresCapabilities.isSubset(of: modelCapabilities(
                identifier: AppleIntelligenceModel.shared.modelIdentifier,
@@ -152,15 +153,24 @@ extension ModelManager {
             })
         }
 
+        var appleIntelligenceMenu: UIMenuElement?
         if #available(iOS 26.0, macCatalyst 26.0, *) {
             if appleIntelligenceAvailable {
-                finalChildren.append(UIAction(
+                let appleAction = UIAction(
                     title: AppleIntelligenceModel.shared.modelDisplayName,
                     state: currentSelection == AppleIntelligenceModel.shared.modelIdentifier ? .on : .off,
                 ) { _ in
                     onCompletion(AppleIntelligenceModel.shared.modelIdentifier)
-                })
+                }
+                appleIntelligenceMenu = UIMenu(
+                    options: [.displayInline],
+                    children: [appleAction],
+                )
             }
+        }
+
+        if let appleIntelligenceMenu {
+            finalChildren.append(appleIntelligenceMenu)
         }
 
         if !localMenuChildren.isEmpty {

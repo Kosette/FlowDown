@@ -129,11 +129,18 @@ enum InferenceIntentHandler {
 
         var content = ""
         var reasoningContent = ""
-        var toolRequests: [ToolCallRequest] = []
+        var toolRequests: [ToolRequest] = []
         for try await chunk in inference {
-            content = chunk.content
-            reasoningContent = chunk.reasoningContent
-            toolRequests.append(contentsOf: chunk.toolCallRequests)
+            switch chunk {
+            case let .text(value):
+                content += value
+            case let .reasoning(value):
+                reasoningContent += value
+            case let .tool(call):
+                toolRequests.append(call)
+            case .image:
+                break
+            }
         }
 
         let trimmedContent = content.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -422,7 +429,7 @@ enum InferenceIntentHandler {
         }
     }
 
-    private static func executeMemoryWritingToolCalls(_ toolCalls: [ToolCallRequest], using tools: [ModelTool]) async {
+    private static func executeMemoryWritingToolCalls(_ toolCalls: [ToolRequest], using tools: [ModelTool]) async {
         guard !toolCalls.isEmpty else { return }
         let mapping = Dictionary(uniqueKeysWithValues: tools.map { ($0.functionName.lowercased(), $0) })
 

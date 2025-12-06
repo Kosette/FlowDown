@@ -274,7 +274,7 @@ extension ConversationSessionManager.Session {
                 input: messages,
             )
 
-            let content = ans.content.trimmingCharacters(in: .whitespacesAndNewlines)
+            let content = ans.text.trimmingCharacters(in: .whitespacesAndNewlines)
 
             if let (queries, searchRequired) = extractQueriesFromXMLWithSearchRequired(content) {
                 return (validateQueries(queries), searchRequired)

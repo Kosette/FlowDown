@@ -80,13 +80,14 @@ extension ConversationSessionManager.Session {
                 input: messages,
             )
 
-            let sanitizedContent = ModelResponseSanitizer.stripReasoning(from: ans.content)
+            let raw = ans.text.isEmpty ? ans.reasoning : ans.text
+            let sanitizedContent = ModelResponseSanitizer.stripReasoning(from: raw)
 
             if let title = extractTitleFromXML(sanitizedContent) {
                 return title.count > 32 ? String(title.prefix(32)) : title
             }
 
-            var ret = sanitizedContent.trimmingCharacters(in: .whitespacesAndNewlines)
+            var ret = sanitizedContent.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             if ret.isEmpty { return nil }
             if ret.count > 32 { ret = String(ret.prefix(32)) }
             return ret
