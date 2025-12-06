@@ -105,6 +105,13 @@ extension ConversationSession {
             message.update(\.document, to: document)
         }
 
+        if message.document.isEmpty, !generatedImages.isEmpty {
+            let summary = generatedImages.count > 1
+                ? String(localized: "Received \(generatedImages.count) images.")
+                : String(localized: "Received an image")
+            message.update(\.document, to: summary)
+        }
+
         if !message.reasoningContent.isEmpty, message.document.isEmpty {
             let document = String(localized: "Thinking finished without output any content.")
             message.update(\.document, to: document)
