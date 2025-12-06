@@ -97,8 +97,5 @@ FlowDown is a Swift-based AI/LLM client for iOS and macOS (Catalyst) with a priv
   - `python3 Resources/DevKit/scripts/translate_missing.py FlowDown/Resources/Localizable.xcstrings` to apply curated zh-Hans translations
   - `python3 Resources/DevKit/scripts/check_untranslated.py FlowDown/Resources/Localizable.xcstrings` to surface untranslated entries
   - `python3 Resources/DevKit/scripts/check_translations.py FlowDown/Resources/Localizable.xcstrings` to remove stale keys and verify completeness
-- CSV workflow for batching translations (avoids manual JSON edits):
-  - Export up to 20 rows missing any language into `.build/xcstrings-untranslated.csv`: `python3 Resources/DevKit/scripts/xcstrings_csv_helper.py export [path/to/Localizable.xcstrings]`
-  - The CSV header includes language codes (e.g., `en`, `zh-Hans`, `ja`, `de`, `fr`, ...). Fill any language columns you want to supply, then apply: `python3 Resources/DevKit/scripts/xcstrings_csv_helper.py apply [.build/xcstrings-untranslated.csv] [path/to/Localizable.xcstrings]`
 - Localization files such as `Localizable.xcstrings` exceed 10k lines; update the supporting Python scripts to regenerate changes instead of editing the JSON directly.
 - Follow existing localization patterns and maintain consistency with the codebase. Avoid manual edits to `.xcstrings`; let scripts manage JSON structure.
