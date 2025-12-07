@@ -1,0 +1,145 @@
+name: Notarize Release
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  notarize:
+    name: Notarize macOS build
+    runs-on: macos-26
+    if: startsWith(github.ref, 'refs/tags/')
+    env:
+      VERSION: ${{ github.ref_name }}
+      RELEASE_BRANCH: release
+    steps:
+      - name: Validate tag format (x.x.x, no v/beta/rev)
+        id: tag_check
+        run: |
+          set -euo pipefail
+          if [[ "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "ok=false" >> "$GITHUB_OUTPUT"
+          echo "Tag ${VERSION} does not match x.x.x (no v/beta/rev); skipping notarization." >> "$GITHUB_STEP_SUMMARY"
+      - name: Checkout
+        if: steps.tag_check.outputs.ok == 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Ensure tag commit is on release branch
+        if: steps.tag_check.outputs.ok == 'true'
+        id: release_branch
+        env:
+          RELEASE_BRANCH: ${{ env.RELEASE_BRANCH }}
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code origin "${RELEASE_BRANCH}" >/dev/null 2>&1; then
+            git fetch origin "${RELEASE_BRANCH}"
+            if git merge-base --is-ancestor "$GITHUB_SHA" "origin/${RELEASE_BRANCH}"; then
+              echo "on_release=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "on_release=false" >> "$GITHUB_OUTPUT"
+            echo "Tag commit is not on ${RELEASE_BRANCH}; skipping notarization." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "on_release=false" >> "$GITHUB_OUTPUT"
+          echo "Release branch ${RELEASE_BRANCH} not found; skipping notarization." >> "$GITHUB_STEP_SUMMARY"
+      - name: Select newest Xcode in /Applications
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        run: |
+          set -euo pipefail
+          ./Resources/DevKit/scripts/select_newest_xcode.sh
+      - name: Setup notary keychain and signing env
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        id: setup_notary
+        env:
+          NOTARY_TOOLBOX_ZIP_BASE64: ${{ secrets.NOTARY_TOOLBOX_ZIP_BASE64 }}
+          NOTARY_TOOLBOX_PASSWORD: ${{ secrets.NOTARY_TOOLBOX_PASSWORD }}
+        run: |
+          set -euo pipefail
+          ./Resources/DevKit/scripts/notary-setup-keychain.sh "$GITHUB_OUTPUT" "$GITHUB_ENV"
+      - name: Resolve packages
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        run: |
+          set -euo pipefail
+          ./Resources/DevKit/scripts/resolve-packages.sh
+      - name: Archive macOS build (signed)
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        env:
+          KEYCHAIN_DB: ${{ steps.setup_notary.outputs.keychain_db }}
+          CODE_SIGNING_IDENTITY: ${{ steps.setup_notary.outputs.code_signing_identity }}
+          CODE_SIGNING_TEAM: ${{ steps.setup_notary.outputs.code_signing_team }}
+        run: |
+          set -euo pipefail
+          ./Resources/DevKit/scripts/xcodebuild-archive-macos.sh
+      - name: Upload build outputs (pre-notarize)
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: FlowDown-${{ env.VERSION }}-build-pre-notarize
+          path: |
+            BuildArtifacts/FlowDown-macos.xcarchive
+            BuildArtifacts/macos-notary.xcresult
+          if-no-files-found: error
+          retention-days: 7
+      - name: Notarize ZIP
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        id: notarize
+        env:
+          CODE_SIGNING_IDENTITY: ${{ steps.setup_notary.outputs.code_signing_identity }}
+          NOTARIZE_KEYCHAIN_PROFILE: ${{ steps.setup_notary.outputs.notarize_keychain_profile }}
+          NOTARIZE_ZIP_OUTPUT: ${{ format('{0}/BuildArtifacts/FlowDown-{1}.zip', github.workspace, env.VERSION) }}
+        run: |
+          set -euo pipefail
+          APP_PATH="${GITHUB_WORKSPACE}/BuildArtifacts/FlowDown-macos.xcarchive/Products/Applications/FlowDown.app"
+          if [[ ! -d "$APP_PATH" ]]; then
+            echo "App not found at $APP_PATH" >&2
+            exit 1
+          fi
+          ./Resources/DevKit/scripts/notarize-zip.sh "$APP_PATH" "${NOTARIZE_ZIP_OUTPUT}"
+          if [[ ! -f "${NOTARIZE_ZIP_OUTPUT}" ]]; then
+            echo "Notarized ZIP not found at ${NOTARIZE_ZIP_OUTPUT}" >&2
+            exit 1
+          fi
+          echo "zip=${NOTARIZE_ZIP_OUTPUT}" >> "$GITHUB_OUTPUT"
+      - name: Create release if missing
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if gh release view "${VERSION}" >/dev/null 2>&1; then
+            echo "Release ${VERSION} already exists"
+          else
+            gh release create "${VERSION}" --title "${VERSION}" --notes "Automated release for ${VERSION}"
+          fi
+      - name: Upload notarized ZIP to release
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ env.VERSION }}
+          ZIP_PATH: ${{ steps.notarize.outputs.zip }}
+        run: |
+          set -euo pipefail
+          if [[ ! -f "$ZIP_PATH" ]]; then
+            echo "ZIP not found at $ZIP_PATH" >&2
+            exit 1
+          fi
+          gh release upload "${VERSION}" "$ZIP_PATH#FlowDown-${VERSION}.zip" --clobber
+      - name: Upload notarized ZIP as artifact
+        if: steps.tag_check.outputs.ok == 'true' && steps.release_branch.outputs.on_release == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: FlowDown-${{ env.VERSION }}-notarized-zip
+          path: ${{ steps.notarize.outputs.zip }}
+          if-no-files-found: error
+          retention-days: 7
+
