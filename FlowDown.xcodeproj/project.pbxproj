@@ -24,6 +24,7 @@
 		506C93CD2EBE4BBC00CB87A9 /* OpenSourceLicenses.md in Resources */ = {isa = PBXBuildFile; fileRef = 506C93C62EBE4BBC00CB87A9 /* OpenSourceLicenses.md */; };
 		5078496A2D285B5900B1F430 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 507849692D285B5900B1F430 /* MarkdownView */; };
 		5081A0142D6DBBBA0079ECBE /* RunestoneEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 5081A0132D6DBBBA0079ECBE /* RunestoneEditor */; };
+		509EBAA12EE54FA100553C8A /* LookinServer in Frameworks */ = {isa = PBXBuildFile; productRef = 509EBAA02EE54FA100553C8A /* LookinServer */; };
 		50B492942D4F609E00F4D2B3 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 50B492932D4F609E00F4D2B3 /* ZIPFoundation */; };
 		50B4CDAC2D4794F90028EB33 /* Digger in Frameworks */ = {isa = PBXBuildFile; productRef = 50B4CDAB2D4794F90028EB33 /* Digger */; };
 		50B5146B2D2305F20092284C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5146A2D2305F20092284C /* main.swift */; };
@@ -134,6 +135,7 @@
 				50C9035B2D428DAD00E6E3A8 /* Storage in Frameworks */,
 				505FC6192D4945E500F4CB17 /* SPIndicator in Frameworks */,
 				505742472E1B8B8100A26090 /* DpkgVersion in Frameworks */,
+				509EBAA12EE54FA100553C8A /* LookinServer in Frameworks */,
 				506373A12EC0D6E200C8A9FB /* AlignedCollectionViewFlowLayout in Frameworks */,
 				50E3FA092D6D7FB8000405BD /* GPTEncoder in Frameworks */,
 				5050EACF2D46D41400634B81 /* MLX in Frameworks */,
@@ -273,6 +275,7 @@
 				502272D12EB3DE3200AF9D28 /* UIEffectKit */,
 				506373A02EC0D6E200C8A9FB /* AlignedCollectionViewFlowLayout */,
 				506373A52EC0DC7900C8A9FB /* ColorfulX */,
+				509EBAA02EE54FA100553C8A /* LookinServer */,
 			);
 			productName = FlowDown;
 			productReference = 503498BD2D23053D004672BD /* FlowDown.app */;
@@ -357,6 +360,7 @@
 				502272D02EB3DE3200AF9D28 /* XCRemoteSwiftPackageReference "UIEffectKit" */,
 				5063739F2EC0D6E200C8A9FB /* XCRemoteSwiftPackageReference "AlignedCollectionViewFlowLayout" */,
 				506373A42EC0DC7900C8A9FB /* XCRemoteSwiftPackageReference "ColorfulX" */,
+				509EBA9F2EE54FA100553C8A /* XCRemoteSwiftPackageReference "LookinServer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
@@ -824,7 +828,7 @@
 			repositoryURL = "https://github.com/Lakr233/ConfigurableKit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.1.1;
+				minimumVersion = 3.1.2;
 			};
 		};
 		50383CE82D2E1DF200426941 /* XCRemoteSwiftPackageReference "BetterCodable" */ = {
@@ -873,6 +877,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.0.1;
+			};
+		};
+		509EBA9F2EE54FA100553C8A /* XCRemoteSwiftPackageReference "LookinServer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/QMUI/LookinServer/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.8;
 			};
 		};
 		50A350B92DE4B5C3008F094E /* XCRemoteSwiftPackageReference "MarkdownView" */ = {
@@ -1022,6 +1034,11 @@
 		5081A0132D6DBBBA0079ECBE /* RunestoneEditor */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RunestoneEditor;
+		};
+		509EBAA02EE54FA100553C8A /* LookinServer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 509EBA9F2EE54FA100553C8A /* XCRemoteSwiftPackageReference "LookinServer" */;
+			productName = LookinServer;
 		};
 		50B492932D4F609E00F4D2B3 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

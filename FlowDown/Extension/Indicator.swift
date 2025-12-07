@@ -53,7 +53,7 @@ enum Indicator {
     ) {
         Task { @MainActor in
             let titleString = String(localized: title)
-            let messageString = String(localized: message ?? "")
+            let messageString = if let message { String(localized: message) } else { "" }
             let alert = AlertProgressIndicatorViewController(
                 title: "\(titleString)",
                 message: "\(messageString)",

@@ -18,7 +18,8 @@ extension CloudModelEditorController {
 
 private extension CloudModelEditorController {
     var notConfiguredText: String { String(localized: "Not Configured") }
-    var notAvailableText: String { String(localized: "N/A") }
+    var notAvailableText: String { "N/A" }
+
     var configuredText: String { String(localized: "Configured") }
 
     func addSeparator() {
@@ -208,7 +209,7 @@ private extension CloudModelEditorController {
             let input = AlertInputViewController(
                 title: "Edit Workgroup (Optional)",
                 message: "This value will be added to the request to distinguish the workgroup on the remote. This part is optional, if not used, leave it blank.",
-                placeholder: "xx-xxx",
+                placeholder: "\("xx-xxx")",
                 text: currentModel.token,
             ) { [weak self] newToken in
                 guard let self else { return }

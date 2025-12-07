@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Lakr233/ConfigurableKit",
       "state" : {
-        "revision" : "3d863f62c64588d788d9877c130bc51104049bb0",
-        "version" : "3.1.1"
+        "revision" : "65faa3328dcda472f9f3e4e2ec43807217f2b488",
+        "version" : "3.1.2"
       }
     },
     {
@@ -115,6 +115,15 @@
       "state" : {
         "revision" : "a4372d7f90c846d834c1f1575d1af0050d70fa0f",
         "version" : "1.1.6"
+      }
+    },
+    {
+      "identity" : "lookinserver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/QMUI/LookinServer/",
+      "state" : {
+        "revision" : "e553d1b689d147817dc54ad5c28fcff71e860101",
+        "version" : "1.2.8"
       }
     },
     {

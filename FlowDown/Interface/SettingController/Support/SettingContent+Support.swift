@@ -81,7 +81,7 @@ extension SettingController.SettingContent.SupportController {
             ),
             ConfigurableObject(
                 icon: "safari",
-                title: "GitHub",
+                title: "\("GitHub")",
                 explain: "Leave a message on GitHub issue.",
                 ephemeralAnnotation: .openLink(
                     title: "Open...",
@@ -90,7 +90,7 @@ extension SettingController.SettingContent.SupportController {
             ),
             ConfigurableObject(
                 icon: "bubble.left",
-                title: "Discord",
+                title: "\("Discord")",
                 explain: "Join our Discord server.",
                 ephemeralAnnotation: .openLink(
                     title: "Open...",

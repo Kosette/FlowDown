@@ -25,7 +25,7 @@ class MCPEditorController: StackScrollController {
         cancellables.removeAll()
     }
 
-    let testFooterView = ConfigurableSectionFooterView().with(footer: "")
+    let testFooterView = ConfigurableSectionFooterView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,7 +181,7 @@ class MCPEditorController: StackScrollController {
             let input = AlertInputViewController(
                 title: "Edit Endpoint",
                 message: "The URL endpoint for this MCP server. Most of them requires /mcp/ suffix.",
-                placeholder: "https://",
+                placeholder: "\("https://")",
                 text: server.endpoint.isEmpty ? "https://" : server.endpoint,
             ) { output in
                 MCPService.shared.edit(identifier: self.serverId) {

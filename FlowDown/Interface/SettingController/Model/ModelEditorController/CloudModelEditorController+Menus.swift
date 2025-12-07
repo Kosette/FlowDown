@@ -152,7 +152,7 @@ extension CloudModelEditorController {
             let input = AlertInputViewController(
                 title: "Edit Endpoint",
                 message: "This endpoint is used to send inference requests.",
-                placeholder: "https://",
+                placeholder: "\("https://")",
                 text: model.endpoint.isEmpty ? "https://" : model.endpoint,
             ) { [weak self, weak infoView] output in
                 guard let self, let infoView else { return }

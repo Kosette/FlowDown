@@ -490,7 +490,7 @@ extension RichEditorView: ControlPanel.Delegate {
         let alert = AlertInputViewController(
             title: NSLocalizedString("Capture Web Content", comment: ""),
             message: NSLocalizedString("Please paste or enter the URL here, the web content will be fetched later.", comment: ""),
-            placeholder: NSLocalizedString("https://", comment: ""),
+            placeholder: "https://",
             text: "",
             cancelButtonText: NSLocalizedString("Cancel", comment: ""),
             doneButtonText: NSLocalizedString("Capture", comment: ""),

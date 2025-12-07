@@ -203,7 +203,7 @@ extension SettingController.SettingContent {
 
             stackView.addArrangedSubviewWithMargin(
                 ConfigurableSectionHeaderView().with(
-                    header: "MLX",
+                    header: String("MLX"),
                 ),
             ) { $0.bottom /= 2 }
             stackView.addArrangedSubview(SeparatorView())
