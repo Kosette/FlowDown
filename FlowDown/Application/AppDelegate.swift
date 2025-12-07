@@ -125,3 +125,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MLX.GPU.onApplicationResignActivate()
     }
 }
+
+func terminateApplication() {
+    // close the app
+    UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+    Task.detached {
+        try await Task.sleep(for: .seconds(1))
+        exit(0)
+    }
+}

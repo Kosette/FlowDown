@@ -15192,6 +15192,52 @@
         }
       }
     },
+    "Export app preferences and model configurations without conversations." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export app preferences and model configurations without conversations."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App-Einstellungen und Modellkonfigurationen ohne Unterhaltungen exportieren."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar preferencias de la app y configuraciones de modelos sin conversaciones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporter les préférences de l’app et les configurations de modèles sans les conversations."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "会話を含めずにアプリの設定とモデル構成をエクスポートします。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "대화를 제외하고 앱 환경설정과 모델 구성을 내보냅니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在不包含会话的情况下导出应用偏好和模型配置。"
+          }
+        }
+      }
+    },
     "Export Database" : {
       "localizations" : {
         "de" : {
@@ -15652,6 +15698,52 @@
         }
       }
     },
+    "Export Settings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export Settings"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen exportieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar ajustes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporter les réglages"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定を書き出す"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 내보내기"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出设置"
+          }
+        }
+      }
+    },
     "Export Template" : {
       "localizations" : {
         "de" : {
@@ -15928,48 +16020,94 @@
         }
       }
     },
-    "Exported database contains all conversations data and cloud model configurations, but does not include local model data, also known as weights, and application settings. To export local models, please go to the model management page. Application settings are not supported for export." : {
+    "Exported database contains all conversations data and cloud model configurations, but does not include local model data (weights). Use Settings Backup to export application preferences." : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die exportierte Datenbank enthält alle Unterhaltungsdaten und Cloud-Modellkonfigurationen, aber keine lokalen Modelldaten (Weights) und keine App-Einstellungen. Um lokale Modelle zu exportieren, gehe zur Modellverwaltung. App-Einstellungen können nicht exportiert werden."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Exported database contains all conversations data and cloud model configurations, but does not include local model data, also known as weights, and application settings. To export local models, please go to the model management page. Application settings are not supported for export."
+            "value" : "Exported database contains all conversations data and cloud model configurations, but does not include local model data (weights). Use Settings Backup to export application preferences."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die exportierte Datenbank enthält alle Gesprächsdaten und Cloud-Modellkonfigurationen, schließt jedoch lokale Modelldaten (Gewichte) aus. Verwende die Einstellungen-Sicherung, um App-Einstellungen zu exportieren."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La base de datos exportada contiene todas las conversaciones y configuraciones de modelos en la nube, pero no incluye los datos de modelos locales (pesos) ni los ajustes de la aplicación. Para exportar modelos locales, ve a la página de gestión de modelos. Los ajustes de la aplicación no se pueden exportar."
+            "value" : "La base de datos exportada incluye todas las conversaciones y configuraciones de modelos en la nube, pero no incluye los datos de modelos locales (pesos). Usa la copia de seguridad de ajustes para exportar las preferencias de la aplicación."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La base de données exportée contient toutes les données de conversation et les configurations de modèles cloud, mais n’inclut pas les données des modèles locaux (poids) ni les réglages de l’application. Pour exporter les modèles locaux, rendez-vous dans la page de gestion des modèles. Les réglages de l’application ne peuvent pas être exportés."
+            "value" : "La base de données exportée inclut toutes les conversations et les configurations de modèles cloud, mais exclut les données des modèles locaux (poids). Utilisez la sauvegarde des réglages pour exporter les préférences de l’app."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "エクスポートされたデータベースには全会話データとクラウドモデル設定が含まれますが、重みなどのローカルモデルデータやアプリ設定は含みません。ローカルモデルを出力するにはモデル管理ページへ。アプリ設定のエクスポートは非対応です。"
+            "value" : "エクスポートされたデータベースにはすべての会話データとクラウドモデルの設定が含まれますが、ローカルモデルのデータ（重み）は含まれません。アプリの設定を出力するには設定バックアップを使用してください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "내보낸 데이터베이스에는 모든 대화 데이터와 클라우드 모델 구성이 포함되지만, 가중치로도 알려진 로컬 모델 데이터와 앱 설정은 포함되지 않습니다. 로컬 모델을 내보내려면 모델 관리 페이지로 이동하세요. 앱 설정은 내보내기를 지원하지 않습니다."
+            "value" : "내보낸 데이터베이스에는 모든 대화 데이터와 클라우드 모델 설정이 포함되지만 로컬 모델 데이터(가중치)는 포함되지 않습니다. 앱 환경설정을 내보내려면 설정 백업을 사용하세요."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "导出的数据库包含全部的对话数据和云端模型配置，但不包含本地模型数据或应用程序设置。若要导出本地模型数据，请前往模型管理页面。应用程序设置不支持导出。"
+            "value" : "导出的数据库包含所有会话数据和云端模型配置，但不包含本地模型数据（权重）。要导出应用偏好，请使用设置备份。"
+          }
+        }
+      }
+    },
+    "Exporting" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporting"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportiere"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportando"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportation"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "書き出し中"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내보내는 중"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在导出"
           }
         }
       }
@@ -18180,6 +18318,98 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "旗帜"
+          }
+        }
+      }
+    },
+    "FlowDown Settings Backup %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown Settings Backup %@"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown-Einstellungen-Backup %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia de seguridad de ajustes de FlowDown %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauvegarde des réglages FlowDown %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown 設定バックアップ %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown 설정 백업 %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown 设置备份 %@"
+          }
+        }
+      }
+    },
+    "FlowDown will close now to apply imported settings." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown will close now to apply imported settings."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown wird jetzt beendet, um die importierten Einstellungen anzuwenden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown se cerrará ahora para aplicar los ajustes importados."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown va se fermer pour appliquer les réglages importés."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "インポートした設定を適用するため、FlowDown を終了します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가져온 설정을 적용하기 위해 지금 FlowDown이 종료됩니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown 将立即关闭以应用导入的设置。"
           }
         }
       }
@@ -20488,6 +20718,52 @@
         }
       }
     },
+    "Import Settings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import Settings"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen importieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar ajustes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer les réglages"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定を読み込む"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 가져오기"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入设置"
+          }
+        }
+      }
+    },
     "Import Text" : {
       "localizations" : {
         "de" : {
@@ -20668,6 +20944,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "导入了 %lld 个模板。"
+          }
+        }
+      }
+    },
+    "Importing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importiere"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importando"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importation en cours"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "読み込み中"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가져오는 중"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在导入"
           }
         }
       }
@@ -26895,6 +27217,52 @@
         }
       }
     },
+    "No configurable settings were found to export." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No configurable settings were found to export."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine konfigurierbaren Einstellungen zum Exportieren gefunden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se encontraron ajustes configurables para exportar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun réglage configurable trouvé à exporter."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "書き出せる設定が見つかりません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내보낼 수 있는 설정을 찾지 못했습니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有找到可导出的可配置设置。"
+          }
+        }
+      }
+    },
     "No conversations found." : {
       "localizations" : {
         "de" : {
@@ -32607,6 +32975,52 @@
         }
       }
     },
+    "Restore a settings backup. The app will exit after import." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore a settings backup. The app will exit after import."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine Einstellungs-Sicherung wiederherstellen. Die App beendet sich nach dem Import."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurar una copia de seguridad de ajustes. La app se cerrará tras la importación."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurer une sauvegarde des réglages. L’app se fermera après l’import."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定バックアップを復元します。インポート後にアプリは終了します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 백업을 복원합니다. 가져오기 후 앱이 종료됩니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "恢复设置备份。导入完成后应用将退出。"
+          }
+        }
+      }
+    },
     "Restricted" : {
       "localizations" : {
         "de" : {
@@ -35363,6 +35777,144 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "设置"
+          }
+        }
+      }
+    },
+    "Settings Backup" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings Backup"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen-Backup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia de seguridad de ajustes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauvegarde des réglages"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定バックアップ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 백업"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置备份"
+          }
+        }
+      }
+    },
+    "Settings backup is only supported when using UserDefaults storage." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings backup is only supported when using UserDefaults storage."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungs-Backups werden nur bei Verwendung von UserDefaults unterstützt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La copia de seguridad de ajustes solo se admite cuando se usa el almacenamiento UserDefaults."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La sauvegarde des réglages est uniquement prise en charge avec le stockage UserDefaults."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定バックアップは UserDefaults ストレージを使用している場合にのみサポートされます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 백업은 UserDefaults 저장소를 사용할 때만 지원됩니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仅在使用 UserDefaults 存储时支持设置备份。"
+          }
+        }
+      }
+    },
+    "Settings backups only include configurable preferences and model selections. Conversations and local model weights remain separate." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings backups only include configurable preferences and model selections. Conversations and local model weights remain separate."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungs-Backups enthalten nur konfigurierbare Präferenzen und Modellauswahlen. Unterhaltungen und lokale Modellgewichte bleiben getrennt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las copias de seguridad de ajustes solo incluyen preferencias configurables y selecciones de modelos. Las conversaciones y los pesos de modelos locales permanecen aparte."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les sauvegardes des réglages incluent uniquement les préférences configurables et les sélections de modèles. Les conversations et les poids des modèles locaux restent séparés."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定バックアップには、設定可能なプリファレンスとモデル選択のみが含まれます。会話やローカルモデルの重みは含まれません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 백업에는 설정 가능한 환경설정과 모델 선택만 포함됩니다. 대화와 로컬 모델 가중치는 별도로 유지됩니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置备份仅包含可配置偏好和模型选择。会话记录和本地模型权重不会包含在内。"
           }
         }
       }
@@ -40386,6 +40938,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "所选模型不支持图像输入。"
+          }
+        }
+      }
+    },
+    "The selected settings backup is invalid or from an incompatible version." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected settings backup is invalid or from an incompatible version."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die ausgewählte Einstellungen-Sicherung ist ungültig oder stammt aus einer nicht kompatiblen Version."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La copia de seguridad de ajustes seleccionada no es válida o pertenece a una versión incompatible."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La sauvegarde des réglages sélectionnée est invalide ou provient d’une version incompatible."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選択した設定バックアップが無効か、互換性のないバージョンのものです。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 설정 백업이 유효하지 않거나 호환되지 않는 버전에서 생성되었습니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所选的设置备份无效或来自不兼容的版本。"
           }
         }
       }

@@ -15,7 +15,7 @@ import UniformTypeIdentifiers
 
 extension SettingController.SettingContent {
     class DataControlController: StackScrollController {
-        private var documentPickerImportHandler: (([URL]) -> Void)?
+        var documentPickerImportHandler: (([URL]) -> Void)?
 
         init() {
             super.init(nibName: nil, bundle: nil)
@@ -95,6 +95,8 @@ extension SettingController.SettingContent {
             ) { $0.top /= 2 }
             stackView.addArrangedSubview(SeparatorView())
 
+            addSettingsBackupSection()
+
             stackView.addArrangedSubviewWithMargin(
                 ConfigurableSectionHeaderView().with(
                     header: "Database",
@@ -146,7 +148,7 @@ extension SettingController.SettingContent {
 
             stackView.addArrangedSubviewWithMargin(
                 ConfigurableSectionFooterView().with(
-                    footer: "Exported database contains all conversations data and cloud model configurations, but does not include local model data, also known as weights, and application settings. To export local models, please go to the model management page. Application settings are not supported for export.",
+                    footer: "Exported database contains all conversations data and cloud model configurations, but does not include local model data (weights). Use Settings Backup to export application preferences.",
                 ),
             ) { $0.top /= 2 }
             stackView.addArrangedSubview(SeparatorView())
@@ -339,12 +341,7 @@ extension SettingController.SettingContent {
 
                                 /// 在主线程中释放db链接
                                 sdb.reset()
-                                // close the app
-                                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-                                Task.detached {
-                                    try await Task.sleep(for: .seconds(1))
-                                    exit(0)
-                                }
+                                terminateApplication()
                             }
                         }
                     }
@@ -441,9 +438,7 @@ extension SettingController.SettingContent {
                         context.allowSimpleDispose()
                         context.addAction(title: "OK", attribute: .accent) {
                             SyncEngine.resetCachedState()
-                            context.dispose {
-                                exit(0)
-                            }
+                            context.dispose { terminateApplication() }
                         }
                     }
                     controller.present(alert, animated: true)
