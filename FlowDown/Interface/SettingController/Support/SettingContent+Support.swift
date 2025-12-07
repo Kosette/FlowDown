@@ -85,7 +85,7 @@ extension SettingController.SettingContent.SupportController {
                 explain: "Leave a message on GitHub issue.",
                 ephemeralAnnotation: .openLink(
                     title: "Open...",
-                    url: URL(string: "https://github.com/Lakr233/FlowDown-Beta/issues")!,
+                    url: URL(string: "https://github.com/Lakr233/FlowDown/issues")!,
                 ),
             ),
             ConfigurableObject(
