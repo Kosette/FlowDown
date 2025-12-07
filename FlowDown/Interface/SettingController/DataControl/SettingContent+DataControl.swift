@@ -115,13 +115,6 @@ extension SettingController.SettingContent {
             stackView.addArrangedSubviewWithMargin(importDatabase)
             stackView.addArrangedSubview(SeparatorView())
 
-            stackView.addArrangedSubviewWithMargin(
-                ConfigurableSectionHeaderView().with(
-                    header: "Database Export",
-                ),
-            ) { $0.bottom /= 2 }
-            stackView.addArrangedSubview(SeparatorView())
-
             var exportDatabaseReader: UIView?
             let exportDatabase = ConfigurableObject(
                 icon: "square.and.arrow.up",

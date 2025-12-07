@@ -5754,6 +5754,22 @@
         }
       }
     },
+    "Chat Templates" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat Templates"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "对话模板"
+          }
+        }
+      }
+    },
     "Check" : {
       "localizations" : {
         "de" : {
@@ -10449,6 +10465,7 @@
       }
     },
     "Database Export" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -15194,16 +15211,16 @@
     },
     "Export app preferences and model configurations without conversations." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Export app preferences and model configurations without conversations."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "App-Einstellungen und Modellkonfigurationen ohne Unterhaltungen exportieren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export app preferences and model configurations without conversations."
           }
         },
         "es" : {
@@ -15700,16 +15717,16 @@
     },
     "Export Settings" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Export Settings"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einstellungen exportieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export Settings"
           }
         },
         "es" : {
@@ -16022,16 +16039,16 @@
     },
     "Exported database contains all conversations data and cloud model configurations, but does not include local model data (weights). Use Settings Backup to export application preferences." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exported database contains all conversations data and cloud model configurations, but does not include local model data (weights). Use Settings Backup to export application preferences."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Die exportierte Datenbank enthält alle Gesprächsdaten und Cloud-Modellkonfigurationen, schließt jedoch lokale Modelldaten (Gewichte) aus. Verwende die Einstellungen-Sicherung, um App-Einstellungen zu exportieren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exported database contains all conversations data and cloud model configurations, but does not include local model data (weights). Use Settings Backup to export application preferences."
           }
         },
         "es" : {
@@ -16068,16 +16085,16 @@
     },
     "Exporting" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exporting"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exportiere"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporting"
           }
         },
         "es" : {
@@ -18324,16 +18341,16 @@
     },
     "FlowDown Settings Backup %@" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "FlowDown Settings Backup %@"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "FlowDown-Einstellungen-Backup %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown Settings Backup %@"
           }
         },
         "es" : {
@@ -18370,16 +18387,16 @@
     },
     "FlowDown will close now to apply imported settings." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "FlowDown will close now to apply imported settings."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "FlowDown wird jetzt beendet, um die importierten Einstellungen anzuwenden."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FlowDown will close now to apply imported settings."
           }
         },
         "es" : {
@@ -20720,16 +20737,16 @@
     },
     "Import Settings" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Import Settings"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einstellungen importieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import Settings"
           }
         },
         "es" : {
@@ -20950,16 +20967,16 @@
     },
     "Importing" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importing"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Importiere"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing"
           }
         },
         "es" : {
@@ -27217,50 +27234,18 @@
         }
       }
     },
-    "Chat Templates" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chat Templates"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "对话模板"
-          }
-        }
-      }
-    },
-    "Sync your saved chat templates across devices." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync your saved chat templates across devices."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在设备间同步你保存的对话模板。"
-          }
-        }
-      }
-    },
     "No configurable settings were found to export." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No configurable settings were found to export."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keine konfigurierbaren Einstellungen zum Exportieren gefunden."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No configurable settings were found to export."
           }
         },
         "es" : {
@@ -33009,16 +32994,16 @@
     },
     "Restore a settings backup. The app will exit after import." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore a settings backup. The app will exit after import."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eine Einstellungs-Sicherung wiederherstellen. Die App beendet sich nach dem Import."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore a settings backup. The app will exit after import."
           }
         },
         "es" : {
@@ -35815,16 +35800,16 @@
     },
     "Settings Backup" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings Backup"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einstellungen-Backup"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings Backup"
           }
         },
         "es" : {
@@ -35861,16 +35846,16 @@
     },
     "Settings backup is only supported when using UserDefaults storage." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings backup is only supported when using UserDefaults storage."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einstellungs-Backups werden nur bei Verwendung von UserDefaults unterstützt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings backup is only supported when using UserDefaults storage."
           }
         },
         "es" : {
@@ -35907,16 +35892,16 @@
     },
     "Settings backups only include configurable preferences and model selections. Conversations and local model weights remain separate." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings backups only include configurable preferences and model selections. Conversations and local model weights remain separate."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einstellungs-Backups enthalten nur konfigurierbare Präferenzen und Modellauswahlen. Unterhaltungen und lokale Modellgewichte bleiben getrennt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings backups only include configurable preferences and model selections. Conversations and local model weights remain separate."
           }
         },
         "es" : {
@@ -38858,6 +38843,22 @@
         }
       }
     },
+    "Sync your saved chat templates across devices." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync your saved chat templates across devices."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在设备间同步你保存的对话模板。"
+          }
+        }
+      }
+    },
     "Syncing Scope" : {
       "localizations" : {
         "de" : {
@@ -40976,16 +40977,16 @@
     },
     "The selected settings backup is invalid or from an incompatible version." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The selected settings backup is invalid or from an incompatible version."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Die ausgewählte Einstellungen-Sicherung ist ungültig oder stammt aus einer nicht kompatiblen Version."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected settings backup is invalid or from an incompatible version."
           }
         },
         "es" : {
