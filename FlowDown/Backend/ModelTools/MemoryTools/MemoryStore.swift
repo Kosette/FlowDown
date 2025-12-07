@@ -360,7 +360,7 @@ class MemoryStore: ObservableObject {
 
             let body = filteredMemories.enumerated().map { index, memory -> String in
                 let timestamp = dateFormatter.string(from: memory.creation)
-                return String(localized: "\(index + 1). [\(timestamp)] \(memory.content)")
+                return "\(index + 1). [\(timestamp)] \(memory.content)"
             }
             .joined(separator: "\n")
 

@@ -10,18 +10,20 @@ import ConfigurableKit
 import GlyphixTextFx
 import UIKit
 
+private let defaultBrandingValue = "FlowDown"
+
 class BrandingLabel: GlyphixTextLabel {
     static let configurableObject = ConfigurableObject(
         icon: "pencil",
         title: "Edit Branding Name",
         explain: "Change the branding name display in the app. Leave it empty to use FlowDown.",
         key: "BrandingLabel.Text",
-        defaultValue: "FlowDown",
+        defaultValue: "\(defaultBrandingValue)",
         annotation: .action { controller in
             let alert = AlertInputViewController(
                 title: "Edit Branding Name",
                 message: "Change the branding name display in the app. Leave it empty to use FlowDown.",
-                placeholder: "FlowDown",
+                placeholder: "\(defaultBrandingValue)",
                 text: BrandingLabel.readBrandingValue(),
                 cancelButtonText: "Cancel",
                 doneButtonText: "Set",
@@ -41,7 +43,7 @@ class BrandingLabel: GlyphixTextLabel {
         if let value = UserDefaults.standard.string(forKey: BrandingLabel.configurableObject.key),
            !value.isEmpty
         { return value }
-        return "FlowDown"
+        return defaultBrandingValue
     }
 
     init() {
@@ -50,7 +52,7 @@ class BrandingLabel: GlyphixTextLabel {
         font = .systemFont(ofSize: UIFont.labelFontSize, weight: .semibold)
         isBlurEffectEnabled = true
         countsDown = true
-        text = "FlowDown"
+        text = defaultBrandingValue
 
         setContentHuggingPriority(.required, for: .vertical)
         setContentCompressionResistancePriority(.required, for: .vertical)

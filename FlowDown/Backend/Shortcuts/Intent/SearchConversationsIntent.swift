@@ -125,10 +125,7 @@ enum SearchConversationsIntentHelper {
     ) -> String {
         let title = conversation.title.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
             ?? String(localized: "Conversation")
-        let headerFormat = String(
-            localized: "%@ • %@",
-        )
-        let header = String(format: headerFormat, title, headerFormatter.string(from: conversation.creation))
+        let header = String(format: "%@ • %@", title, headerFormatter.string(from: conversation.creation))
 
         let limitedMessages = messages.prefix(10)
 
@@ -151,10 +148,7 @@ enum SearchConversationsIntentHelper {
                 contents = String(localized: "(No Content)")
             }
 
-            let entryHeaderFormat = String(
-                localized: "[%@] %@",
-            )
-            let entryHeader = String(format: entryHeaderFormat, timestamp, roleDescription)
+            let entryHeader = String(format: "[%@] %@", timestamp, roleDescription)
 
             return [entryHeader, contents].joined(separator: "\n")
         }

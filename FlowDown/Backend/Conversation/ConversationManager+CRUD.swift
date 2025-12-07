@@ -114,11 +114,7 @@ extension ConversationManager {
 
     func duplicateConversation(identifier: Conversation.ID) -> Conversation.ID? {
         let ans = sdb.conversationDuplicate(identifier: identifier) { conv in
-            let title = String(
-                format: String(localized: "%@ Copy"),
-                conv.title,
-            )
-
+            let title = String(localized: "\(conv.title) Copy")
             conv.update(\.title, to: title)
         }
         scanAll()
