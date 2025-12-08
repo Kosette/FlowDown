@@ -367,7 +367,7 @@ extension ModelManager {
                 }
                 let textCollectionEmitter = BalancedEmitter(
                     threshold: 1.0,
-                    frequency: 4,
+                    frequency: 5,
                 ) { chunk in
                     cont.yield(.text(chunk))
                 }
