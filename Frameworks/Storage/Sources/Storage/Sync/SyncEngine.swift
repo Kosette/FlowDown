@@ -385,6 +385,8 @@ public extension SyncEngine {
         }
         SyncEngine.stateSerialization = nil
         initializeSyncEngine()
+        // 确保首次开启或重置后自定义 Zone 已创建，避免后续发送报 zoneNotFound
+        await createCustomZoneIfNeeded(true)
         try await Task.sleep(nanoseconds: 1_000_000_000)
         try await syncEngine.performingFetchChanges()
     }
