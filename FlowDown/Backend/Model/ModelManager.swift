@@ -279,13 +279,13 @@ class ModelManager: NSObject {
 }
 
 extension ModelManager {
-    func responseFormat(for identifier: ModelIdentifier) -> CloudModelResponseFormat {
+    func responseFormat(for identifier: ModelIdentifier) -> CloudModel.ResponseFormat {
         cloudModel(identifier: identifier)?.response_format ?? .default
     }
 
     func updateResponseFormat(
         for identifier: ModelIdentifier,
-        to newFormat: CloudModelResponseFormat,
+        to newFormat: CloudModel.ResponseFormat,
     ) {
         editCloudModel(identifier: identifier) { model in
             model.update(\.response_format, to: newFormat)

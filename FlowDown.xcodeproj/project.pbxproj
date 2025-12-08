@@ -29,6 +29,7 @@
 		50CB4E752DE30A57009C58E1 /* Digger in Frameworks */ = {isa = PBXBuildFile; productRef = 50CB4E742DE30A57009C58E1 /* Digger */; };
 		50DDB1712DDF16F200351E46 /* ListViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 50DDB1702DDF16F200351E46 /* ListViewKit */; };
 		50E3FA092D6D7FB8000405BD /* GPTEncoder in Frameworks */ = {isa = PBXBuildFile; productRef = 50E3FA082D6D7FB8000405BD /* GPTEncoder */; };
+		50F6E0002F00A0B500123456 /* FlowDownModelExchange in Frameworks */ = {isa = PBXBuildFile; productRef = 50F6E0012F00A0B500123456 /* FlowDownModelExchange */; };
 		50FBFC6C2DEA2E5400098EC4 /* XMLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 50FBFC6B2DEA2E5400098EC4 /* XMLCoder */; };
 		86B4FDC22E1190C000C6DC8F /* MCP in Frameworks */ = {isa = PBXBuildFile; productRef = 86B4FDC12E1190C000C6DC8F /* MCP */; };
 		ED16359C2D5C5BDA0081BD0B /* ChatClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = ED16359B2D5C5BDA0081BD0B /* ChatClientKit */; };
@@ -89,6 +90,7 @@
 				50FBFC6C2DEA2E5400098EC4 /* XMLCoder in Frameworks */,
 				50B4CDAC2D4794F90028EB33 /* Digger in Frameworks */,
 				50C9035B2D428DAD00E6E3A8 /* Storage in Frameworks */,
+				50F6E0002F00A0B500123456 /* FlowDownModelExchange in Frameworks */,
 				505FC6192D4945E500F4CB17 /* SPIndicator in Frameworks */,
 				505742472E1B8B8100A26090 /* DpkgVersion in Frameworks */,
 				506373A12EC0D6E200C8A9FB /* AlignedCollectionViewFlowLayout in Frameworks */,
@@ -183,6 +185,7 @@
 				505FC6182D4945E500F4CB17 /* SPIndicator */,
 				50B492932D4F609E00F4D2B3 /* ZIPFoundation */,
 				ED16359B2D5C5BDA0081BD0B /* ChatClientKit */,
+				50F6E0012F00A0B500123456 /* FlowDownModelExchange */,
 				500373C42D62757700585574 /* ScrubberKit */,
 				EDF9A13D2D67788A001D183C /* Respring */,
 				50E3FA082D6D7FB8000405BD /* GPTEncoder */,
@@ -412,7 +415,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZED_STRING_SWIFTUI_SUPPORT = YES;
-				MARKETING_VERSION = 4.1.3;
+				MARKETING_VERSION = 4.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -480,7 +483,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZED_STRING_SWIFTUI_SUPPORT = YES;
-				MARKETING_VERSION = 4.1.3;
+				MARKETING_VERSION = 4.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "$(inherited)";
@@ -978,6 +981,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 50E3FA072D6D7F6A000405BD /* XCRemoteSwiftPackageReference "GPTEncoder" */;
 			productName = GPTEncoder;
+		};
+		50F6E0012F00A0B500123456 /* FlowDownModelExchange */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FlowDownModelExchange;
 		};
 		50FBFC6B2DEA2E5400098EC4 /* XMLCoder */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -8,7 +8,7 @@
 import Foundation
 import Storage
 
-extension CloudModelResponseFormat {
+extension CloudModel.ResponseFormat {
     var localizedTitle: String {
         switch self {
         case .chatCompletions:
@@ -28,8 +28,8 @@ extension CloudModelResponseFormat {
     }
 }
 
-extension CloudModelResponseFormat {
-    static func inferredFormat(fromEndpoint endpoint: String) -> CloudModelResponseFormat? {
+extension CloudModel.ResponseFormat {
+    static func inferredFormat(fromEndpoint endpoint: String) -> CloudModel.ResponseFormat? {
         guard let normalized = normalizeEndpoint(endpoint) else { return nil }
         return allCases.first { $0.matchesNormalizedEndpoint(normalized) }
     }
@@ -37,7 +37,7 @@ extension CloudModelResponseFormat {
 
 // MARK: - Helpers
 
-private extension CloudModelResponseFormat {
+private extension CloudModel.ResponseFormat {
     static func normalizeEndpoint(_ endpoint: String) -> String? {
         var normalized = endpoint.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !normalized.isEmpty else { return nil }

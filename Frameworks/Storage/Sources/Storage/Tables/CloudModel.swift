@@ -8,13 +8,6 @@
 import Foundation
 import WCDBSwift
 
-public enum CloudModelResponseFormat: String, CaseIterable, Codable, Sendable {
-    case chatCompletions
-    case responses
-
-    public static let `default`: CloudModelResponseFormat = .chatCompletions
-}
-
 public final class CloudModel: Identifiable, Codable, Equatable, Hashable, TableNamed, DeviceOwned, TableCodable {
     public static let tableName: String = "CloudModel"
 
@@ -35,7 +28,7 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
     public package(set) var body_fields: String = "" // additional body fields as JSON string
     public package(set) var capabilities: Set<ModelCapabilities> = []
     public package(set) var context: ModelContextLength = .short_8k
-    public package(set) var response_format: CloudModelResponseFormat = .default
+    public package(set) var response_format: CloudModel.ResponseFormat = .default
     // can be used when loading model from our server
     // present to user on the top of the editor page
     public package(set) var comment: String = ""
@@ -61,7 +54,7 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
             BindColumnConstraint(body_fields, isNotNull: true, defaultTo: "")
             BindColumnConstraint(capabilities, isNotNull: true, defaultTo: Set<ModelCapabilities>())
             BindColumnConstraint(context, isNotNull: true, defaultTo: ModelContextLength.short_8k)
-            BindColumnConstraint(response_format, isNotNull: true, defaultTo: CloudModelResponseFormat.default)
+            BindColumnConstraint(response_format, isNotNull: true, defaultTo: CloudModel.ResponseFormat.default)
             BindColumnConstraint(comment, isNotNull: true, defaultTo: "")
             BindColumnConstraint(name, isNotNull: true, defaultTo: "")
 
@@ -105,7 +98,7 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         capabilities: Set<ModelCapabilities> = [],
         comment: String = "",
         name: String = "",
-        response_format: CloudModelResponseFormat = .default,
+        response_format: CloudModel.ResponseFormat = .default,
     ) {
         self.deviceId = deviceId
         self.objectId = objectId
@@ -140,7 +133,7 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         context = try container.decodeIfPresent(ModelContextLength.self, forKey: .context) ?? .short_8k
         comment = try container.decodeIfPresent(String.self, forKey: .comment) ?? ""
         name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
-        response_format = try container.decodeIfPresent(CloudModelResponseFormat.self, forKey: .response_format) ?? .default
+        response_format = try container.decodeIfPresent(CloudModel.ResponseFormat.self, forKey: .response_format) ?? .default
         removed = try container.decodeIfPresent(Bool.self, forKey: .removed) ?? false
     }
 
@@ -169,6 +162,15 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         hasher.combine(comment)
         hasher.combine(name)
         hasher.combine(removed)
+    }
+}
+
+public extension CloudModel {
+    enum ResponseFormat: String, CaseIterable, Codable, Sendable {
+        case chatCompletions
+        case responses
+
+        public static let `default`: CloudModel.ResponseFormat = .chatCompletions
     }
 }
 
@@ -236,10 +238,10 @@ extension ModelContextLength: ColumnCodable {
     }
 }
 
-extension CloudModelResponseFormat: ColumnCodable {
+extension CloudModel.ResponseFormat: ColumnCodable {
     public init?(with value: WCDBSwift.Value) {
         let text = value.stringValue
-        self = CloudModelResponseFormat(rawValue: text) ?? .default
+        self = CloudModel.ResponseFormat(rawValue: text) ?? .default
     }
 
     public func archivedValue() -> WCDBSwift.Value {

@@ -5,6 +5,9 @@
       location = "group:FlowDown.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Examples/ModelExchange.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Frameworks/Logger">
    </FileRef>
    <FileRef
@@ -15,5 +18,8 @@
    </FileRef>
    <FileRef
       location = "group:Frameworks/RunestoneEditor">
+   </FileRef>
+   <FileRef
+      location = "group:Frameworks/FlowDownModelExchange">
    </FileRef>
 </Workspace>

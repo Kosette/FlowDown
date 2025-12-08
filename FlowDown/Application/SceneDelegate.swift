@@ -7,6 +7,7 @@
 
 import Combine
 import ConfigurableKit
+import FlowDownModelExchange
 import Storage
 import UIKit
 
@@ -33,6 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         window.makeKeyAndVisible()
 
+        ModelExchangeCoordinator.shared.registerPresenter(mainController)
         UIUserInterfaceStyle.reapplyConfiguredStyle()
 
         for urlContext in connectionOptions.urlContexts {
@@ -71,9 +73,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         try? FileManager.default.startDownloadingUbiquitousItem(at: url)
         do {
             let model = try ModelManager.shared.importCloudModel(at: url)
-            mainController.queueBootMessage(text: String(localized: "Successfully imported model \(model.auxiliaryIdentifier)"))
+            mainController.queueBootMessage(
+                text: "Successfully imported model \(model.auxiliaryIdentifier)",
+            )
         } catch {
-            mainController.queueBootMessage(text: String(localized: "Failed to import model: \(error.localizedDescription)"))
+            mainController.queueBootMessage(
+                text: "Failed to import model: \(error.localizedDescription)",
+            )
         }
     }
 
@@ -88,10 +94,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             Task { @MainActor in
                 ChatTemplateManager.shared.addTemplate(template)
             }
-            mainController.queueBootMessage(text: String(localized: "Successfully imported \(template.name)"))
+            mainController.queueBootMessage(text: "Successfully imported \(template.name)")
         } catch {
             Logger.app.errorFile("failed to import template from URL: \(url), error: \(error)")
-            mainController.queueBootMessage(text: String(localized: "Failed to import template: \(error.localizedDescription)"))
+            mainController.queueBootMessage(
+                text: "Failed to import template: \(error.localizedDescription)",
+            )
         }
     }
 
@@ -111,17 +119,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             } else if !server.name.isEmpty {
                 server.name
             } else {
-                "MCP Server"
+                String(localized: "MCP Server")
             }
-            mainController.queueBootMessage(text: String(localized: "Successfully imported MCP server \(serverName)"))
+            mainController.queueBootMessage(
+                text: "Successfully imported MCP server \(serverName)",
+            )
         } catch {
             Logger.app.errorFile("failed to import MCP server from URL: \(url), error: \(error)")
-            mainController.queueBootMessage(text: String(localized: "Failed to import MCP server: \(error.localizedDescription)"))
+            mainController.queueBootMessage(
+                text: "Failed to import MCP server: \(error.localizedDescription)",
+            )
         }
     }
 
     private func handleFlowDownURL(_ url: URL) {
         Logger.app.infoFile("handling incoming message: \(url)")
+        if let handled = ModelExchangeAPI.resolveInputScheme(url) {
+            if handled == false {
+                mainController.queueBootMessage(
+                    text: "Model exchange request failed validation",
+                )
+            }
+            return
+        }
         guard let host = url.host(), !host.isEmpty else { return }
         switch host {
         case "new": handleNewMessageURL(url)

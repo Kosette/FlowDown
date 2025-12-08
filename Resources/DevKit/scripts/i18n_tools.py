@@ -147,6 +147,18 @@ def update_missing_translations(
             current_unit = locs.get(language, {}).get("stringUnit", {})
             current_value = current_unit.get("value", "").strip()
             if current_value:
+                if (
+                    current_value == english_value
+                    and translation
+                    and translation != english_value
+                ):
+                    locs[language] = {
+                        "stringUnit": {
+                            "state": "translated",
+                            "value": translation,
+                        }
+                    }
+                    counts["applied_translations"] += 1
                 continue
 
             locs[language] = {

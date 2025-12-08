@@ -277,6 +277,52 @@
         }
       }
     },
+    "%@ is requesting access to your models." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ fordert Zugriff auf Ihre Modelle an."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is requesting access to your models."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ solicita acceso a tus modelos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ demande l’accès à vos modèles."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ があなたのモデルへのアクセスを要求しています。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@이(가) 모델 접근을 요청했습니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 正在请求访问你的模型。"
+          }
+        }
+      }
+    },
     "%1$d servers imported successfully, %2$d failed." : {
       "localizations" : {
         "de" : {
@@ -1286,6 +1332,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加模型"
+          }
+        }
+      }
+    },
+    "Add models in Settings before sharing." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add models in Settings before sharing."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请先在设置中添加模型再进行共享。"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Füge in den Einstellungen Modelle hinzu, bevor du teilst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade modelos en Ajustes antes de compartir."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez des modèles dans Réglages avant de partager."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "共有する前に設定でモデルを追加してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공유하기 전에 설정에서 모델을 추가하세요."
           }
         }
       }
@@ -2578,6 +2670,52 @@
         }
       }
     },
+    "Analyze images, screenshots, and diagrams with OCR support." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilder, Screenshots und Diagramme mit OCR-Unterstützung analysieren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analyze images, screenshots, and diagrams with OCR support."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analiza imágenes, capturas y diagramas con soporte OCR."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analysez images, captures et diagrammes avec prise en charge OCR."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像・スクリーンショット・図表を OCR 対応で解析。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지, 스크린샷, 다이어그램을 OCR과 함께 분석합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "解析图片、截图和图表，支持 OCR。"
+          }
+        }
+      }
+    },
     "Analyze the conversation and generate a reusable chat template. Extract the core purpose, create a concise name, suggest an appropriate emoji, and write a system prompt that captures the essence of the conversation pattern." : {
       "localizations" : {
         "de" : {
@@ -3173,6 +3311,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apple 智能在设备上提供离线可用的模型。"
+          }
+        }
+      }
+    },
+    "Apple Shortcuts" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Kurzbefehle"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Shortcuts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atajos de Apple"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raccourcis Apple"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appleショートカット"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 단축어"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快捷指令"
           }
         }
       }
@@ -4051,6 +4235,52 @@
         }
       }
     },
+    "Audio Processing" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audiobearbeitung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio Processing"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Procesamiento de audio"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traitement audio"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音声処理"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오디오 처리"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音频处理"
+          }
+        }
+      }
+    },
     "Authorized" : {
       "localizations" : {
         "de" : {
@@ -4093,6 +4323,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已授权"
+          }
+        }
+      }
+    },
+    "Automate workflows and Siri intents deeply integrated with OS." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisiere Workflows und Siri-Intents, tief ins OS integriert."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automate workflows and Siri intents deeply integrated with OS."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatiza flujos de trabajo e intents de Siri con integración profunda en el SO."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisez workflows et intentions Siri, intégrés en profondeur au système."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OS と深く統合されたワークフローと Siri インテントを自动化。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OS에 깊이 통합된 워크플로와 Siri 인텐트를 자동화합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "深度集成操作系统的自动化工作流与 Siri 意图。"
           }
         }
       }
@@ -4922,6 +5198,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "日历事件"
+          }
+        }
+      }
+    },
+    "Calendar Tools" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kalender-Tools"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendar Tools"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herramientas de calendario"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outils calendrier"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "カレンダーツール"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캘린더 도구"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日历工具"
           }
         }
       }
@@ -5756,34 +6078,28 @@
     },
     "Chat Templates" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chat Templates"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "对话模板"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chat Templates"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chat-Vorlagen"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat Templates"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plantillas de chat"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèles de chat"
           }
         },
         "ja" : {
@@ -5796,6 +6112,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "채팅 템플릿"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聊天模板"
           }
         }
       }
@@ -7687,7 +8009,6 @@
       }
     },
     "Configure which data groups sync with iCloud." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7775,6 +8096,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已配置"
+          }
+        }
+      }
+    },
+    "Confirm Sharing" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teilen bestätigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Sharing"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar compartición"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmer le partage"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "共有を確認"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공유 확인"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认共享"
           }
         }
       }
@@ -7913,6 +8280,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "连接到 OLLAMA"
+          }
+        }
+      }
+    },
+    "Connect to any OpenAI-compatible API or custom endpoint." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbinde dich mit jeder OpenAI-kompatiblen API oder einem eigenen Endpoint."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect to any OpenAI-compatible API or custom endpoint."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conéctate a cualquier API compatible con OpenAI o a un endpoint personalizado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez-vous à toute API compatible OpenAI ou à un endpoint personnalisé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OpenAI 互換 API やカスタムエンドポイントに接続できます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "어떤 OpenAI 호환 API나 사용자 정의 엔드포인트에도 연결하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "连接任何兼容 OpenAI 的 API 或自定义端点。"
           }
         }
       }
@@ -8469,6 +8882,52 @@
         }
       }
     },
+    "Control chain-of-thought budgets for complex problem solving." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steuere Chain-of-Thought-Budgets für komplexe Problemlösung."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control chain-of-thought budgets for complex problem solving."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controla los presupuestos de chain-of-thought para resolver problemas complejos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contrôlez les budgets de chain-of-thought pour des problèmes complexes."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "複雑な課题に向けて思考チェーンの予算を管理。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "복잡한 문제 해결을 위해 CoT 예산을 제어합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "控制链式思考预算，解决复杂问题。"
+          }
+        }
+      }
+    },
     "Conversation" : {
       "localizations" : {
         "de" : {
@@ -8792,7 +9251,6 @@
       }
     },
     "Conversations, Messages, Attachments" : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -9708,6 +10166,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "创建一个新对话，并可选择切换到该对话。"
+          }
+        }
+      }
+    },
+    "Create and reuse custom personas and system prompts." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigene Personas und System-Prompts erstellen und wiederverwenden."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create and reuse custom personas and system prompts."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea y reutiliza personas personalizadas y prompts de sistema."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créez et réutilisez des personas et invites système personnalisées."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "カスタム人格とシステムプロンプトを作成・再利用。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "맞춤 페르소나와 시스템 프롬프트를 만들고 재사용하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "创建并复用自定义人格与系统提示。"
           }
         }
       }
@@ -11414,53 +11918,6 @@
         }
       }
     },
-    "Delete this model from your local storage." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieses Modell aus deinem lokalen Speicher löschen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete this model from your local storage."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eliminar este modelo de tu almacenamiento local."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimez ce modèle de votre stockage local."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "このモデルをローカルストレージから削除します。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "이 모델을 로컬 저장소에서 삭제합니다."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "从本地储存中删除此模型。"
-          }
-        }
-      }
-    },
     "Delete this template permanently." : {
       "localizations" : {
         "de" : {
@@ -12979,53 +13436,6 @@
         }
       }
     },
-    "Edit Content" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inhalt bearbeiten"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Content"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editar contenido"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modifier le contenu"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "内容を編集"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "콘텐츠 편집"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "编辑内容"
-          }
-        }
-      }
-    },
     "Edit Endpoint" : {
       "localizations" : {
         "de" : {
@@ -13529,53 +13939,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "编辑模板"
-          }
-        }
-      }
-    },
-    "Edit Token" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Token bearbeiten"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Token"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editar token"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modifier le jeton"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "トークンを編集"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "토큰 편집"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "编辑令牌"
           }
         }
       }
@@ -14087,7 +14450,6 @@
       }
     },
     "Enable iCloud sync to keep data consistent across your devices. Turning off does not delete existing data." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -15142,6 +15504,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "执行了 %lld 个工具"
+          }
+        }
+      }
+    },
+    "Expand capabilities with Model Context Protocol servers." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erweitere Funktionen mit Model-Context-Protocol-Servern."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expand capabilities with Model Context Protocol servers."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amplía capacidades con servidores Model Context Protocol."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étendez les capacités avec des serveurs Model Context Protocol."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model Context Protocol サーバーで機能拡张。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model Context Protocol 서버로 기능을 확장하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过 Model Context Protocol 服务器扩展能力。"
           }
         }
       }
@@ -16568,53 +16976,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无法解码数据。"
-          }
-        }
-      }
-    },
-    "Failed to delete iCloud data. Please try again later" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud-Daten konnten nicht gelöscht werden. Bitte später erneut versuchen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to delete iCloud data. Please try again later"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se pudieron eliminar los datos de iCloud. Inténtalo de nuevo más tarde"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de la suppression des données iCloud. Réessayez plus tard."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud データの削除に失敗しました。後でもう一度お試しください。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud 데이터를 삭제하지 못했습니다. 나중에 다시 시도하세요"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "删除 iCloud 数据失败，可稍后重试"
           }
         }
       }
@@ -18645,53 +19006,6 @@
         }
       }
     },
-    "Full Refresh from iCloud" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vollständige Aktualisierung aus iCloud"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Full Refresh from iCloud"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualización completa desde iCloud"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualisation complète depuis iCloud"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud からフルリフレッシュ"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud에서 전체 새로 고침"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "完全刷新 iCloud 数据"
-          }
-        }
-      }
-    },
     "General" : {
       "localizations" : {
         "de" : {
@@ -19336,6 +19650,52 @@
         }
       }
     },
+    "Get Started" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erste Schritte"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "はじめる"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작하기"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始使用"
+          }
+        }
+      }
+    },
     "Google Search" : {
       "localizations" : {
         "de" : {
@@ -19844,7 +20204,6 @@
       }
     },
     "iCloud synchronization is not enabled" : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -23250,6 +23609,52 @@
         }
       }
     },
+    "Live internet access with citations, scraping, and verification." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live-Internetzugriff mit Zitaten, Scraping und Verifizierung."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live internet access with citations, scraping, and verification."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acceso en vivo a internet con citas, scraping y verificación."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accès internet en direct avec citations, scraping et vérification."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "引用・スクレイピング・検证を備えたライブなインターネットアクセス。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실시간 인터넷 접근, 인용·스크래핑·검증 지원."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "实时联网，提供引文、抓取和校验。"
+          }
+        }
+      }
+    },
     "Local" : {
       "localizations" : {
         "de" : {
@@ -23342,6 +23747,52 @@
         }
       }
     },
+    "Local Intelligence" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokale Intelligenz"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local Intelligence"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inteligencia local"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intelligence locale"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ローカルインテリジェンス"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로컬 인텔리전스"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本地智能"
+          }
+        }
+      }
+    },
     "Local Model" : {
       "localizations" : {
         "de" : {
@@ -23384,53 +23835,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "本地模型"
-          }
-        }
-      }
-    },
-    "Local Model Editor" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lokaler Modell-Editor"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Local Model Editor"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editor de modelos locales"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Éditeur de modèle local"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ローカルモデルエディタ"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "로컬 모델 편집기"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "编辑本地模型"
           }
         }
       }
@@ -24310,96 +24714,48 @@
         }
       }
     },
-    "Manual Refresh Mode" : {
-      "extractionState" : "manual",
+    "MCP Integration" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Manueller Aktualisierungsmodus"
+            "value" : "MCP-Integration"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Manual Refresh Mode"
+            "value" : "MCP Integration"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modo de actualización manual"
+            "value" : "Integración MCP"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mode d’actualisation manuel"
+            "value" : "Intégration MCP"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "手動リフレッシュモード"
+            "value" : "MCP 連携"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "수동 새로 고침 모드"
+            "value" : "MCP 통합"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "手动刷新模式"
-          }
-        }
-      }
-    },
-    "Manually fetch the latest changes from iCloud." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neueste Änderungen manuell aus iCloud abrufen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manually fetch the latest changes from iCloud."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obtén manualmente los últimos cambios de iCloud."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Récupérez manuellement les dernières modifications depuis iCloud."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud から最新の変更を手動で取得します。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud에서 최신 변경 사항을 수동으로 가져옵니다."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "立即拉取更新"
+            "value" : "MCP 集成"
           }
         }
       }
@@ -24451,7 +24807,6 @@
       }
     },
     "MCP Servers" : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -24913,7 +25268,6 @@
       }
     },
     "Memory" : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -25881,6 +26235,98 @@
         }
       }
     },
+    "Model encryption or delivery failed: %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modellverschlüsselung oder Zustellung fehlgeschlagen: %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model encryption or delivery failed: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El cifrado o envío del modelo falló: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiffrement ou livraison du modèle échoué : %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モデルの暗号化または配信に失敗しました: %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모델 암호화 또는 전달에 실패했습니다: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模型加密或分发失败：%@"
+          }
+        }
+      }
+    },
+    "Model exchange request failed validation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model exchange request failed validation"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模型交换请求验证失败"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anfrage zum Modellaustausch hat die Validierung nicht bestanden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La solicitud de intercambio de modelos no superó la validación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La demande d’échange de modèle a échoué à la validation"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モデル交換リクエストの検証に失敗しました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모델 교환 요청이 검증을 통과하지 못했습니다"
+          }
+        }
+      }
+    },
     "Model Identifier" : {
       "localizations" : {
         "de" : {
@@ -26387,8 +26833,53 @@
         }
       }
     },
+    "Model(s) listed here are capable of: %@. Your models are encrypted during this sharing session, and can only be read by %@. But be aware that models may contain sensitive information such as credentials or secrets." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die hier aufgeführten Modelle unterstützen: %1$@. Ihre Modelle sind während dieser Freigabe verschlüsselt und können nur von %2$@ gelesen werden. Beachten Sie, dass Modelle sensible Informationen wie Anmeldedaten enthalten können."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model(s) listed here are capable of: %1$@. Your models are encrypted during this sharing session, and can only be read by %2$@. But be aware that models may contain sensitive information such as credentials or secrets."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los modelos listados aquí son capaces de: %1$@. Tus modelos están cifrados durante esta sesión de uso compartido y solo %2$@ puede leerlos. Ten en cuenta que los modelos pueden contener información sensible como credenciales o secretos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les modèles listés ici sont capables de : %1$@. Vos modèles sont chiffrés pendant cette session de partage et ne peuvent être lus que par %2$@. Notez que les modèles peuvent contenir des informations sensibles comme des identifiants ou des secrets."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ここに一覧表示されたモデルは %1$@ に対応しています。この共有セッション中、モデルは暗号化され、%2$@ だけが読み取れます。ただし、モデルには資格情報などの機密情報が含まれる場合があります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "여기에 나열된 모델은 %1$@을(를) 지원합니다. 이 공유 세션 동안 모델은 암호화되며 %2$@만 읽을 수 있습니다. 모델에는 자격 증명 등 민감한 정보가 포함될 수 있으니 주의하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此处列出的模型具备：%1$@。在此次共享会话期间，模型已加密，仅由 %2$@ 可读取。但请注意，模型可能包含凭据等敏感信息。"
+          }
+        }
+      }
+    },
     "Models" : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -26430,6 +26921,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "模型"
+          }
+        }
+      }
+    },
+    "Models may contain credentials or secrets. Share with %@?" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modelle können Anmeldedaten oder Geheimnisse enthalten. Mit %@ teilen?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Models may contain credentials or secrets. Share with %@?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los modelos pueden contener credenciales o secretos. ¿Compartir con %@?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les modèles peuvent contenir des identifiants ou des secrets. Partager avec %@ ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モデルに認証情報や機密が含まれる可能性があります。%@ と共有しますか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모델에 자격 증명이나 비밀이 포함될 수 있습니다. %@와 공유할까요?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模型可能包含凭据或机密。与 %@ 共享？"
           }
         }
       }
@@ -26572,53 +27109,6 @@
         }
       }
     },
-    "More Options" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weitere Optionen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "More Options"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Más opciones"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plus d’options"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "その他のオプション"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "추가 옵션"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "更多选项"
-          }
-        }
-      }
-    },
     "Name" : {
       "localizations" : {
         "de" : {
@@ -26707,6 +27197,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "名称：%@"
+          }
+        }
+      }
+    },
+    "Native support for Apple's foundation models and ecosystem." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Native Unterstützung für Apples Foundation-Modelle und Ökosystem."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Native support for Apple's foundation models and ecosystem."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compatibilidad nativa con los modelos foundation de Apple y su ecosistema."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prise en charge native des modèles foundation d’Apple et de son écosystème."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple のファウンデーションモデルとエコシステムをネイティブにサポート。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple의 파운데이션 모델과 생태계를 네이티브로 지원합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "原生支持 Apple 的基础模型与生态。"
           }
         }
       }
@@ -27355,6 +27891,52 @@
         }
       }
     },
+    "No data collection. Your chats and keys stay on your device." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Datenerfassung. Deine Chats und Schlüssel bleiben auf deinem Gerät."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data collection. Your chats and keys stay on your device."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin recopilación de datos. Tus chats y claves permanecen en tu dispositivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune collecte de données. Vos conversations et clés restent sur votre appareil."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "データ収集は行いません。チャットとキーはデバイスに残ります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "데이터를 수집하지 않습니다. 채팅과 키는 기기에만 저장됩니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不收集数据。你的聊天和密钥都留在本地设备。"
+          }
+        }
+      }
+    },
     "No events found between %@ and %@." : {
       "localizations" : {
         "de" : {
@@ -27765,6 +28347,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "未选择模型"
+          }
+        }
+      }
+    },
+    "No Models Available" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Models Available"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有可用的模型"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Modelle verfügbar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay modelos disponibles"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun modèle disponible"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "利用できるモデルがありません"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용 가능한 모델이 없습니다"
           }
         }
       }
@@ -28640,6 +29268,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "打开设置"
+          }
+        }
+      }
+    },
+    "Open Source" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Source"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Source"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código abierto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open source"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "オープンソース"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오픈 소스"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开源"
           }
         }
       }
@@ -29564,53 +30238,6 @@
         }
       }
     },
-    "Pause automatic background syncing. Use Refresh to pull changes when needed." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automatische Hintergrundsynchronisierung pausieren. Verwende Aktualisieren, um bei Bedarf Änderungen zu holen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause automatic background syncing. Use Refresh to pull changes when needed."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pausa la sincronización automática en segundo plano. Usa Actualizar para traer cambios cuando sea necesario."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mettez en pause la synchronisation automatique en arrière-plan. Utilisez Actualiser pour récupérer les changements si besoin."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "バックグラウンド同期を一時停止します。必要に応じて更新を実行してください。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "자동 백그라운드 동기화를 일시 중지합니다. 필요할 때 새로 고침으로 변경 사항을 가져오세요."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "暂停自动后台同步；需要时使用“刷新”手动拉取。"
-          }
-        }
-      }
-    },
     "PDF file is empty." : {
       "localizations" : {
         "de" : {
@@ -29889,6 +30516,52 @@
         }
       }
     },
+    "Pick at least one model to continue." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wähle mindestens ein Modell, um fortzufahren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pick at least one model to continue."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige al menos un modelo para continuar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez au moins un modèle pour continuer."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "続行するには少なくとも1つモデルを選択してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계속하려면 최소 한 개의 모델을 선택하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "至少选择一个模型以继续。"
+          }
+        }
+      }
+    },
     "Pick New Icon" : {
       "localizations" : {
         "de" : {
@@ -29931,6 +30604,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选取新图标"
+          }
+        }
+      }
+    },
+    "Plan schedules and manage events directly within the chat." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plane Termine und verwalte Ereignisse direkt im Chat."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plan schedules and manage events directly within the chat."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planifica agendas y gestiona eventos directamente en el chat."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planifiez vos horaires et gérez les événements directement dans le chat."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "チャット内でスケジュールを計画しイベントを管理。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "채팅 안에서 일정 계획과 이벤트 관리를 바로 합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在对话中规划日程并管理事件。"
           }
         }
       }
@@ -31085,6 +31804,52 @@
         }
       }
     },
+    "Privacy First" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenschutz zuerst"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy First"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacidad primero"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Priorité à la confidentialité"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシー最優先"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프라이버시 우선"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐私优先"
+          }
+        }
+      }
+    },
     "Privacy Policy" : {
       "localizations" : {
         "de" : {
@@ -31822,6 +32587,52 @@
         }
       }
     },
+    "Ready to Use" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sofort einsatzbereit"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready to Use"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo para usar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prêt à l’emploi"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すぐに使える"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "즉시 사용 가능"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "即刻可用"
+          }
+        }
+      }
+    },
     "Reasoning Budget" : {
       "localizations" : {
         "de" : {
@@ -31914,6 +32725,52 @@
         }
       }
     },
+    "Reasoning Mode" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reasoning-Modus"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reasoning Mode"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo de razonamiento"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode raisonnement"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "推論モード"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "추론 모드"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "推理模式"
+          }
+        }
+      }
+    },
     "Reasoning Parameters" : {
       "localizations" : {
         "de" : {
@@ -31956,53 +32813,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "推理参数"
-          }
-        }
-      }
-    },
-    "Rebuild sync state and fetch everything new from iCloud. Local data is preserved." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synchronisierungsstatus neu aufbauen und alles neu aus iCloud holen. Lokale Daten bleiben erhalten."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rebuild sync state and fetch everything new from iCloud. Local data is preserved."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reconstruye el estado de sincronización y obtiene todo de nuevo desde iCloud. Los datos locales se conservan."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reconstruisez l’état de synchro et récupérez tout à nouveau depuis iCloud. Les données locales sont conservées."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "同期状態を再構築し、iCloud からすべて取得します。ローカルデータは保持されます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "동기화 상태를 재구성하고 iCloud에서 모든 새 데이터를 가져옵니다. 로컬 데이터는 보존됩니다."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重建同步状态并拉取 iCloud 上的所有最新内容。本地数据将被保留。"
           }
         }
       }
@@ -32283,53 +33093,6 @@
         }
       }
     },
-    "Refresh from iCloud" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aus iCloud aktualisieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Refresh from iCloud"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualizar desde iCloud"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualiser depuis iCloud"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud から更新"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud에서 새로 고침"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "手动从 iCloud 刷新"
-          }
-        }
-      }
-    },
     "Refreshed" : {
       "localizations" : {
         "de" : {
@@ -32377,7 +33140,6 @@
       }
     },
     "Refreshing..." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -33941,6 +34703,52 @@
         }
       }
     },
+    "Run private, offline MLX models directly on Apple Silicon." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Private, offline MLX-Modelle direkt auf Apple Silicon ausführen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run private, offline MLX models directly on Apple Silicon."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ejecuta modelos MLX privados y sin conexión directamente en Apple Silicon."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exécutez des modèles MLX privés hors ligne directement sur Apple Silicon."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライベートなオフライン MLX モデルを Apple Silicon 上で直接実行。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인용 오프라인 MLX 모델을 Apple Silicon에서 바로 실행합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Apple Silicon 上直接运行私有离线的 MLX 模型。"
+          }
+        }
+      }
+    },
     "Runtime System Prompt" : {
       "localizations" : {
         "de" : {
@@ -34213,6 +35021,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "范围：%@"
+          }
+        }
+      }
+    },
+    "Seamlessly sync conversations across iPhone, iPad, and Mac." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unterhaltungen nahtlos über iPhone, iPad und Mac synchronisieren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seamlessly sync conversations across iPhone, iPad, and Mac."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincroniza conversaciones sin interrupciones entre iPhone, iPad y Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchronisez vos conversations sans effort entre iPhone, iPad et Mac."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone、iPad、Mac で会話をシームレスに同期します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone, iPad, Mac 전반에 대화를 끊김 없이 동기화합니다。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 iPhone、iPad 和 Mac 间无缝同步会话。"
           }
         }
       }
@@ -34857,6 +35711,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已找到 %lld 个网站，正在获取数据"
+          }
+        }
+      }
+    },
+    "Select a model" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modell auswählen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a model"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona un modelo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélectionnez un modèle"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モデルを選択"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모델을 선택하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择一个模型"
           }
         }
       }
@@ -36011,6 +36911,98 @@
         }
       }
     },
+    "Share Failed" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teilen fehlgeschlagen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Failed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al compartir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec du partage"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "共有に失敗しました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공유 실패"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "共享失败"
+          }
+        }
+      }
+    },
+    "Share Models" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modelle teilen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Models"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir modelos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager des modèles"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モデルを共有"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모델 공유"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "共享模型"
+          }
+        }
+      }
+    },
     "Short" : {
       "comment" : "Model Context",
       "localizations" : {
@@ -36887,6 +37879,52 @@
         }
       }
     },
+    "Smart Attachments" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intelligente Anhänge"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smart Attachments"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adjuntos inteligentes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pièces jointes intelligentes"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スマート添付"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스마트 첨부"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "智能附件"
+          }
+        }
+      }
+    },
     "Smileys & Emotion" : {
       "comment" : "Emoji Category",
       "localizations" : {
@@ -37252,6 +38290,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "稳定 @ 0.5"
+          }
+        }
+      }
+    },
+    "Start chatting instantly with complimentary Pollinations AI models." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sofort mit den kostenlosen Pollinations-AI-Modellen chatten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start chatting instantly with complimentary Pollinations AI models."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empieza a chatear al instante con los modelos de IA de Pollinations incluidos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discutez immédiatement avec les modèles IA Pollinations inclus."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同梱の Pollinations AI モデルですぐにチャット开始。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "포함된 Pollinations AI 모델로 바로 대화를 시작하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "内置 Pollinations AI 模型，开箱即聊。"
           }
         }
       }
@@ -37992,6 +39076,52 @@
         }
       }
     },
+    "Summarize PDFs and text files locally before sending." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDFs und Textdateien lokal zusammenfassen, bevor du sie sendest."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarize PDFs and text files locally before sending."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume PDFs y archivos de texto localmente antes de enviar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumez localement PDFs et fichiers texte avant envoi."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "送信前に PDF とテキストをローカルで要约。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "보내기 전에 PDF와 텍스트 파일을 로컬에서 요약합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在发送前本地总结 PDF 与文本文件。"
+          }
+        }
+      }
+    },
     "Summarize Text" : {
       "localizations" : {
         "de" : {
@@ -38592,7 +39722,6 @@
       }
     },
     "Sync chats and their messages and files." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -38639,7 +39768,6 @@
       }
     },
     "Sync cloud model configurations." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -38686,7 +39814,6 @@
       }
     },
     "Sync configured MCP connections." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -38733,7 +39860,6 @@
       }
     },
     "Sync Scope" : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -38780,7 +39906,6 @@
       }
     },
     "Sync your AI memory entries." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -38828,34 +39953,28 @@
     },
     "Sync your saved chat templates across devices." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync your saved chat templates across devices."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在设备间同步你保存的对话模板。"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync your saved chat templates across devices."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Synchronisiere deine gespeicherten Chat-Vorlagen auf allen Geräten."
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync your saved chat templates across devices."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sincroniza tus plantillas de chat guardadas entre dispositivos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync your saved chat templates across devices."
           }
         },
         "ja" : {
@@ -38868,6 +39987,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "저장한 채팅 템플릿을 기기 간에 동기화하세요。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在设备间同步你保存的对话模板。"
           }
         }
       }
@@ -43979,6 +45104,52 @@
         }
       }
     },
+    "Transcribe voice notes and process audio attachments." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprachmemos transkribieren und Audioanhänge verarbeiten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcribe voice notes and process audio attachments."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcribe notas de voz y procesa adjuntos de audio."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcrivez des notes vocales et traitez les pièces jointes audio."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音声メモを文字起こしし、音声添付を処理します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "음성 메모를 전사하고 오디오 첨부파일을 처리합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "转录语音笔记并处理音频附件。"
+          }
+        }
+      }
+    },
     "Transcript Stopped" : {
       "localizations" : {
         "de" : {
@@ -44067,6 +45238,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "转录"
+          }
+        }
+      }
+    },
+    "Transparent architecture. Verify the code, trust the process." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transparente Architektur. Prüfe den Code, vertraue dem Prozess."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transparent architecture. Verify the code, trust the process."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquitectura transparente. Verifica el código, confía en el proceso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Architecture transparente. Vérifiez le code, faites confiance au processus."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "透明なアーキテクチャ。コードを検证して、プロセスを信頼。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "투명한 아키텍처. 코드를 확인하고 프로세스를 믿으세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "透明架构，你可以审查代码，更放心。"
           }
         }
       }
@@ -44165,7 +45382,6 @@
       }
     },
     "Turning off sync only pauses future updates. Existing data stays in place. Re‑enable later to fetch and resume syncing." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -45449,6 +46665,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "唯一模型标识符"
+          }
+        }
+      }
+    },
+    "Universal Cloud" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Universelle Cloud"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Universal Cloud"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nube universal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cloud universel"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ユニバーサルクラウド"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "유니버설 클라우드"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通用云接入"
           }
         }
       }
@@ -47937,6 +49199,52 @@
         }
       }
     },
+    "Visual Understanding" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visuelles Verständnis"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visual Understanding"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprensión visual"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compréhension visuelle"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ビジュアル理解"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시각적 이해"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视觉理解"
+          }
+        }
+      }
+    },
     "Warning" : {
       "localizations" : {
         "de" : {
@@ -49133,6 +50441,52 @@
         }
       }
     },
+    "Welcome to" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommen bei"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenido a"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue sur"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ようこそ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "환영합니다"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "欢迎使用"
+          }
+        }
+      }
+    },
     "What content should be classified?" : {
       "localizations" : {
         "de" : {
@@ -49548,7 +50902,6 @@
       }
     },
     "When sync is off, no new changes are shared. Existing data remains intact. Re‑enable sync to fetch the latest state before resuming." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -50464,6 +51817,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "你的模型请求调用工具：%@"
+          }
+        }
+      }
+    },
+    "Your privacy-first AI workspace. Blend local intelligence with powerful cloud models in one seamless experience." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein datenschutzfokussierter KI-Arbeitsbereich. Kombiniere lokale Intelligenz nahtlos mit leistungsstarken Cloud-Modellen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your privacy-first AI workspace. Blend local intelligence with powerful cloud models in one seamless experience."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu espacio de trabajo de IA centrado en la privacidad. Combina inteligencia local con potentes modelos en la nube en una experiencia sin fisuras."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre espace de travail IA axé sur la confidentialité. Alliez intelligence locale et puissants modèles cloud dans une expérience fluide."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシーを最優先した AI ワークスペース。ローカルの知能と強力なクラウドモデルをシームレスに融合します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프라이버시 우선 AI 워크스페이스. 로컬 인텔리전스와 강력한 클라우드 모델을 하나로 매끄럽게 결합합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你的隐私优先 AI 工作空间，将本地智能与强大云模型无缝融合。"
           }
         }
       }

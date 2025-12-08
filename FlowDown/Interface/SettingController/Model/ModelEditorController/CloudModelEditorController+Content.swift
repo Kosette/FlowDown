@@ -430,7 +430,7 @@ private extension CloudModelEditorController {
         view.use { [weak self, weak view] in
             guard let self, let view else { return [] }
             let selected = ModelManager.shared.responseFormat(for: identifier)
-            return CloudModelResponseFormat.allCases.map { format in
+            return CloudModel.ResponseFormat.allCases.map { format in
                 UIAction(
                     title: format.localizedTitle,
                     state: format == selected ? .on : .off,

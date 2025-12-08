@@ -211,7 +211,7 @@ extension CloudModelEditorController {
 
         guard !trimmed.isEmpty else { return }
 
-        guard let inferredFormat = CloudModelResponseFormat.inferredFormat(fromEndpoint: trimmed) else {
+        guard let inferredFormat = CloudModel.ResponseFormat.inferredFormat(fromEndpoint: trimmed) else {
             presentEndpointFormatMismatchAlert()
             return
         }

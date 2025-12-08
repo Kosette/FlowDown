@@ -11,8 +11,8 @@ import Foundation
 import UIKit
 
 extension MainController {
-    func queueBootMessage(text: String) {
-        bootAlertMessageQueue.append(text)
+    func queueBootMessage(text: String.LocalizationValue) {
+        bootAlertMessageQueue.append(String(localized: text))
         NSObject.cancelPreviousPerformRequests(
             withTarget: self,
             selector: #selector(presentNextBootMessage),
@@ -50,6 +50,21 @@ extension MainController {
             if self.chatView.conversationIdentifier == conversation.id {
                 self.sendMessageToCurrentConversation(text)
             }
+        }
+    }
+
+    func scheduleWelcomeIfNeeded() {
+        guard WelcomeExperience.shouldPresent else { return }
+        guard !hasScheduledWelcome else { return }
+        hasScheduledWelcome = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self else { return }
+            guard WelcomeExperience.shouldPresent else { return }
+            guard presentedViewController == nil else { return }
+            let controller = WelcomePageViewController.makePresentedController {
+                WelcomeExperience.markPresented()
+            }
+            present(controller, animated: true)
         }
     }
 }

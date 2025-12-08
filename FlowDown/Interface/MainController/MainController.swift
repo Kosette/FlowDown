@@ -20,7 +20,7 @@ class MainController: UIViewController {
             $0.isHidden = true
         #else
             $0.alpha = 0.2
-            let vfx = UIBlurEffect(style: .systemMaterial)
+            let vfx = UIBlurEffect(style: .regular)
             let vfxView = UIVisualEffectView(effect: vfx)
             $0.addSubview(vfxView)
             vfxView.snp.makeConstraints { make in
@@ -34,6 +34,8 @@ class MainController: UIViewController {
     let contentView = SafeInputView()
     let contentShadowView = UIView()
     let gestureLayoutGuide = UILayoutGuide()
+
+    var hasScheduledWelcome = false
 
     var allowSidebarPersistence: Bool {
         guard UIDevice.current.userInterfaceIdiom == .pad else { return false }
@@ -151,6 +153,7 @@ class MainController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        scheduleWelcomeIfNeeded()
     }
 
     private var previousLayoutRect: CGRect = .zero

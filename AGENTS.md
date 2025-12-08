@@ -4,6 +4,7 @@ This file provides guidance to AI coding agents working inside this repository.
 
 ## Overview
 FlowDown is a Swift-based AI/LLM client for iOS and macOS (Catalyst) with a privacy-first mindset. The workspace hosts the main app plus several Swift Package Manager frameworks (e.g. `ChatClientKit`, `Storage`, `Logger`) that power storage, editing, model integrations, and on-device MLX inference. Persistent configuration lives in the `ConfigurableKit` package.
+- All code text (UI strings, comments, logs) must remain in English.
 
 ## Environment & Tooling
 - Prefer opening `FlowDown.xcworkspace` so the app and frameworks resolve together under shared schemes.
@@ -116,6 +117,7 @@ FlowDown is a Swift-based AI/LLM client for iOS and macOS (Catalyst) with a priv
 - `AlertViewController` and `ConfigurableKit` APIs expect `String.LocalizationValue`; pass localization values directly for consistency
 - Other UI entry points should continue using `String(localized: ...)` for user-facing strings
 - Source all user-visible strings from `FlowDown/Resources/Localizable.xcstrings` instead of hardcoded literals
+- We ship multiple locales (en base plus de, es, fr, ja, ko, zh-Hans); keep all locales populated when adding or updating strings—do not leave only English/Chinese
 - Use the provided scripts to manage translations:
   - `python3 Resources/DevKit/scripts/update_missing_i18n.py FlowDown/Resources/Localizable.xcstrings` to scaffold new keys (extend `NEW_STRINGS` as required)
   - `python3 Resources/DevKit/scripts/translate_missing.py FlowDown/Resources/Localizable.xcstrings` to apply curated zh-Hans translations
