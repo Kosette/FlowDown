@@ -309,7 +309,10 @@ public extension SyncEngine {
 
     /// 拉取变化 !不要在代理回调里面调用!
     func fetchChanges() async throws {
-        guard SyncEngine.isSyncEnabled else { return }
+        guard SyncEngine.isSyncEnabled else {
+            Logger.syncEngine.infoFile("Skip fetchChanges because sync is disabled")
+            return
+        }
 
         // 这里不检查账户，由后面的 handleAccountChange 事件统一处理账户变化
 //        let accountStatus = try await container.accountStatus()
@@ -329,7 +332,10 @@ public extension SyncEngine {
 
     /// 发送变化 !不要在代理回调里面调用!
     func sendChanges() async throws {
-        guard SyncEngine.isSyncEnabled else { return }
+        guard SyncEngine.isSyncEnabled else {
+            Logger.syncEngine.infoFile("Skip sendChanges because sync is disabled")
+            return
+        }
         var needDelay = false
         if _syncEngine == nil {
             initializeSyncEngine()
@@ -402,13 +408,17 @@ private extension SyncEngine {
     /// 创建CKRecordZone
     /// - Parameter immediateSendChanges: 是否立即发送变化，仅在 automaticallySync = false 有效
     func createCustomZoneIfNeeded(_ immediateSendChanges: Bool = false) async {
-        guard SyncEngine.isSyncEnabled else { return }
+        guard SyncEngine.isSyncEnabled else {
+            Logger.syncEngine.infoFile("Skip createCustomZoneIfNeeded because sync is disabled")
+            return
+        }
 
         do {
             let existingZones = try await container.privateCloudDatabase.allRecordZones()
             if existingZones.contains(where: { $0.zoneID == SyncEngine.zoneID }) {
                 Logger.syncEngine.infoFile("Zone already exists")
             } else {
+                Logger.syncEngine.infoFile("Creating custom zone \(SyncEngine.zoneID)")
                 let zone = CKRecordZone(zoneID: SyncEngine.zoneID)
                 syncEngine.state.add(pendingDatabaseChanges: [.saveZone(zone)])
                 if !isAutomaticallySyncEnabled, immediateSendChanges {
@@ -440,10 +450,16 @@ private extension SyncEngine {
     func scheduleUploadIfNeeded(_ immediateSendChanges: Bool = false) async throws {
         try Task.checkCancellation()
 
-        guard SyncEngine.isSyncEnabled else { return }
+        guard SyncEngine.isSyncEnabled else {
+            Logger.syncEngine.infoFile("Skip scheduleUploadIfNeeded because sync is disabled")
+            return
+        }
 
         let accountStatus = try await container.accountStatus()
-        guard accountStatus == .available else { return }
+        guard accountStatus == .available else {
+            Logger.syncEngine.infoFile("Skip scheduleUploadIfNeeded because accountStatus=\(accountStatus.rawValue)")
+            return
+        }
 
         // 查出UploadQueue 队列中的数据 构建 CKSyncEngine Changes
         // 每次最多发送100条

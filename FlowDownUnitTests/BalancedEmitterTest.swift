@@ -35,4 +35,3 @@ func balancedEmitter_batchesUsingAddTimeBatchSize() async throws {
     #expect(emitted == ["ABC", "DE"])
     #expect(emitted.joined() == "ABCDE")
 }
-

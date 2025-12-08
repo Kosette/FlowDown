@@ -10,6 +10,10 @@ import Foundation
 import WCDBSwift
 
 package extension Storage {
+    private func logDecodeFailure(tableName: String, recordID: CKRecord.ID, payloadSize: Int?) {
+        Logger.syncEngine.errorFile("handleRemoteUpsert \(tableName) decode payload failed record=\(recordID.recordName) payloadSize=\(payloadSize ?? -1)")
+    }
+
     func handleRemoteDeleted(
         deletions: [(recordID: CKRecord.ID, recordType: CKRecord.RecordType)],
         handle: Handle? = nil,
@@ -176,10 +180,13 @@ package extension Storage {
     }
 
     private func handleRemoteUpsertConversation(serverRecord: CKRecord, handle: Handle) throws {
-        guard let payload = serverRecord.payloadData else { return }
+        guard let payload = serverRecord.payloadData else {
+            logDecodeFailure(tableName: Conversation.tableName, recordID: serverRecord.recordID, payloadSize: nil)
+            return
+        }
 
         guard let remoteObject = try? Conversation.decodePayload(payload) else {
-            Logger.syncEngine.errorFile("handleRemoteUpsertConversation decodePayload fail")
+            logDecodeFailure(tableName: Conversation.tableName, recordID: serverRecord.recordID, payloadSize: payload.count)
             return
         }
 
@@ -210,10 +217,13 @@ package extension Storage {
     }
 
     private func handleRemoteUpsertMessage(serverRecord: CKRecord, handle: Handle) throws {
-        guard let payload = serverRecord.payloadData else { return }
+        guard let payload = serverRecord.payloadData else {
+            logDecodeFailure(tableName: Message.tableName, recordID: serverRecord.recordID, payloadSize: nil)
+            return
+        }
 
         guard let remoteObject = try? Message.decodePayload(payload) else {
-            Logger.syncEngine.errorFile("handleRemoteUpsertMessage decodePayload fail")
+            logDecodeFailure(tableName: Message.tableName, recordID: serverRecord.recordID, payloadSize: payload.count)
             return
         }
 
@@ -244,10 +254,13 @@ package extension Storage {
     }
 
     private func handleRemoteUpsertAttachment(serverRecord: CKRecord, handle: Handle) throws {
-        guard let payload = serverRecord.payloadData else { return }
+        guard let payload = serverRecord.payloadData else {
+            logDecodeFailure(tableName: Attachment.tableName, recordID: serverRecord.recordID, payloadSize: nil)
+            return
+        }
 
         guard let remoteObject = try? Attachment.decodePayload(payload) else {
-            Logger.syncEngine.errorFile("handleRemoteUpsertAttachment decodePayload fail")
+            logDecodeFailure(tableName: Attachment.tableName, recordID: serverRecord.recordID, payloadSize: payload.count)
             return
         }
 
@@ -278,10 +291,13 @@ package extension Storage {
     }
 
     private func handleRemoteUpsertCloudModel(serverRecord: CKRecord, handle: Handle) throws {
-        guard let payload = serverRecord.payloadData else { return }
+        guard let payload = serverRecord.payloadData else {
+            logDecodeFailure(tableName: CloudModel.tableName, recordID: serverRecord.recordID, payloadSize: nil)
+            return
+        }
 
         guard let remoteObject = try? CloudModel.decodePayload(payload) else {
-            Logger.syncEngine.errorFile("handleRemoteUpsertCloudModel decodePayload fail")
+            logDecodeFailure(tableName: CloudModel.tableName, recordID: serverRecord.recordID, payloadSize: payload.count)
             return
         }
 
@@ -312,10 +328,13 @@ package extension Storage {
     }
 
     private func handleRemoteUpsertModelContextServer(serverRecord: CKRecord, handle: Handle) throws {
-        guard let payload = serverRecord.payloadData else { return }
+        guard let payload = serverRecord.payloadData else {
+            logDecodeFailure(tableName: ModelContextServer.tableName, recordID: serverRecord.recordID, payloadSize: nil)
+            return
+        }
 
         guard let remoteObject = try? ModelContextServer.decodePayload(payload) else {
-            Logger.syncEngine.errorFile("handleRemoteUpsertModelContextServer decodePayload fail")
+            logDecodeFailure(tableName: ModelContextServer.tableName, recordID: serverRecord.recordID, payloadSize: payload.count)
             return
         }
 
@@ -356,10 +375,13 @@ package extension Storage {
     }
 
     private func handleRemoteUpsertMemory(serverRecord: CKRecord, handle: Handle) throws {
-        guard let payload = serverRecord.payloadData else { return }
+        guard let payload = serverRecord.payloadData else {
+            logDecodeFailure(tableName: Memory.tableName, recordID: serverRecord.recordID, payloadSize: nil)
+            return
+        }
 
         guard let remoteObject = try? Memory.decodePayload(payload) else {
-            Logger.syncEngine.errorFile("handleRemoteUpsertMemory decodePayload fail")
+            logDecodeFailure(tableName: Memory.tableName, recordID: serverRecord.recordID, payloadSize: payload.count)
             return
         }
 
@@ -390,10 +412,13 @@ package extension Storage {
     }
 
     private func handleRemoteUpsertChatTemplate(serverRecord: CKRecord, handle: Handle) throws {
-        guard let payload = serverRecord.payloadData else { return }
+        guard let payload = serverRecord.payloadData else {
+            logDecodeFailure(tableName: ChatTemplateRecord.tableName, recordID: serverRecord.recordID, payloadSize: nil)
+            return
+        }
 
         guard let remoteObject = try? ChatTemplateRecord.decodePayload(payload) else {
-            Logger.syncEngine.errorFile("handleRemoteUpsertChatTemplate decodePayload fail")
+            logDecodeFailure(tableName: ChatTemplateRecord.tableName, recordID: serverRecord.recordID, payloadSize: payload.count)
             return
         }
 
