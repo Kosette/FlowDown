@@ -354,20 +354,14 @@ extension ModelManager {
         return AsyncThrowingStream(ChatResponseChunk.self, bufferingPolicy: .unbounded) { cont in
             Task.detached {
                 let reasoningEmitter = BalancedEmitter(
-                    threshold: 2.0,
+                    duration: 2.0,
                     frequency: 80,
                 ) { chunk in
                     cont.yield(.reasoning(chunk))
                 }
                 let textEmitter = BalancedEmitter(
-                    threshold: 0.5,
+                    duration: 0.5,
                     frequency: 20,
-                ) { chunk in
-                    cont.yield(.text(chunk))
-                }
-                let textCollectionEmitter = BalancedEmitter(
-                    threshold: 1.0,
-                    frequency: 5,
                 ) { chunk in
                     cont.yield(.text(chunk))
                 }
@@ -375,7 +369,6 @@ extension ModelManager {
                     Task.detached {
                         await reasoningEmitter.cancel()
                         await textEmitter.cancel()
-                        await textCollectionEmitter.cancel()
                     }
                 }
 
@@ -390,27 +383,24 @@ extension ModelManager {
                         switch chunk {
                         case let .reasoning(string):
                             await textEmitter.wait()
-                            await textCollectionEmitter.wait()
                             await reasoningEmitter.add(string)
                         case let .text(string):
                             await reasoningEmitter.wait()
-                            if emotionalDamage >= 2500 {
-                                Logger.ui.infoFile("streaming inference: bypassing emitters due to emotional damage: \(emotionalDamage)")
-                                await textEmitter.wait()
-                                await textCollectionEmitter.add(string)
-                                emotionalDamage += string.count
-                            } else {
-                                await textCollectionEmitter.wait() // will not happen tho
-                                await textEmitter.add(string)
-                                emotionalDamage += string.count
+                            if emotionalDamage >= 5000 {
+                                await textEmitter.update(duration: 1.0, frequency: 3)
+                            } else if emotionalDamage >= 2000 {
+                                await textEmitter.update(duration: 1.0, frequency: 9)
+                            } else if emotionalDamage >= 1000 {
+                                await textEmitter.update(duration: 1.0, frequency: 20)
                             }
+                            await textEmitter.add(string)
+                            emotionalDamage += string.count
                         default:
                             cont.yield(chunk)
                         }
                     }
                     await reasoningEmitter.wait()
                     await textEmitter.wait()
-                    await textCollectionEmitter.wait()
                     cont.finish()
                 } catch {
                     cont.finish(throwing: error)

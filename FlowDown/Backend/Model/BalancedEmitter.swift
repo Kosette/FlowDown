@@ -13,22 +13,34 @@ actor BalancedEmitter {
     private var continuation: CheckedContinuation<Void, Never>?
 
     private let onEmit: @Sendable (String) -> Void
-    private let threshold: Double
-    private let frequency: Int
+    private var duration: Double
+    private var frequency: Int
+    private var batchSize: Int = 1
 
     init(
-        threshold: Double = 1,
+        duration: Double = 1,
         frequency: Int = 30,
         onEmit: @escaping @Sendable (String) -> Void,
     ) {
-        self.threshold = threshold
+        self.duration = duration
         self.frequency = frequency
         self.onEmit = onEmit
+    }
+
+    func update(duration: Double? = nil, frequency: Int? = nil) {
+        if let duration, duration > 0 {
+            self.duration = duration
+        }
+        if let frequency, frequency > 0 {
+            self.frequency = frequency
+        }
+        batchSize = max(1, Int(ceil(Double(buffer.count) / Double(self.frequency))))
     }
 
     func add(_ chunk: String) {
         guard !chunk.isEmpty else { return }
         buffer += chunk
+        batchSize = max(1, Int(ceil(Double(buffer.count) / Double(frequency))))
         dispatchLoopIfRequired()
     }
 
@@ -45,10 +57,9 @@ actor BalancedEmitter {
         guard !isRunning else { return }
         isRunning = true
         Task {
-            let stepDelay = (threshold * 1000) / Double(frequency)
-            let batch = Int(ceil(Double(buffer.count) / Double(frequency)))
+            let stepDelay = (duration * 1000) / Double(frequency)
             while !buffer.isEmpty {
-                let len = max(1, batch)
+                let len = min(batchSize, buffer.count)
                 let emitText = String(buffer.prefix(len))
                 buffer.removeFirst(emitText.count)
                 onEmit(emitText)
