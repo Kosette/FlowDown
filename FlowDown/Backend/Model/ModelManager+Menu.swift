@@ -51,7 +51,12 @@ extension ModelManager {
         }
 
         if localModels.isEmpty, cloudModels.isEmpty, !appleIntelligenceAvailable {
-            return []
+            return [
+                UIAction(
+                    title: String(localized: "(None)"),
+                    attributes: [.disabled],
+                ) { _ in },
+            ]
         }
 
         var localBuildSections: [String: [(String, LocalModel)]] = [:]

@@ -350,12 +350,11 @@ extension ModelManager {
             temperature: temperature < 0 ? nil : .init(temperature),
             tools: tools,
         )
-        let sequence = try await client.streamingChat(body: body)
         return AsyncThrowingStream(ChatResponseChunk.self, bufferingPolicy: .unbounded) { cont in
             Task.detached {
                 let reasoningEmitter = BalancedEmitter(
-                    duration: 2.0,
-                    frequency: 80,
+                    duration: 1.0,
+                    frequency: 30,
                 ) { chunk in
                     cont.yield(.reasoning(chunk))
                 }
@@ -379,6 +378,8 @@ extension ModelManager {
                 var emotionalDamage = 0
 
                 do {
+                    let sequence = try await client.streamingChat(body: body)
+
                     for try await chunk in sequence {
                         switch chunk {
                         case let .reasoning(string):
@@ -391,7 +392,7 @@ extension ModelManager {
                             } else if emotionalDamage >= 2000 {
                                 await textEmitter.update(duration: 1.0, frequency: 9)
                             } else if emotionalDamage >= 1000 {
-                                await textEmitter.update(duration: 1.0, frequency: 20)
+                                await textEmitter.update(duration: 0.5, frequency: 15)
                             }
                             await textEmitter.add(string)
                             emotionalDamage += string.count
@@ -401,9 +402,22 @@ extension ModelManager {
                     }
                     await reasoningEmitter.wait()
                     await textEmitter.wait()
+                    if emotionalDamage == 0 {
+                        Logger.model.debugFile("model \(modelID) generated no text output in streaming inference")
+                        if let error = client.collectedErrors {
+                            cont.finish(throwing: NSError(
+                                domain: "Model",
+                                code: -1,
+                                userInfo: [NSLocalizedDescriptionKey: error],
+                            ))
+                            return
+                        }
+                    }
                     cont.finish()
+                    return
                 } catch {
                     cont.finish(throwing: error)
+                    return
                 }
             }
         }

@@ -129,7 +129,9 @@ extension ConversationSession {
         } catch {
             logger.errorFile("\(error.localizedDescription)")
             let errorMessage = appendNewMessage(role: .assistant)
-            errorMessage.update(\.document, to: "*\(error.localizedDescription)*")
+            let sanitized = error.localizedDescription
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            errorMessage.update(\.document, to: "```\n\(sanitized)")
             await requestUpdate(view: currentMessageListView)
             await requestUpdate(view: currentMessageListView)
         }

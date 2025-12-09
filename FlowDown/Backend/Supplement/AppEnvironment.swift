@@ -53,13 +53,8 @@ nonisolated enum AppEnvironment {
 }
 
 nonisolated extension AppEnvironment.Container {
-    nonisolated static func live() -> AppEnvironment.Container {
-        let storage: Storage
-        do {
-            storage = try Storage.db()
-        } catch {
-            fatalError(error.localizedDescription)
-        }
+    nonisolated static func live() throws -> AppEnvironment.Container {
+        let storage = try Storage.db()
 
         let syncEngine = SyncEngine(
             storage: storage,

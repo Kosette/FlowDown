@@ -18,10 +18,13 @@ import UIKit
 @objc(AppDelegate)
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var templateMenuCancellable: AnyCancellable?
+
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil,
     ) -> Bool {
+        guard !RecoveryMode.isActivated else { return true }
+
         UITableView.appearance().backgroundColor = .clear
         UIButton.appearance().tintColor = .accent
         UITextView.appearance().tintColor = .accent
@@ -80,10 +83,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken _: Data) {
+        guard !RecoveryMode.isActivated else { return }
         logger.infoFile("Did register for remote notifications")
     }
 
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        guard !RecoveryMode.isActivated else { return }
         logger.errorFile("ERROR: Failed to register for notifications: \(error.localizedDescription)")
     }
 
@@ -111,23 +116,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func application(
-        _: UIApplication,
-        didDiscardSceneSessions _: Set<UISceneSession>,
-    ) {}
-
     func applicationDidBecomeActive(_: UIApplication) {
+        guard !RecoveryMode.isActivated else { return }
         UIUserInterfaceStyle.reapplyConfiguredStyle()
         MLX.GPU.onApplicationBecomeActivate()
     }
 
     func applicationWillResignActive(_: UIApplication) {
+        guard !RecoveryMode.isActivated else { return }
         MLX.GPU.onApplicationResignActivate()
     }
 }
 
 func terminateApplication() {
-    // close the app
     UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
     Task.detached {
         try await Task.sleep(for: .seconds(1))

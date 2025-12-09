@@ -1338,22 +1338,16 @@
     },
     "Add models in Settings before sharing." : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add models in Settings before sharing."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请先在设置中添加模型再进行共享。"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Füge in den Einstellungen Modelle hinzu, bevor du teilst."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add models in Settings before sharing."
           }
         },
         "es" : {
@@ -1378,6 +1372,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "공유하기 전에 설정에서 모델을 추가하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请先在设置中添加模型再进行共享。"
           }
         }
       }
@@ -26283,22 +26283,16 @@
     },
     "Model exchange request failed validation" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Model exchange request failed validation"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "模型交换请求验证失败"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anfrage zum Modellaustausch hat die Validierung nicht bestanden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model exchange request failed validation"
           }
         },
         "es" : {
@@ -26323,6 +26317,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "모델 교환 요청이 검증을 통과하지 못했습니다"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模型交换请求验证失败"
           }
         }
       }
@@ -28353,22 +28353,16 @@
     },
     "No Models Available" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Models Available"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有可用的模型"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keine Modelle verfügbar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Models Available"
           }
         },
         "es" : {
@@ -28393,6 +28387,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "사용 가능한 모델이 없습니다"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有可用的模型"
           }
         }
       }

@@ -30,19 +30,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         #endif
         windowScene.sizeRestrictions?.minimumSize = CGSize(width: 650, height: 650)
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = mainController
-        self.window = window
-        window.makeKeyAndVisible()
+        defer {
+            window.makeKeyAndVisible()
+            self.window = window
+        }
 
-        ModelExchangeCoordinator.shared.registerPresenter(mainController)
-        UIUserInterfaceStyle.reapplyConfiguredStyle()
+        if RecoveryMode.isActivated {
+            window.rootViewController = RecoveryModeViewController()
+        } else {
+            window.rootViewController = mainController
 
-        for urlContext in connectionOptions.urlContexts {
-            handleIncomingURL(urlContext.url)
+            ModelExchangeCoordinator.shared.registerPresenter(mainController)
+            UIUserInterfaceStyle.reapplyConfiguredStyle()
+
+            for urlContext in connectionOptions.urlContexts {
+                handleIncomingURL(urlContext.url)
+            }
         }
     }
 
     func scene(_: UIScene, openURLContexts contexts: Set<UIOpenURLContext>) {
+        guard !RecoveryMode.isActivated else { return }
+
         for urlContext in contexts {
             handleIncomingURL(urlContext.url)
         }
@@ -156,14 +165,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let message = encodedMessage.removingPercentEncoding?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         mainController.queueNewConversation(text: message, shouldSend: !message.isEmpty)
     }
-
-    func sceneDidDisconnect(_: UIScene) {}
-
-    func sceneDidBecomeActive(_: UIScene) {}
-
-    func sceneWillResignActive(_: UIScene) {}
-
-    func sceneWillEnterForeground(_: UIScene) {}
-
-    func sceneDidEnterBackground(_: UIScene) {}
 }

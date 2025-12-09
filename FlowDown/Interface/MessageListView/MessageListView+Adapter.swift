@@ -363,6 +363,16 @@ extension MessageListView: ListViewAdapter {
             UIMenu(options: [.displayInline], children: [
                 { () -> UIAction? in
                     guard let message = session.message(for: messageIdentifier),
+                          message.role == .user,
+                          session.nearestUserMessage(beforeOrEqual: messageIdentifier) != nil
+                    else { return nil }
+                    return UIAction(title: String(localized: "Retry"), image: .init(systemName: "arrow.clockwise")) { [weak self] _ in
+                        guard let self else { return }
+                        session.retry(byClearAfter: messageIdentifier, currentMessageListView: self)
+                    }
+                }(),
+                { () -> UIAction? in
+                    guard let message = session.message(for: messageIdentifier),
                           message.role == .user
                     else { return nil }
                     guard let editor = self.nearestEditor() else { return nil }

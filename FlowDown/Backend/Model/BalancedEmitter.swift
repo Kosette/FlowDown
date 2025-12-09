@@ -45,11 +45,19 @@ actor BalancedEmitter {
     }
 
     func wait() async {
-        if buffer.isEmpty { return }
-        clean()
-        dispatchLoopIfRequired()
+        if buffer.isEmpty, !isRunning { return }
         await withCheckedContinuation { cont in
-            self.continuation = cont
+            // resolve any previous waiter before installing a new one
+            clean()
+            dispatchLoopIfRequired()
+
+            // if the emitter has already drained by the time we get here,
+            // resume immediately to avoid stalling the caller
+            if buffer.isEmpty, !isRunning {
+                cont.resume()
+            } else {
+                continuation = cont
+            }
         }
     }
 
