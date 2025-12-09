@@ -397,6 +397,8 @@ extension ModelManager {
                             await textEmitter.add(string)
                             emotionalDamage += string.count
                         default:
+                            await reasoningEmitter.wait()
+                            await textEmitter.wait()
                             cont.yield(chunk)
                         }
                     }
