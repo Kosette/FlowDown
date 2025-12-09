@@ -25,9 +25,13 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
     public package(set) var endpoint: String = ""
     public package(set) var token: String = ""
     public package(set) var headers: [String: String] = [:] // additional headers
-    public package(set) var body_fields: String = "" // additional body fields as JSON string
+    public package(set) var bodyFields: String = "" // additional body fields as JSON string
     public package(set) var capabilities: Set<ModelCapabilities> = []
     public package(set) var context: ModelContextLength = .short_8k
+
+    @available(*, deprecated, message: "已废弃不再使用, 请勿删除,需要保留")
+    package var temperature_preference: ModelTemperaturePreference = .inherit
+
     public package(set) var response_format: CloudModel.ResponseFormat = .default
     // can be used when loading model from our server
     // present to user on the top of the editor page
@@ -51,12 +55,13 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
             BindColumnConstraint(endpoint, isNotNull: true, defaultTo: "")
             BindColumnConstraint(token, isNotNull: true, defaultTo: "")
             BindColumnConstraint(headers, isNotNull: true, defaultTo: [String: String]())
-            BindColumnConstraint(body_fields, isNotNull: true, defaultTo: "")
+            BindColumnConstraint(bodyFields, isNotNull: true, defaultTo: "")
             BindColumnConstraint(capabilities, isNotNull: true, defaultTo: Set<ModelCapabilities>())
             BindColumnConstraint(context, isNotNull: true, defaultTo: ModelContextLength.short_8k)
-            BindColumnConstraint(response_format, isNotNull: true, defaultTo: CloudModel.ResponseFormat.default)
             BindColumnConstraint(comment, isNotNull: true, defaultTo: "")
             BindColumnConstraint(name, isNotNull: true, defaultTo: "")
+            BindColumnConstraint(temperature_preference, isNotNull: false, defaultTo: ModelTemperaturePreference.inherit)
+            BindColumnConstraint(response_format, isNotNull: true, defaultTo: CloudModel.ResponseFormat.default)
 
             BindIndex(creation, namedWith: "_creationIndex")
             BindIndex(modified, namedWith: "_modifiedIndex")
@@ -70,12 +75,13 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         case endpoint
         case token
         case headers
-        case body_fields
+        case bodyFields
         case capabilities
         case context
         case response_format
         case comment
         case name
+        case temperature_preference
 
         case removed
         case modified
@@ -93,7 +99,7 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
             "HTTP-Referer": "https://flowdown.ai/",
             "X-Title": "FlowDown",
         ],
-        body_fields: String = "",
+        bodyFields: String = "",
         context: ModelContextLength = .medium_64k,
         capabilities: Set<ModelCapabilities> = [],
         comment: String = "",
@@ -109,7 +115,7 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         self.endpoint = endpoint
         self.token = token
         self.headers = headers
-        self.body_fields = body_fields
+        self.bodyFields = bodyFields
         self.capabilities = capabilities
         self.comment = comment
         self.name = name
@@ -128,11 +134,14 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         endpoint = try container.decodeIfPresent(String.self, forKey: .endpoint) ?? ""
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
         headers = try container.decodeIfPresent([String: String].self, forKey: .headers) ?? [:]
-        body_fields = try container.decodeIfPresent(String.self, forKey: .body_fields) ?? ""
+        bodyFields = try container.decodeIfPresent(String.self, forKey: .bodyFields) ?? ""
         capabilities = try container.decodeIfPresent(Set<ModelCapabilities>.self, forKey: .capabilities) ?? []
         context = try container.decodeIfPresent(ModelContextLength.self, forKey: .context) ?? .short_8k
         comment = try container.decodeIfPresent(String.self, forKey: .comment) ?? ""
         name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+
+        temperature_preference = try container.decodeIfPresent(ModelTemperaturePreference.self, forKey: .temperature_preference) ?? .inherit
+
         response_format = try container.decodeIfPresent(CloudModel.ResponseFormat.self, forKey: .response_format) ?? .default
         removed = try container.decodeIfPresent(Bool.self, forKey: .removed) ?? false
     }
@@ -155,7 +164,7 @@ public final class CloudModel: Identifiable, Codable, Equatable, Hashable, Table
         hasher.combine(endpoint)
         hasher.combine(token)
         hasher.combine(headers)
-        hasher.combine(body_fields)
+        hasher.combine(bodyFields)
         hasher.combine(capabilities)
         hasher.combine(context)
         hasher.combine(response_format)
@@ -191,50 +200,6 @@ extension CloudModel: Updatable {
     package func update(_ block: (CloudModel) -> Void) {
         block(self)
         markModified()
-    }
-}
-
-extension ModelTemperaturePreference: ColumnCodable {
-    public init?(with value: WCDBSwift.Value) {
-        let text = value.stringValue
-        self = ModelTemperaturePreference(rawValue: text) ?? .inherit
-    }
-
-    public func archivedValue() -> WCDBSwift.Value {
-        .init(rawValue)
-    }
-
-    public static var columnType: ColumnType {
-        .text
-    }
-}
-
-extension ModelCapabilities: ColumnCodable {
-    public init?(with value: WCDBSwift.Value) {
-        let text = value.stringValue
-        self.init(rawValue: text)
-    }
-
-    public func archivedValue() -> WCDBSwift.Value {
-        .init(rawValue)
-    }
-
-    public static var columnType: ColumnType {
-        .text
-    }
-}
-
-extension ModelContextLength: ColumnCodable {
-    public init?(with value: WCDBSwift.Value) {
-        self.init(rawValue: value.intValue)
-    }
-
-    public func archivedValue() -> WCDBSwift.Value {
-        .init(rawValue)
-    }
-
-    public static var columnType: ColumnType {
-        .integer64
     }
 }
 

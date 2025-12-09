@@ -364,7 +364,7 @@ private extension CloudModelEditorController {
                   let currentModel = ModelManager.shared.cloudModel(identifier: identifier)
             else { return }
 
-            var text = currentModel.body_fields
+            var text = currentModel.bodyFields
             if text.isEmpty {
                 text = "{}"
             } else if let formatted = Self.prettyPrintedJson(from: text) {
@@ -400,7 +400,7 @@ private extension CloudModelEditorController {
                 }
 
                 ModelManager.shared.editCloudModel(identifier: currentModel.id) { editable in
-                    editable.update(\.body_fields, to: normalized)
+                    editable.update(\.bodyFields, to: normalized)
                 }
                 view.configure(value: normalized.isEmpty ? self.notAvailableText : self.configuredText)
             }
@@ -412,7 +412,7 @@ private extension CloudModelEditorController {
         view.configure(title: "Body Fields")
         view.configure(description: "Configure inference-specific body fields here. The json key-value pairs you enter are merged into every request.")
 
-        let hasBodyFields = !(model?.body_fields.isEmpty ?? true) && !Self.isEmptyJsonObject(model?.body_fields ?? "")
+        let hasBodyFields = !(model?.bodyFields.isEmpty ?? true) && !Self.isEmptyJsonObject(model?.bodyFields ?? "")
         view.configure(value: hasBodyFields ? configuredText : notAvailableText)
         return view
     }

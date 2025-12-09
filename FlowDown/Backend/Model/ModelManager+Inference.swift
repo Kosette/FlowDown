@@ -202,8 +202,8 @@ extension ModelManager {
     /// - Returns: A dictionary of body fields, or empty dictionary if not found or empty
     public func modelBodyFields(for identifier: ModelIdentifier) -> [String: Any] {
         guard let model = cloudModel(identifier: identifier),
-              !model.body_fields.isEmpty,
-              let data = model.body_fields.data(using: .utf8),
+              !model.bodyFields.isEmpty,
+              let data = model.bodyFields.data(using: .utf8),
               let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
         else {
             return [:]
@@ -231,8 +231,8 @@ extension ModelManager {
         }
         if let model = cloudModel(identifier: identifier) {
             let endpoint = resolveEndpointComponents(from: model.endpoint)
-            // Use additionalBodyField directly without merging model's body_fields
-            // Callers should explicitly merge body_fields if needed
+            // Use additionalBodyField directly without merging model's bodyFields
+            // Callers should explicitly merge bodyFields if needed
             switch model.response_format {
             case .chatCompletions:
                 return RemoteCompletionsChatClient(

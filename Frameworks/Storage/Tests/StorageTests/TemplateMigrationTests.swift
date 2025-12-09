@@ -12,8 +12,8 @@ import WCDBSwift
 
 @Suite("Template migrations")
 struct TemplateMigrationTests {
-    @Test("V5 -> V6 creates ChatTemplate table and bumps userVersion")
-    func migrateV5ToV6_createsTable() throws {
+    @Test("V4 -> V5 creates ChatTemplate table and bumps userVersion")
+    func migrateV4ToV5_createsTable() throws {
         let tempDirectory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
         try FileManager.default.createDirectory(at: tempDirectory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: tempDirectory) }
@@ -22,14 +22,14 @@ struct TemplateMigrationTests {
         let database = Database(at: databaseURL.path)
         defer { database.close() }
 
-        // simulate existing schema at v5
-        try database.exec(StatementPragma().pragma(.userVersion).to(DBVersion.Version5.rawValue))
+        // simulate existing schema at v4
+        try database.exec(StatementPragma().pragma(.userVersion).to(DBVersion.Version4.rawValue))
 
-        let migration = MigrationV5ToV6()
+        let migration = MigrationV4ToV5()
         try migration.migrate(db: database)
 
         #expect(try database.isTableExists(ChatTemplateRecord.tableName))
         let userVersion = try database.getValue(from: StatementPragma().pragma(.userVersion))?.intValue
-        #expect(userVersion == DBVersion.Version6.rawValue)
+        #expect(userVersion == DBVersion.Version5.rawValue)
     }
 }

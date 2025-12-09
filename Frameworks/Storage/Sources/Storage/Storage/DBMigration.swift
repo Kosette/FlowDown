@@ -521,95 +521,11 @@ struct MigrationV4ToV5: DBMigration {
         let start = Date.now
         Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) begin")
 
-        try renameLegacyBodyFieldsColumnIfNeeded(db: db)
-
-        // Ensure new schema additions (response_format, body_fields) are created
-        try db.create(table: CloudModel.tableName, of: CloudModel.self)
-
-        try db.exec(StatementPragma().pragma(.userVersion).to(toVersion.rawValue))
-
-        let elapsed = Date.now.timeIntervalSince(start) * 1000.0
-        Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) end elapsed \(Int(elapsed))ms")
-    }
-
-    private func renameLegacyBodyFieldsColumnIfNeeded(db: Database) throws {
-        let tableName = CloudModel.tableName
-        let pragma = StatementPragma()
-            .pragma(.tableInfo)
-            .with(tableName)
-        guard let rows = try? db.getRows(from: pragma) else {
-            return
-        }
-
-        let columnNames = rows.map { $0[1].stringValue }
-        guard columnNames.contains("bodyFields") else {
-            return
-        }
-        Logger.database.infoFile("[*] migrating column bodyFields -> body_fields on table \(tableName)")
-        let renameColumn = StatementAlterTable()
-            .alter(table: tableName)
-            .rename(column: Column(named: "bodyFields"), to: Column(named: "body_fields"))
-        try db.exec(renameColumn)
-    }
-}
-
-struct MigrationV5ToV6: DBMigration {
-    let fromVersion: DBVersion = .Version5
-    let toVersion: DBVersion = .Version6
-    let requiresDataMigration: Bool = false
-
-    func migrate(db: Database) throws {
-        let start = Date.now
-        Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) begin")
-
         try db.create(table: ChatTemplateRecord.tableName, of: ChatTemplateRecord.self)
 
         try db.exec(StatementPragma().pragma(.userVersion).to(toVersion.rawValue))
 
         let elapsed = Date.now.timeIntervalSince(start) * 1000.0
         Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) end elapsed \(Int(elapsed))ms")
-    }
-}
-
-struct MigrationV6ToV7: DBMigration {
-    let fromVersion: DBVersion = .Version6
-    let toVersion: DBVersion = .Version7
-    let requiresDataMigration: Bool = true
-
-    func migrate(db: Database) throws {
-        let start = Date.now
-        Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) begin")
-
-        try rebuildCloudModelTableWithoutTemperature(db: db)
-
-        try db.exec(StatementPragma().pragma(.userVersion).to(toVersion.rawValue))
-
-        let elapsed = Date.now.timeIntervalSince(start) * 1000.0
-        Logger.database.infoFile("[*] migrate version \(fromVersion.rawValue) -> \(toVersion.rawValue) end elapsed \(Int(elapsed))ms")
-    }
-
-    private func rebuildCloudModelTableWithoutTemperature(db: Database) throws {
-        let tableName = CloudModel.tableName
-        guard try db.isTableExists(tableName) else {
-            try db.create(table: tableName, of: CloudModel.self)
-            return
-        }
-
-        let tempTableName = "\(tableName)_temp_v7"
-        if try db.isTableExists(tempTableName) {
-            try db.drop(table: tempTableName)
-        }
-
-        let alter = StatementAlterTable().alter(table: tableName).rename(to: tempTableName)
-        try db.exec(alter)
-
-        try db.create(table: tableName, of: CloudModel.self)
-
-        let legacy: [CloudModel] = try db.getObjects(fromTable: tempTableName)
-        if !legacy.isEmpty {
-            try db.insertOrReplace(legacy, intoTable: tableName)
-        }
-
-        try db.drop(table: tempTableName)
     }
 }

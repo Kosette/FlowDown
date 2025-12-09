@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WCDBSwift
 
 public enum ModelCapabilities: String, Codable, CaseIterable, Equatable {
     case visual
@@ -45,5 +46,49 @@ extension ModelTemperaturePreference: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(rawValue)
+    }
+}
+
+extension ModelTemperaturePreference: ColumnCodable {
+    public init?(with value: WCDBSwift.Value) {
+        let text = value.stringValue
+        self = ModelTemperaturePreference(rawValue: text) ?? .inherit
+    }
+
+    public func archivedValue() -> WCDBSwift.Value {
+        .init(rawValue)
+    }
+
+    public static var columnType: ColumnType {
+        .text
+    }
+}
+
+extension ModelCapabilities: ColumnCodable {
+    public init?(with value: WCDBSwift.Value) {
+        let text = value.stringValue
+        self.init(rawValue: text)
+    }
+
+    public func archivedValue() -> WCDBSwift.Value {
+        .init(rawValue)
+    }
+
+    public static var columnType: ColumnType {
+        .text
+    }
+}
+
+extension ModelContextLength: ColumnCodable {
+    public init?(with value: WCDBSwift.Value) {
+        self.init(rawValue: value.intValue)
+    }
+
+    public func archivedValue() -> WCDBSwift.Value {
+        .init(rawValue)
+    }
+
+    public static var columnType: ColumnType {
+        .integer64
     }
 }
