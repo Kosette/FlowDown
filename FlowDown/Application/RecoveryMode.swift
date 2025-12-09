@@ -9,32 +9,14 @@ import Foundation
 import SwiftUI
 import UIKit
 
-struct RecoveryMode: App {
-    var body: some Scene {
-        WindowGroup {
-            RecoveryModeViewControllerRepresentable()
-                .frame(width: 666, height: 666, alignment: .center)
-        }
-        .windowResizability(.contentMinSize)
-    }
-}
-
-private struct RecoveryModeViewControllerRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_: RecoveryModeViewController, context _: Context) {}
-
-    func makeUIViewController(context _: Context) -> RecoveryModeViewController {
-        RecoveryModeViewController()
-    }
-}
-
-extension RecoveryMode {
+enum RecoveryMode {
     private(set) static var isActivated = false
     private(set) static var error: Error?
 
     static func launch(with error: Error) -> Never {
         self.error = error
         isActivated = true // 在存在 user default 的情况下 window group 可能不会被使用
-        RecoveryMode.main()
+        UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, nil)
         fatalError()
     }
 }
